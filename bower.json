@@ -1,10 +1,10 @@
 {
-  "name": "material-kit-react",
-  "homepage": "https://github.com/creativetimofficial/material-kit-react",
+  "name": "Arma Tu Fiesta",
+  "homepage": " http://google.com",
   "authors": [
-    "creative-tim"
+    " "
   ],
-  "description": "A Badass Material-UI Kit based on Material Design",
+  "description": "",
   "main": "dist/index.js",
   "keywords": [
     "material",
@@ -13,7 +13,7 @@
     "google",
     "twitter"
   ],
-  "license": "Creative TIM License",
+  "license": "",
   "ignore": [
     "**/.*",
     "node_modules",
