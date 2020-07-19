@@ -30,13 +30,13 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
             
             <Button
-          href="/"
+          href="/map"
           color="transparent"
           target="_blank"
           className={classes.navLink}
           onClick={<Link to={"/com"} className={classes.Link}> </Link>}
         >
-          Contrataciones
+          Mapa
         </Button>
         
 
