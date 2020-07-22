@@ -15,8 +15,12 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
+import theme from "theme.js";
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styles =>({
+  title:"Arma Tu Fiesta",
+  color:theme.palette.primary,//used in servicesPage
+}));
 
 export default function Header(props) {
   const classes = useStyles();
