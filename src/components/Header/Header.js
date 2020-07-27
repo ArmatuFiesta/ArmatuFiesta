@@ -19,7 +19,7 @@ import theme from "theme.js";
 
 const useStyles = makeStyles(styles =>({
   title:"Arma Tu Fiesta",
-  color:theme.palette.primary,//used in servicesPage
+  color:styles.color,//used in servicesPage
 }));
 
 export default function Header(props) {

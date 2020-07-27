@@ -19,6 +19,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import ProductCard from 'components/Card/ProductCard.js'
+
 
 // Sections for this page
 
@@ -30,6 +32,8 @@ const useStyles = makeStyles(styles);
 
 export default function ServicePage(props) {
     const classes = useStyles();
+    const { ...rest } = props;
+    //for the menu behavior
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -38,23 +42,21 @@ export default function ServicePage(props) {
       const handleClose = () => {
         setAnchorEl(null);
       };
+      //end of the menu behavior
     return(<div> 
-        <Header/>
+        <Header
+        color="green"
+        brand="Arma Tu Fiesta"
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
 
-        <Grid container spacing={3} color>
-                
-                    <Grid item xs={3}>
-                        <h2>Arma tu Fiesta</h2>
-                    </Grid>
-                    <Grid item xs={1} lg={6} container>
-                        <Grid item xs><h6>item 1</h6></Grid>
-                        <Grid item xs><h6>item 2</h6></Grid>
-                        <Grid item xs><h6>item 3</h6></Grid>
-        </Grid>
-        </Grid>
+        {...rest}/>
 
-
-        <GridContainer spacing={2}>
+        //body of the service page
+        <GridContainer spacing={2}> 
         <GridItem xs={3}>
         <MenuList
             id="simple-menu"
@@ -71,9 +73,17 @@ export default function ServicePage(props) {
             <MenuItem onClick={handleClose}>Servicio 6</MenuItem>
             </MenuList>
         </GridItem>
-        <GridItem xs container><div heigh="200px" color="red"></div></GridItem>
-            <GridItem xs={12} md><div color="blue"></div></GridItem>
-            <GridItem xs={12} md><div color="blue"></div></GridItem>
+
+        //menu end
+        <GridItem xs={3}>
+            <ProductCard></ProductCard>
+        </GridItem>
+        <GridItem xs={3}>
+            <ProductCard></ProductCard>
+        </GridItem>
+        <GridItem xs={3}>
+            <ProductCard></ProductCard>
+        </GridItem>
             <GridItem xs={12} md><div color="blue"></div></GridItem>
         </GridContainer>
 
