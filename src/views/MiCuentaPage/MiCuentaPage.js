@@ -3,7 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import SelectableRowsManagement from "./sections/DataTable.js"
 // @material-ui/icons
 
 // core components
@@ -42,14 +42,13 @@ export default function MiCuentaPage(props) {
     return(
         <div>
 
-        <div className={myClasses.subHeader} ><h6 className={myClasses.subHeader}>"Mi lista de compra"</h6></div>
+        <div className={myClasses.subHeader} ><h6 className={myClasses.subHeader}></h6></div>
        
 
         <GridContainer spacing={3} >
-            <GridItem xs={2} id="Producto"><p>Producto</p></GridItem>
-            <GridItem xs={2} id="Unidades"><p>Unidades</p></GridItem>
-            <GridItem xs={2} id="Punitario"><p>Precio Unitario</p></GridItem>
-            <GridItem xs={6} id="Ptotal"><p>Precio Total</p></GridItem>
+        <GridItem xs={14} id="Compra">
+            <SelectableRowsManagement/>
+            </GridItem>
         </GridContainer>
         <GridContainer spacing={4} >
             <GridItem xs={6} id="TotalCompra"><p>Total de Compra:</p></GridItem>
