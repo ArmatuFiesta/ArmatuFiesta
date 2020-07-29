@@ -15,6 +15,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import RegisterPage from "views/RegisterPage/RegisterPage.js";
 import MapPage from "views/MapPage/MapPage.js";
 import ServicesPage from "views/ServicesPage/ServicesPage.js";
+import MainPage from "views/MainPage/MainPage.js";
 
 var hist = createBrowserHistory();
 
@@ -22,7 +23,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Router history={hist}>
     <Switch>
-      <Route path="/services" component={ServicesPage}/>
+      <Route path="/services" component={MainPage}/>
       <Route path="/login-page" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/map" component={MapPage} />
