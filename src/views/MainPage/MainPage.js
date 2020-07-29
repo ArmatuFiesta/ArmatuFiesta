@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import CustomTabs from "components/CustomTabs/CustomTabs";
 import ServicesPage from "views/ServicesPage/ServicesPage.js";
+import ServiceInfo from "views/ServicesPage/ServiceInfo/ServiceInfo.js";
 import MiCuentaPage from "views/MiCuentaPage/MiCuentaPage.js";
 
 
@@ -42,6 +43,8 @@ export default function MainPage(props) {
                 tabContent:(<ServicesPage menuCategories={contratacionesCategories}/>)},
             {tabName:'Mi Cuenta',
                 tabContent:(<MiCuentaPage/>)},
+                {tabName:'EjemploProducto',
+                tabContent:(<ServiceInfo/>)},
             ] }
             {...rest}
         />

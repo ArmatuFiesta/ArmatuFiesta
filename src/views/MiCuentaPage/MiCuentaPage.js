@@ -42,12 +42,12 @@ export default function MiCuentaPage(props) {
     return(
         <div>
 
-        <div className={myClasses.subHeader} ><h6 className={myClasses.subHeader}></h6></div>
+       {/* <div className={myClasses.subHeader} ><h6 className={myClasses.subHeader}>Mi Lista de Compra</h6></div> */}
        
 
         <GridContainer spacing={3} >
         <GridItem xs={14} id="Compra">
-            <SelectableRowsManagement/>
+             <SelectableRowsManagement/>
             </GridItem>
         </GridContainer>
         <GridContainer spacing={4} >

@@ -17,8 +17,9 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function ProductCard() {
+export default function ProductCard(props) {
   const classes = useStyles();
+  const { productName, productDescription, ...rest } = props;
   return (
     <Card style={{width: "20rem"}}>
       <img
@@ -29,9 +30,9 @@ export default function ProductCard() {
       />
       <CardBody>
         {/* aqui es donde va todo el body del card */}
-        <h4 className={classes.cardTitle}>Product Name</h4>
-        <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        {/*<Button color="primary">Do something</Button>*/}
+        <h4 className={classes.cardTitle}>{productName}</h4>
+        <p>{productDescription}</p>
+        {/*<Button color="primary">Añadir al carrito</Button>*/}
       </CardBody>
     </Card>
   );

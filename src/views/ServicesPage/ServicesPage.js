@@ -19,14 +19,18 @@ import ProductCard from 'components/Card/ProductCard.js'
 // Sections for this page
 
 
-const dashboardRoutes = [];
-
 const useStyles = makeStyles(styles);
-
+const Product=({name, description})=>({ 
+    //instancia de producto
+    type:'item',
+    props:{
+        name:name,
+        description:description,
+    }
+});
 
 export default function ServicePage(props) {
 const {menuCategories}=props;
-
     const classes = useStyles();
     const { ...rest } = props;
     //for the menu behavior
@@ -38,17 +42,49 @@ const {menuCategories}=props;
       const handleClose = () => {
         setAnchorEl(null);
       };
+
+      const selectedMenuItem = (category) => {
+        var productsList;
+        switch (category) {
+            case 0:
+              //Muestra comida y bebidas
+              break;
+            case 1:
+              //Muestra Salones
+              break;
+            case 6:
+                productsList=[
+                    {
+                        name: 'Cursos Matrimoniales',
+                        description: 'cursitos matrimoniales para ti'
+                    },
+                
+                    {
+                        name: 'Carta de Solteria',
+                        email: 'Haz tu carta de solteria online!'
+                    }
+                ]
+              //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
+              break;
+            default:
+              //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+              break;
+          }
+          uploadProducts(productsList);
+      };
+
+      const uploadProducts = (products) => {
+      
+                products.map(Product => <GridItem xs={3}>
+                <ProductCard productName={Product.name} 
+                productDescription={Product.description}/>
+                </GridItem>);
+    
+    
+    };
+
       //end of the menu behavior
     return(<div> 
-       {/*<Header
-        brand="Arma Tu Fiesta"
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "white"
-        }}
-
-        {...rest}/> */} 
 
         <GridContainer spacing={2}> 
         <GridItem xs={3}>
@@ -59,27 +95,17 @@ const {menuCategories}=props;
             open={Boolean(anchorEl)}
             onClose={handleClose}
             >
-            <MenuItem onClick={handleClose}>{menuCategories[0]}</MenuItem>
-            <MenuItem onClick={handleClose}>{menuCategories[1]}</MenuItem>
-            <MenuItem onClick={handleClose}>{menuCategories[2]}</MenuItem>
-            <MenuItem onClick={handleClose}>{menuCategories[3]}</MenuItem>
-            <MenuItem onClick={handleClose}>{menuCategories[4]}</MenuItem>
-            <MenuItem onClick={handleClose}>{menuCategories[5]}</MenuItem>
+            <MenuItem onClick={selectedMenuItem}>{menuCategories[0]}</MenuItem>
+            <MenuItem onClick={selectedMenuItem}>{menuCategories[1]}</MenuItem>
+            <MenuItem onClick={selectedMenuItem}>{menuCategories[2]}</MenuItem>
+            <MenuItem onClick={selectedMenuItem}>{menuCategories[3]}</MenuItem>
+            <MenuItem onClick={selectedMenuItem}>{menuCategories[4]}</MenuItem>
+            <MenuItem onClick={selectedMenuItem}>{menuCategories[5]}</MenuItem>
             </MenuList>
         </GridItem>
-
-      
-        <GridItem xs={3}>
-            <ProductCard></ProductCard>
-        </GridItem>
-        <GridItem xs={3}>
-            <ProductCard></ProductCard>
-        </GridItem>
-        <GridItem xs={3}>
-            <ProductCard></ProductCard>
-        </GridItem>
-            <GridItem xs={12} md><div color="blue"></div></GridItem>
+        {/**AQUI VAN LOS PRODUCTOS/SERVICIOS */}
         </GridContainer>
+        
 
     </div>); 
 }

@@ -90,7 +90,7 @@ export default function SelectableRowsManagement() {
       columns={columns}
       data={data}
       progressPending={loading}
-     
+      backgroundColor="#9EDCFA"
       pagination
       paginationServer
       paginationTotalRows={totalRows}
