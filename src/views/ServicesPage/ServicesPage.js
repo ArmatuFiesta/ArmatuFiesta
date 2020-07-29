@@ -25,6 +25,8 @@ const useStyles = makeStyles(styles);
 
 
 export default function ServicePage(props) {
+const {menuCategories}=props;
+
     const classes = useStyles();
     const { ...rest } = props;
     //for the menu behavior
@@ -57,12 +59,12 @@ export default function ServicePage(props) {
             open={Boolean(anchorEl)}
             onClose={handleClose}
             >
-            <MenuItem onClick={handleClose}>Servicio 1</MenuItem>
-            <MenuItem onClick={handleClose}>Servicio 2</MenuItem>
-            <MenuItem onClick={handleClose}>Servicio 3</MenuItem>
-            <MenuItem onClick={handleClose}>Servicio 4</MenuItem>
-            <MenuItem onClick={handleClose}>Servicio 5</MenuItem>
-            <MenuItem onClick={handleClose}>Servicio 6</MenuItem>
+            <MenuItem onClick={handleClose}>{menuCategories[0]}</MenuItem>
+            <MenuItem onClick={handleClose}>{menuCategories[1]}</MenuItem>
+            <MenuItem onClick={handleClose}>{menuCategories[2]}</MenuItem>
+            <MenuItem onClick={handleClose}>{menuCategories[3]}</MenuItem>
+            <MenuItem onClick={handleClose}>{menuCategories[4]}</MenuItem>
+            <MenuItem onClick={handleClose}>{menuCategories[5]}</MenuItem>
             </MenuList>
         </GridItem>
 

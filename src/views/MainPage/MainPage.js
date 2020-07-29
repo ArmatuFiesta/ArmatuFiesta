@@ -18,6 +18,10 @@ const useStyles = makeStyles(styles);
 
 
 export default function MainPage(props) {
+    const serviceCategories=["CATERING","SALONES DE FIESTA","DECORACION",
+    "CORTE Y COSTURA"," OBSEQUIOS Y TARJETERIA","MATRIMONIOS"];
+    const contratacionesCategories=["MUSICA", "SHOWS","SEGURIDAD",
+"PROTOCOLO","FOTOGRAFIA","BAILES"];
     const classes = useStyles();
     const { ...rest } = props;
     return(
@@ -32,10 +36,10 @@ export default function MainPage(props) {
                   ),
                 },
             {  tabName:"Servicios",
-                tabContent: (<ServicesPage/>),
+                tabContent: (<ServicesPage menuCategories={serviceCategories}/>),
             },
             {tabName:'Contrataciones',
-                tabContent:(<ServicesPage/>)},
+                tabContent:(<ServicesPage menuCategories={contratacionesCategories}/>)},
             {tabName:'Mi Cuenta',
                 tabContent:(<MiCuentaPage/>)},
             ] }
