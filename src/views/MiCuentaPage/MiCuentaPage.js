@@ -20,12 +20,14 @@ import { CreditCard } from "@material-ui/icons";
 const dashboardRoutes = [];
 const myStyles = {
     subHeader:{
-        heigh: 500,
+        height: 30,
         backgroundColor: "#9EDCFA",
         color:"white",
+        fontSize:20,
     },
     textCenter: {
-      textAlign: "center"
+      textAlign: "center",
+      fontSize:20,
     }
   };
 
@@ -40,7 +42,7 @@ export default function MiCuentaPage(props) {
     return(
         <div>
 
-        <div className={myClasses.subHeader} ><h6>"Mi lista de compra"</h6></div>
+        <div className={myClasses.subHeader} ><h6 className={myClasses.subHeader}>"Mi lista de compra"</h6></div>
        
 
         <GridContainer spacing={3} >
