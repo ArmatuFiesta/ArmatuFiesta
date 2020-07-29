@@ -8,13 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // core components
 import Header from "components/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
-import Grid from "@material-ui/core/Grid";
-import Button from "components/CustomButtons/Button.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
-import { primaryBoxShadow } from "assets/jss/material-kit-react";
-import theme from "theme.js"
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import MenuItem from '@material-ui/core/MenuItem';
@@ -44,8 +38,7 @@ export default function ServicePage(props) {
       };
       //end of the menu behavior
     return(<div> 
-        <Header
-        color="green"
+       {/*<Header
         brand="Arma Tu Fiesta"
         fixed
         changeColorOnScroll={{
@@ -53,9 +46,8 @@ export default function ServicePage(props) {
           color: "white"
         }}
 
-        {...rest}/>
+        {...rest}/> */} 
 
-        //body of the service page
         <GridContainer spacing={2}> 
         <GridItem xs={3}>
         <MenuList
@@ -74,7 +66,7 @@ export default function ServicePage(props) {
             </MenuList>
         </GridItem>
 
-        //menu end
+      
         <GridItem xs={3}>
             <ProductCard></ProductCard>
         </GridItem>

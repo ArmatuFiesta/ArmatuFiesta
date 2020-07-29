@@ -28,9 +28,10 @@ export default function ProductCard() {
         alt="Card-img-cap"
       />
       <CardBody>
-        <h4 className={classes.cardTitle}>Card title</h4>
+        {/* aqui es donde va todo el body del card */}
+        <h4 className={classes.cardTitle}>Product Name</h4>
         <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <Button color="primary">Do something</Button>
+        {/*<Button color="primary">Do something</Button>*/}
       </CardBody>
     </Card>
   );
