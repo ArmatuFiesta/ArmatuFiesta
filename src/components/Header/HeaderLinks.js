@@ -44,7 +44,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-         <Link to={"services"} className={classes.Link}>Servicios </Link>
+         <Link to={"services"} className={classes.Link}>Acceder</Link>
 
         </Button>
         
