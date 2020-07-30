@@ -14,6 +14,7 @@ import GridItem from "components/Grid/GridItem.js";
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import ProductCard from 'components/Card/ProductCard.js'
+import MapPage from "views/MapPage/MapPage";
 
 
 // Sections for this page
@@ -52,6 +53,7 @@ export default function ServicePage(props) {
         break;
       case 1:
         //Muestra Salones
+        setItems(<GridItem xs={6}><MapPage></MapPage></GridItem>);
         break;
       case 5:
         productsList = [
@@ -65,13 +67,14 @@ export default function ServicePage(props) {
             email: 'Haz tu carta de solteria online!'
           }
         ]
+        uploadProducts(productsList);
         //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
         break;
       default:
         //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
         break;
     }
-    uploadProducts(productsList);
+    
   };
 
   const uploadProducts = (products) => {

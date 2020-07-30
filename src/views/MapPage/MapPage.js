@@ -33,7 +33,7 @@ import { SmsOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
-export default function LandingPage(props) {
+export default function MapPage(props) {
 
   const [activePopup, setActivePopup] = React.useState(null);
   const mapref = React.useRef();
@@ -75,20 +75,7 @@ export default function LandingPage(props) {
 
 
   return (
-    <div>
-      <div>
-      <Header
-        absolute
-        color="white"
-        brand="Arma Tu Fiesta"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      />
-      </div>
-      <div className="sidebar" >
-      <h2>AA</h2>
-        <div className="list"></div>
-      </div>
+    
       <div >
         <FormControl className={classes.formControl}>
         <InputLabel shrink id="select-estados">
@@ -155,8 +142,7 @@ export default function LandingPage(props) {
         </Map>
         </div>
       </div>
-      <Footer />
-    </div>
+    
   );
  
 }
