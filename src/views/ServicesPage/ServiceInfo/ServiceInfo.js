@@ -15,6 +15,9 @@ import GridItem from "components/Grid/GridItem.js";
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel, Input, FormHelperText } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
+import { Message } from "@material-ui/icons";
+import Button from "components/CustomButtons/Button.js";
+import ComboBox from "components/ComboBox/ComboBox.js";
 const styles = {
   ...imagesStyles,
   cardTitle,
@@ -22,6 +25,8 @@ const styles = {
     color: "#6c757d"
   },
 };
+
+const tiposEventos=[{title:"Matrimonio"},{title:"Boda"},{title:"Quinceanos"},{title:"Infantil"},{title:"Otros"}];
 
 const useStyles = makeStyles(styles);
 
@@ -40,12 +45,12 @@ export default function ServicePage(props) {
                 <Card>
             <img className={classes.imgCardTop} src="..." alt="Card-img-cap" />
             <CardBody>
-                <h4 className={classes.cardTitle}>Servicio Ejemplo</h4>
+                <h4 className={classes.cardTitle}>Servicio Ejemplo</h4> {/** {service.name} */}
                 <p>Tipo: Comedor
-Direccion: Quinta numero xx, Palos Grandes, Carcas
+Direccion: Quinta numero xx, Palos Grandes, Carcas {/** {service.description} */}
 Contacto: 0414-xxxx-xxx
-Ambiente: Elegante</p>
-                <p><small className={classes.textMuted}>Last updated 3 mins ago</small></p>
+Ambiente: Elegante</p>   
+                <p><small className={classes.textMuted}>Last updated 3 mins ago</small></p>  {/** {service.habilitado} */}
             </CardBody>
             </Card>
             </GridItem>
@@ -53,10 +58,12 @@ Ambiente: Elegante</p>
             <div>
                 <h6>Solicitar Presupuesto</h6>
             <FormControl>
-                <InputLabel htmlFor="my-input">Nombre Completo</InputLabel>
+
+                <InputLabel htmlFor="my-input">Nombre Completo</InputLabel> 
                 <Input id="my-input" aria-describedby="my-helper-text" />
                 {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
             </FormControl>
+            <br/><br/>
             <FormControl>
                 <InputLabel htmlFor="my-input">Correo Electronico</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
@@ -64,6 +71,7 @@ Ambiente: Elegante</p>
             </FormControl>
             <br/><br/>
             <p>Selecciona el tipo de evento: </p>
+            <ComboBox itemList={tiposEventos} label="Eventos"/>
             <div>
             <br/><br/>
         <TextField
@@ -73,7 +81,9 @@ Ambiente: Elegante</p>
           multiline
           variant="outlined"
         />
-    
+
+<br/><br/>
+          <Button color="primary" round><Message/> Submit</Button>
       </div>
             
             </div>

@@ -77,7 +77,11 @@ const {menuCategories}=props;
       
                 products.map(Product => <GridItem xs={3}>
                 <ProductCard productName={Product.name} 
-                productDescription={Product.description}/>
+                productDescription={Product.description}
+              /*href="/map"
+                onClick={<Link to={"/com"} className={classes.Link}> </Link>
+                Para cada producto se requiere de un link con parametro id que indique el producto al que se refiere */
+                          />
                 </GridItem>);
     
     
