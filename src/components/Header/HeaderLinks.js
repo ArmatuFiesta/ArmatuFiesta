@@ -27,17 +27,7 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-            
-            <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-         <Link to={"map"} className={classes.Link}>Mapa</Link>
-        </Button>
-        
-
-      </ListItem>
+      
       <ListItem className={classes.listItem}>
             
             <Button
