@@ -42,7 +42,7 @@ export default function MapPage(props) {
   
   const fetchNotarias = async page => {
     const response = await axios.get(
-      `http://localhost:8000/api/notarias/`,
+      `https://cors-anywhere.herokuapp.com/http://arma-tu-fiesta.herokuapp.com/api/notarias/`,
     );
     setData(response.data);
     console.log(response.data);
