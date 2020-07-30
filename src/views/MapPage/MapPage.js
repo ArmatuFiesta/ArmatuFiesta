@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -12,7 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 // @material forms 
 
 import {Map,Marker,Popup,TileLayer}from "react-leaflet";
-
+import axios from 'axios';
 import "views/MapPage/components/map.css";
 
 //maps components
@@ -22,28 +22,43 @@ import Footer from "components/Footer/Footer.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import * as datos from "views/MapPage/components/placeholder_data.json";
 import * as estados from "./estados.json";
-import useSwr from "swr"
-//SWR lo voy a usar para fetch la data de la bd
+
 
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
+import { SmsOutlined } from "@material-ui/icons";
 
-const fetcher =(...args) => fetch(...args).then(response => response.json());
-//este fetcher es para agarrar datos de la bd cuando este lista
+
 
 
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
+
   const [activePopup, setActivePopup] = React.useState(null);
   const mapref = React.useRef();
+
+  const [data, setData] = React.useState([]);
   
+  const fetchNotarias = async page => {
+    const response = await axios.get(
+      `localhost:8000/api/notarias/`,
+    );
+    setData(response.data.data);
+    console.log(data);
+  };
+
    function handleFlyto(){
     const {current = {}} = mapref;
     const {leafletElement: mapa}= current;
     mapa.flyTo(ltln,zooom)
   }
   
+  useEffect(() => {
+    fetchNotarias(1);
+  
+  }, []);
+
   const classes = useStyles();
   const { ...rest } = props;
   var lat = 10.48801;
@@ -102,12 +117,12 @@ export default function LandingPage(props) {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {datos.features.map( notarias => (
+        {data.map( notarias => (
            <Marker
-           key={notarias.properties.PARK_ID}
+           key={notarias.id}
            position={[
-            notarias.geometry.coordinates[0],
-            notarias.geometry.coordinates[1]
+            notarias.ubicacion_geografica.latitud,
+            notarias.ubicacion_geografica.longitud
            ]}
            onClick={() => {
             setActivePopup(notarias);
@@ -120,16 +135,16 @@ export default function LandingPage(props) {
        {activePopup && (
         <Popup
           position={[
-            activePopup.geometry.coordinates[0],
-            activePopup.geometry.coordinates[1]
+            activePopup.ubicacion_geografica.latitud,
+            activePopup.ubicacion_geografica.longitud
           ]}
           onClose={() => {
             setActivePopup(null);
           }}
         >
           <div>
-            <h2>{activePopup.properties.NAME}</h2>
-            <p>{activePopup.properties.DESCRIPTIO}</p>
+            <h2>{activePopup.nombre_notaria}</h2>
+            
           </div>
         </Popup>
       )}  
