@@ -29,13 +29,13 @@ export default function MainPage(props) {
         <CustomTabs headerColor="primary" 
             title="ArmaTuFiesta"
             tabs={[
-                {  tabName:"Blog",
+                /*{  tabName:"Blog",
                 tabContent:(
                     <p className={classes.textCenter}>
                       Aqui iria el Blog acerca de los tips y esa vaina
                     </p>
                   ),
-                },
+                },*/
             {  tabName:"Servicios",
                 tabContent: (<ServicesPage menuCategories={serviceCategories}/>),
             },
