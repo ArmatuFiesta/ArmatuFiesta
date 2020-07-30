@@ -42,10 +42,10 @@ export default function LandingPage(props) {
   
   const fetchNotarias = async page => {
     const response = await axios.get(
-      `localhost:8000/api/notarias/`,
+      `http://localhost:8000/api/notarias/`,
     );
-    setData(response.data.data);
-    console.log(data);
+    setData(response.data);
+    console.log(response.data);
   };
 
    function handleFlyto(){
@@ -117,17 +117,17 @@ export default function LandingPage(props) {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {data.map( notarias => (
+        {data.map( notaria => (
            <Marker
-           key={notarias.id}
+           key={notaria.id}
            position={[
-            notarias.ubicacion_geografica.latitud,
-            notarias.ubicacion_geografica.longitud
+            notaria.ubicacion_geografica.latitud,
+            notaria.ubicacion_geografica.longitud
            ]}
            onClick={() => {
-            setActivePopup(notarias);
-            
-            
+            setActivePopup(notaria);
+
+
            }}
          />
 
