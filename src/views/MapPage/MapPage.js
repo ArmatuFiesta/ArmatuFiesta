@@ -42,7 +42,7 @@ export default function MapPage(props) {
   
   const fetchNotarias = async page => {
     const response = await axios.get(
-      `https://cors-anywhere.herokuapp.com/http://arma-tu-fiesta.herokuapp.com/api/notarias/`,
+      "http://arma-tu-fiesta.herokuapp.com/api/notarias/?format=json",
     );
     setData(response.data);
     console.log(response.data);
@@ -109,6 +109,7 @@ export default function MapPage(props) {
            key={notaria.id}
            position={[
             notaria.ubicacion_geografica.latitud,
+            
             notaria.ubicacion_geografica.longitud
            ]}
            onClick={() => {
