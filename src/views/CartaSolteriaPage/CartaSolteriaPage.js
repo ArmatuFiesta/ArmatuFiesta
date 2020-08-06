@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
+
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -19,12 +20,61 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
+import Axios from "axios";
 
 // Sections for this page
 
 const dashboardRoutes = [];
-
+const headers = {
+  'Content-Type': 'application/json',
+};
 const useStyles = makeStyles(styles);
+const datos ={
+  
+  'template': { 
+    "content" : '<b><p>Yo, {{name}}, de nacionalidad Venezolana, mayor de edad, civilmente hábil, de este domicilio, soltero y titular de la cédula de Identidad V-{{$randomPhoneNumber}}, comparezco por ante su competente autoridad con motivo al matrimonio civil que he decidido contraer, a objeto de solicitarle se sirva interrogar a los testigos que oportunamente presentaré, sobre los siguientes particulares:</p><p>PRIMERO Si me conocen suficientemente de vista, trato y comunicación desde hace varios años.</p><p>SEGUNDO: Si por ese conocimiento que de mi tienen, saben y les consta que nací en Caracas, el día {{dia}} de {{mes}} de {{año}}, y que soy hijo de {{papa}} Y {{mama}}.</p><p>TERCERO: Si por el conocimiento que de mi tienen, saben y les consta que soy soltero(a) y no tengo impedimento alguno para contraer matrimonio.</p><p>Por último solicito que una vez evacuadas las presentes actuaciones se sirva devolvérmelas en original con sus resultas. Es Justicia que espero a la fecha de su presentación. Los testigos contestaron afirmativamente a las anteriores preguntas y en consecuencia estampan sus firmas a continuación</p></b>',
+    "recipe": "chrome-pdf",
+    "engine": "handlebars",
+    "chrome": {
+        "landscape": false
+    }
+    
+    },
+  "data":{  
+    "name":"qweqwe",
+    "dia":"18",
+    "mes":"septiembre",
+    "año":"1800",
+    "papa":"qweqwe",
+    "mama":"dasdasdad"
+    }
+
+};
+
+
+function handleClick(){
+  //llega la data bien pero al descargar queda en blanco :/
+  Axios.post('http://localhost:5488/api/report',datos,{header:headers}).then(res => {
+    const headerContentDisp = res.headers["content-disposition"];
+      const filename =
+        headerContentDisp &&
+        headerContentDisp.split("filename=")[1].replace(/["']/g, ""); // TODO improve parcing
+      const contentType = res.headers["content-type"];
+
+      const blob = new Blob([res.data], { contentType });
+      const href = window.URL.createObjectURL(blob);
+
+      const el = document.createElement("a");
+      el.setAttribute("href", href);
+      el.setAttribute(
+        "download",
+        filename || "someFile"
+      );
+      el.click();
+      window.URL.revokeObjectURL(blob);
+      return res;
+  })
+};
 
 export default function LandingPage(props) {
   const classes = useStyles();
@@ -140,7 +190,7 @@ export default function LandingPage(props) {
           </GridContainer>
           <GridContainer>
             <GridItem>
-              <Button></Button>
+              <Button onClick={handleClick} >Get</Button>
             </GridItem>
           </GridContainer>
         </div>
