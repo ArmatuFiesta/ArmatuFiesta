@@ -11,7 +11,6 @@ import CustomTabs from "components/CustomTabs/CustomTabs";
 import ServicesPage from "views/ServicesPage/ServicesPage.js";
 import ServiceInfo from "views/ServicesPage/ServiceInfo/ServiceInfo.js";
 import MiCuentaPage from "views/MiCuentaPage/MiCuentaPage.js";
-import AddServicePage from "views/AdminPage/AddServicePage.js";
 
 
 const dashboardRoutes = [];
@@ -46,8 +45,6 @@ export default function MainPage(props) {
                 tabContent:(<MiCuentaPage/>)},
                 {tabName:'EjemploProducto',
                 tabContent:(<ServiceInfo/>)},
-                {tabName:'Vista Admin',
-                tabContent:(<AddServicePage />)},
             ] }
             {...rest}
         />

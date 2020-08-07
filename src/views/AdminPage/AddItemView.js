@@ -9,15 +9,17 @@ import FormControl from '@material-ui/core/FormControl';
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 import { InputLabel, Input, FormHelperText } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
-import { Message } from "@material-ui/icons";
+import { Message, Save, Add, Label, Cloud, CloudUpload } from "@material-ui/icons";
 import Button from "components/CustomButtons/Button.js";
 import ComboBox from "components/ComboBox/ComboBox.js";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import GridItem from "components/Grid/GridItem";
+import GridContainer from "components/Grid/GridContainer";
 
-const tiposEventos=[{title:"Matrimonio"},{title:"Boda"},{title:"Quinceanos"},{title:"Infantil"},{title:"Otros"}];
+const categoriasEx=[{title:"CATERING"},{title:"NOTARIAS"},{title:"DECORACION"},{title:"CORTE Y COSTURA"},{title:"OBSEQUIOS Y TARJETERIA"},{title:"MATRIMONIOS"}];
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,12 +30,13 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(2),
       marginRight: theme.spacing(2),
       [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-        width: 600,
+        width: 700,
         marginLeft: 'auto',
         marginRight: 'auto',
       },
     },
     paper: {
+      width:'auto',
       marginTop: theme.spacing(3),
       marginBottom: theme.spacing(3),
       padding: theme.spacing(2),
@@ -54,6 +57,10 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(3),
       marginLeft: theme.spacing(1),
     },
+    margins:{
+      marginTop: theme.spacing(3),
+      marginLeft: theme.spacing(1),
+    }
   }));
 export default function AddServicePage(props){
   const classes=useStyles();
@@ -67,38 +74,55 @@ export default function AddServicePage(props){
         </Toolbar>
       </AppBar>
 
+      
       <main className={classes.layout}>
       <Paper  className={classes.paper}>
-                <h6>Solicitar Presupuesto</h6>
+                <Typography variant="h5" align="center">Agregar Item</Typography>
+                <GridContainer spacing={3}>
+        <GridItem sm={6}>
+        <p >Selecciona la categoria del Item</p>
+            <ComboBox itemList={categoriasEx} label="Categoria" />
+            <ComboBox itemList={categoriasEx} label="Subcategoria" />
+            <br/>
+            <p>Coloca el nombre con el que se identifica el item</p> 
             <FormControl>
-
-                <InputLabel htmlFor="my-input">Nombre Completo</InputLabel> 
+                <InputLabel htmlFor="my-input">Nombre Item</InputLabel> 
                 <Input id="my-input" aria-describedby="my-helper-text" />
                 {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
-            </FormControl>
-            <br/><br/>
+            </FormControl> 
+            <br/>
+            <p  >Indica el precio asociado</p>
             <FormControl>
-                <InputLabel htmlFor="my-input">Correo Electronico</InputLabel>
+                <InputLabel htmlFor="my-input">Precio Item</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
                   {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
             </FormControl>
-            <br/><br/>
-            <p>Selecciona el tipo de evento: </p>
-            <ComboBox itemList={tiposEventos} label="Eventos"/>
-            <div>
-            <br/><br/>
-        <TextField
+        </GridItem>
+        <GridItem sm={6}>
+        <Button
+        variant="contained"
+        align="center"
+        color="default"
+        className={classes.button}
+        startIcon={<CloudUpload />}
+      >
+        Agregar Foto
+      </Button>
+          <Input type="image" className={classes.margins}></Input>
+          <TextField
           id="outlined-textarea"
-          label="Detalles del Evento"
-          placeholder="Escribenos aca cualquier otro detalle!"
+          label="Descripción Item"
+          width = "full"
+          placeholder="Describe aqui tu producto/servicio!"
           multiline
           variant="outlined"
+          className={classes.margins}
         />
 
             <br/><br/>
-          <Button color="primary" round><Message/> Submit</Button>
-      </div>
-            
+          <Button color="primary" round><Save/> Agregar Producto</Button>
+        </GridItem>
+      </GridContainer>      
       </Paper>
       </main>
       
