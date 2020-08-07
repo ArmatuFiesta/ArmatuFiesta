@@ -14,10 +14,10 @@ import LandingPage from "views/LandingPage/LandingPage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import RegisterPage from "views/RegisterPage/RegisterPage.js";
 import MapPage from "views/MapPage/MapPage.js";
-import ServicesPage from "views/ServicesPage/ServicesPage.js";
 import MainPage from "views/MainPage/MainPage.js";
-import Solteria from "views/CartaSolteriaPage/CartaSolteriaPage.js"
-
+import Solteria from "views/CartaSolteriaPage/CartaSolteriaPage.js";
+import AddServicePage from "views/AdminPage/AddServicePage.js";
+import CheckOut from "views/PaymentView/CheckOut";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -29,7 +29,10 @@ ReactDOM.render(
       <Route path="/login-page" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/map" component={MapPage} />
+      <Route path="/adminView" component={AddServicePage} />
+      <Route path="/payment" component={CheckOut} />
       <Route path="/" component={LandingPage} />
+      
     </Switch>
   </Router>,
   </ThemeProvider>,

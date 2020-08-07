@@ -33,6 +33,9 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const handleLogin=(username, password)=>{ //verificar data con back y dar acceso a pantalla admin
+  }
+  
   return (
     <div>
       <Header
@@ -129,6 +132,7 @@ export default function LoginPage(props) {
                       color="primary"
                       //justify="center"
                       //size="lg"
+                      onClick= {handleLogin}
                       fullWidth="true"
                     >
                       Inicia Sesión!

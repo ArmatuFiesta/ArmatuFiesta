@@ -29,7 +29,6 @@ export default function HeaderLinks(props) {
     <List className={classes.list}>
       
       <ListItem className={classes.listItem}>
-            
             <Button
           color="transparent"
           className={classes.navLink}
@@ -49,6 +48,18 @@ export default function HeaderLinks(props) {
         >
          { /*<PartyMode className={classes.icons} /> */} Blog
         </Button>
+      </ListItem>
+
+      <ListItem className={classes.listItem}>
+            <Button
+          color="transparent"
+          className={classes.navLink}
+        >
+         <Link to={"adminView"} className={classes.Link}>Admin</Link>
+
+        </Button>
+        
+
       </ListItem>
       {/*<ListItem className={classes.listItem}>
         <Tooltip title="Delete">

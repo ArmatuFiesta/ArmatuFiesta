@@ -52,7 +52,7 @@ export default function MiCuentaPage(props) {
         </GridContainer>
         <GridContainer spacing={4} >
             <GridItem xs={6} id="TotalCompra"><p>Total de Compra:</p></GridItem>
-            <GridItem xs={6} id="PagarButton"><Button color="primary" round><CreditCard /> PAGAR</Button></GridItem>
+            <GridItem xs={6} id="PagarButton"><Button href="/payment" color="primary" round><CreditCard /> PAGAR</Button></GridItem>
         </GridContainer>
         </div>
     );
