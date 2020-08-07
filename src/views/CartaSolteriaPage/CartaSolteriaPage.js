@@ -4,7 +4,7 @@ import Datetime from "react-datetime";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+//import { downloadFile } from 'react-file-downloader'
 // @material-ui/icons
 
 // core components
@@ -25,9 +25,7 @@ import Axios from "axios";
 // Sections for this page
 
 const dashboardRoutes = [];
-const headers = {
-  'Content-Type': 'application/json',
-};
+
 const useStyles = makeStyles(styles);
 const datos ={
   
@@ -54,26 +52,30 @@ const datos ={
 
 function handleClick(){
   //llega la data bien pero al descargar queda en blanco :/
-  Axios.post('http://localhost:5488/api/report',datos,{header:headers}).then(res => {
-    const headerContentDisp = res.headers["content-disposition"];
-      const filename =
-        headerContentDisp &&
-        headerContentDisp.split("filename=")[1].replace(/["']/g, ""); // TODO improve parcing
-      const contentType = res.headers["content-type"];
-
-      const blob = new Blob([res.data], { contentType });
-      const href = window.URL.createObjectURL(blob);
-
-      const el = document.createElement("a");
-      el.setAttribute("href", href);
-      el.setAttribute(
-        "download",
-        filename || "someFile"
-      );
-      el.click();
-      window.URL.revokeObjectURL(blob);
-      return res;
+  datos.data.name="aaaaa";
+  Axios.post("http://localhost:5488/api/report",
+  datos,
+  {
+      responseType: 'arraybuffer',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/pdf'
+      }
   })
+  .then((res) => {
+      const contentType = res.headers["content-type"];
+      const blob = new Blob([res.data], {contentType} ); 
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'sample.pdf'); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+  })
+  .catch((error) => console.log(error));
+
+
 };
 
 export default function LandingPage(props) {
