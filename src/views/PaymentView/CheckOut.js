@@ -14,18 +14,7 @@ import AddressForm from 'views/PaymentView/AdressForm.js';
 import PaymentForm from 'views/PaymentView/PaymentForm.js';
 import Review from 'views/PaymentView/Review.js';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -64,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Datos de Usuario', 'Datos de pago', 'Confirma tu orden'];
 
 function getStepContent(step) {
   switch (step) {
@@ -104,7 +93,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+            Mi orden
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
@@ -121,7 +110,7 @@ export default function Checkout() {
                 </Typography>
                 <Typography variant="subtitle1">
                   Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                  send you an update when your order has fped.
                 </Typography>
               </React.Fragment>
             ) : (
@@ -130,7 +119,7 @@ export default function Checkout() {
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
-                      Back
+                      Atras
                     </Button>
                   )}
                   <Button
@@ -139,14 +128,13 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Place order' : 'Siguiente'}
                   </Button>
                 </div>
               </React.Fragment>
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </main>
     </React.Fragment>
   );

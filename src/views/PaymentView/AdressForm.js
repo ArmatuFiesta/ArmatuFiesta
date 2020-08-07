@@ -9,15 +9,15 @@ export default function AddressForm() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        Datos de usuario
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="firstName"
-            name="firstName"
-            label="First name"
+            id="nombre"
+            name="nombre"
+            label="Nombre"
             fullWidth
             autoComplete="given-name"
           />
@@ -25,9 +25,9 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lastName"
-            name="lastName"
-            label="Last name"
+            id="apellido"
+            name="apellido"
+            label="Apellido"
             fullWidth
             autoComplete="family-name"
           />

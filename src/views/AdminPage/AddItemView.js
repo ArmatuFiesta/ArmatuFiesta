@@ -120,7 +120,7 @@ export default function AddServicePage(props){
         />
 
             <br/><br/>
-          <Button color="primary" round><Save/> Agregar Producto</Button>
+          <Button color="primary" round className={classes.buttons}><Save/> Agregar Producto</Button>
         </GridItem>
       </GridContainer>      
       </Paper>
