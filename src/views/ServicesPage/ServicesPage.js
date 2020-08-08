@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
+import axios from 'axios';
 
 // @material-ui/icons
 
@@ -31,6 +32,7 @@ const Product = ({name, description}) => ({
 });
 
 export default function ServicePage(props) {
+
   const {menuCategories} = props;
   const classes = useStyles();
   const {...rest} = props;

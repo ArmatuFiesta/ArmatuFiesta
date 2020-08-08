@@ -17,6 +17,7 @@ import MapPage from "views/MapPage/MapPage.js";
 import MainPage from "views/MainPage/MainPage.js";
 import Solteria from "views/CartaSolteriaPage/CartaSolteriaPage.js";
 import AddItemView from "views/AdminPage/AddItemView.js";
+import ServicePojo from "views/ServicesPage/ServicePojo.js";
 import CheckOut from "views/PaymentView/CheckOut";
 var hist = createBrowserHistory();
 
@@ -31,6 +32,7 @@ ReactDOM.render(
       <Route path="/map" component={MapPage} />
       <Route path="/adminView" component={AddItemView} />
       <Route path="/payment" component={CheckOut} />
+      <Route path="/servicesEx" component={ServicePojo} />
       <Route path="/" component={LandingPage} />
       
     </Switch>
