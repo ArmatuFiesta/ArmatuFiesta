@@ -1,9 +1,9 @@
 import React from "react";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
-import { Link } from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 //import People from "@material-ui/icons/People";
@@ -22,31 +22,47 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
+import {httpClient} from "../../core/http-client";
+
 import image from "assets/img/log.jpg";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [redirect, setRedirect] = React.useState(false);
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const { ...rest } = props;
-  const handleLogin=(username, password)=>{ //verificar data con back y dar acceso a pantalla admin
+  const {...rest} = props;
+  const handleLogin = (username, password) => {
+    httpClient.post('/login/', {
+      nombre_usuario: username,
+      password
+    }).then(({data: {access, refresh}}) => {
+      localStorage.setItem('token', access);
+      localStorage.setItem('refresh', refresh);
+      setRedirect(true)
+    })
+      .catch(reason => console.log(reason));
   }
-  
-  return (
-    <div>
-      <Header
-        href="/" //TODO: Averiguar como redirigir a home
-        absolute
-        color="transparent"
-        brand="Arma Tu Fiesta"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      />
 
+  const header = <Header
+    href="/" //TODO: A  veriguar como redirigir a home
+    absolute
+    color="transparent"
+    brand="Arma Tu Fiesta"
+    rightLinks={<HeaderLinks/>}
+    {...rest}
+  />;
+
+
+  return redirect ? <Redirect to="/adminView/"/> : (
+    <div>
+      {header}
       <div
         className={classes.pageHeader}
         style={{
@@ -70,7 +86,7 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className={"fab fa-twitter"} />
+                        <i className={"fab fa-twitter"}/>
                       </Button>
                       <Button
                         justIcon
@@ -79,7 +95,7 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className={"fab fa-facebook"} />
+                        <i className={"fab fa-facebook"}/>
                       </Button>
                       <Button
                         justIcon
@@ -88,15 +104,15 @@ export default function LoginPage(props) {
                         color="transparent"
                         onClick={(e) => e.preventDefault()}
                       >
-                        <i className={"fab fa-google-plus-g"} />
+                        <i className={"fab fa-google-plus-g"}/>
                       </Button>
                     </div>
                   </CardHeader>
                   <p className={classes.divider}>Tambien puedes...</p>
                   <CardBody>
                     <CustomInput
-                      labelText="Email..."
-                      id="email"
+                      labelText="Nombre de usuario..."
+                      id="text"
                       formControlProps={{
                         fullWidth: true,
                       }}
@@ -104,9 +120,10 @@ export default function LoginPage(props) {
                         type: "email",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
+                            <Email className={classes.inputIconsColor}/>
                           </InputAdornment>
                         ),
+                        onChange: e => setUsername(e.target.value)
                       }}
                     />
                     <CustomInput
@@ -125,6 +142,7 @@ export default function LoginPage(props) {
                           </InputAdornment>
                         ),
                         autoComplete: "off",
+                        onChange: e => setPassword(e.target.value)
                       }}
                     />
                     <Button
@@ -132,7 +150,7 @@ export default function LoginPage(props) {
                       color="primary"
                       //justify="center"
                       //size="lg"
-                      onClick= {handleLogin}
+                      onClick={(e) => handleLogin(username, password)}
                       fullWidth="true"
                     >
                       Inicia Sesión!
@@ -154,7 +172,7 @@ export default function LoginPage(props) {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
+        <Footer whiteFont/>
       </div>
     </div>
   );

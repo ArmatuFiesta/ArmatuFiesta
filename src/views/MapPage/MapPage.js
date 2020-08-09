@@ -33,7 +33,7 @@ import { SmsOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles(styles);
 
-export default function MapPage(props) {
+export default function LandingPage(props) {
 
   const [activePopup, setActivePopup] = React.useState(null);
   const mapref = React.useRef();
@@ -42,7 +42,7 @@ export default function MapPage(props) {
   
   const fetchNotarias = async page => {
     const response = await axios.get(
-      "http://arma-tu-fiesta.herokuapp.com/api/notarias/?format=json",
+      `http://localhost:8000/api/notarias/`,
     );
     setData(response.data);
     console.log(response.data);
@@ -75,7 +75,20 @@ export default function MapPage(props) {
 
 
   return (
-    
+    <div>
+      <div>
+      <Header
+        absolute
+        color="white"
+        brand="Arma Tu Fiesta"
+        rightLinks={<HeaderLinks />}
+        {...rest}
+      />
+      </div>
+      <div className="sidebar" >
+      <h2>AA</h2>
+        <div className="list"></div>
+      </div>
       <div >
         <FormControl className={classes.formControl}>
         <InputLabel shrink id="select-estados">
@@ -109,7 +122,6 @@ export default function MapPage(props) {
            key={notaria.id}
            position={[
             notaria.ubicacion_geografica.latitud,
-            
             notaria.ubicacion_geografica.longitud
            ]}
            onClick={() => {
@@ -143,7 +155,8 @@ export default function MapPage(props) {
         </Map>
         </div>
       </div>
-    
+      <Footer />
+    </div>
   );
  
 }
