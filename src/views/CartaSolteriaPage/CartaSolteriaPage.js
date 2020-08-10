@@ -1,5 +1,4 @@
-import React from "react";
-import Datetime from "react-datetime";
+import React  from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -16,9 +15,8 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
+import TextField from '@material-ui/core/TextField';
+
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import Axios from "axios";
 
@@ -30,12 +28,7 @@ const useStyles = makeStyles(styles);
 const datos ={
   
   'template': { 
-    "content" : '<b><p>Yo, {{name}}, de nacionalidad Venezolana, mayor de edad, civilmente hábil, de este domicilio, soltero y titular de la cédula de Identidad V-{{$randomPhoneNumber}}, comparezco por ante su competente autoridad con motivo al matrimonio civil que he decidido contraer, a objeto de solicitarle se sirva interrogar a los testigos que oportunamente presentaré, sobre los siguientes particulares:</p><p>PRIMERO Si me conocen suficientemente de vista, trato y comunicación desde hace varios años.</p><p>SEGUNDO: Si por ese conocimiento que de mi tienen, saben y les consta que nací en Caracas, el día {{dia}} de {{mes}} de {{año}}, y que soy hijo de {{papa}} Y {{mama}}.</p><p>TERCERO: Si por el conocimiento que de mi tienen, saben y les consta que soy soltero(a) y no tengo impedimento alguno para contraer matrimonio.</p><p>Por último solicito que una vez evacuadas las presentes actuaciones se sirva devolvérmelas en original con sus resultas. Es Justicia que espero a la fecha de su presentación. Los testigos contestaron afirmativamente a las anteriores preguntas y en consecuencia estampan sus firmas a continuación</p></b>',
-    "recipe": "chrome-pdf",
-    "engine": "handlebars",
-    "chrome": {
-        "landscape": false
-    }
+    "name":"solteria"
     
     },
   "data":{  
@@ -51,8 +44,9 @@ const datos ={
 
 
 function handleClick(){
+  
   //llega la data bien pero al descargar queda en blanco :/
-  datos.data.name="aaaaa";
+
   Axios.post("http://localhost:5488/api/report",
   datos,
   {
@@ -77,9 +71,14 @@ function handleClick(){
 
 
 };
+function handleChange(event) {
+  this.setState({value: event.target.value});
+  console.log(event.target.value)
+};
 
 export default function LandingPage(props) {
   const classes = useStyles();
+  
   const { ...rest } = props;
   return (
     <div>
@@ -108,87 +107,16 @@ export default function LandingPage(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
+        <GridContainer></GridContainer>
         <GridContainer>
-          <GridItem xs={4}>
-          <CustomInput
-                labelText= "Nombre y Apellido"
-                id="float"
-                formControlProps={{
-                  fullWidth: true
-                }}
-              />
-          </GridItem>
-          <GridItem xs={4}>
-          <CustomInput
-                id="float"
-                
-                  labelText= "Cedula 'V-000000 o E-00000'"
-               
-                formControlProps={{
-                  fullWidth: true
-                }}
-              />
-          </GridItem>
-          <GridItem xs={4} lg={5}>
-            <InputLabel className={classes.label}>
-                    Fecha de Nacimiento
-                  </InputLabel>
-                
-                  <FormControl fullWidth>
-
-                    <Datetime
-                    timeFormat={false}
-                      styles={useStyles}
-                      locale ="mx"
-                      inputProps={{ placeholder: "Fecha de Nacimiento" }}
-                    />
-                  </FormControl>
-                </GridItem>
-
-          </GridContainer>
-          <GridContainer>
-          <GridItem xs={4}>
-          <CustomInput
-                id="float"
-                  labelText= "Nombre y Apellido Padre"
-                formControlProps={{
-                  fullWidth: true
-                }}
-              />
-          </GridItem>
-          <GridItem xs={4}>
-          <CustomInput
-                id="float"
-                  labelText= "Cedula Padre 'V-000000 o E-00000'"
-                formControlProps={{
-                  fullWidth: true
-                }}
-              />
-          </GridItem>
-          </GridContainer>
-          <GridContainer>
-          <GridItem xs={4}>
-          <CustomInput
-                id="float"
-                
-                labelText= "Nombre y Apellido Madre"
-               
-                formControlProps={{
-                  fullWidth: true
-                }}
-              />
-          </GridItem>
-          <GridItem xs={4}>
-          <CustomInput
-                id="float"
-                
-                  labelText="Cedula Madre 'V-000000 o E-00000'"
-             
-                formControlProps={{
-                  fullWidth: true
-                }}
-              />
-          </GridItem>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField id="name" label="Nombre y apellido" variant="outlined"/>
+          <TextField id="dia" label="dia de nacimiento" variant="outlined" />
+          <TextField id="mes" label="mes de nacimiento" variant="outlined" />
+          <TextField id="año" label="año de nacimiento" variant="outlined" />
+          <TextField id="padre" label="nombre y apellido padre" variant="outlined" />
+          <TextField id="madre" label="Nombre y apellido madre" variant="outlined" props={onchange={name=this.target.value}}/>
+        </form>      
           </GridContainer>
           <GridContainer>
             <GridItem>
