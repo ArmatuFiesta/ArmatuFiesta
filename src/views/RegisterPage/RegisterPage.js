@@ -23,6 +23,8 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/log.jpg";
 
+import {httpClient} from "../../core/http-client";
+
 const useStyles = makeStyles(styles);
 
 export default function RegisterPage(props) {
@@ -32,6 +34,16 @@ export default function RegisterPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const [form, setForm] = React.useState({
+    nombre_usuario: '',
+    correo: '',
+    contrasena: ''
+  });
+
+  const signUp = form => {
+    httpClient.post('/api/register')
+  };
+
   return (
     <div>
       <Header
@@ -101,6 +113,9 @@ export default function RegisterPage(props) {
                             <People className={classes.inputIconsColor} />
                           </InputAdornment>
                         ),
+                        onChange: (e) => {
+                          setForm({...form, nombre_usuario: e.target.value})
+                        }
                       }}
                     />
                     <CustomInput
@@ -116,6 +131,9 @@ export default function RegisterPage(props) {
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         ),
+                        onChange: (e) => {
+                          setForm({...form, correo: e.target.value})
+                        }
                       }}
                     />
                     <CustomInput
@@ -134,11 +152,14 @@ export default function RegisterPage(props) {
                           </InputAdornment>
                         ),
                         autoComplete: "off",
+                        onChange: (e) => {
+                          setForm({...form, contrasena: e.target.value})
+                        }
                       }}
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg" onClick={signUp(form)}>
                       Registrarme
                     </Button>
                   </CardFooter>
