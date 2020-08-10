@@ -19,24 +19,25 @@ import Solteria from "views/CartaSolteriaPage/CartaSolteriaPage.js";
 import AddItemView from "views/AdminPage/AddItemView.js";
 import ServicePojo from "views/ServicesPage/ServicePojo.js";
 import CheckOut from "views/PaymentView/CheckOut";
+import Notaria from "./views/AdminPage/Notaria/Notaria";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Router history={hist}>
-    <Switch>
-    <Route path="/solteria" component={Solteria}/>
-      <Route path="/services" component={MainPage}/>
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/register" component={RegisterPage} />
-      <Route path="/map" component={MapPage} />
-      <Route path="/adminView" component={AddItemView} />
-      <Route path="/payment" component={CheckOut} />
-      <Route path="/servicesEx" component={ServicePojo} />
-      <Route path="/" component={LandingPage} />
-      
-    </Switch>
-  </Router>,
+      <Switch>
+        <Route path="/solteria" component={Solteria}/>
+        <Route path="/services" component={MainPage}/>
+        <Route path="/login-page" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/map" component={MapPage} />
+        <Route path="/adminView" component={AddItemView} />
+        <Route path="/payment" component={CheckOut} />
+        <Route path="/admin/notarias" component={Notaria}/>
+        <Route path="/servicesEx" component={ServicePojo} />
+        <Route path="/" component={LandingPage} />
+      </Switch>
+    </Router>,
   </ThemeProvider>,
   
   document.getElementById("root")

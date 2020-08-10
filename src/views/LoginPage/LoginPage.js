@@ -51,7 +51,7 @@ export default function LoginPage(props) {
   }
 
   const header = <Header
-    href="/" //TODO: A  veriguar como redirigir a home
+    homeUrl="/" //TODO: A  veriguar como redirigir a home
     absolute
     color="transparent"
     brand="Arma Tu Fiesta"
