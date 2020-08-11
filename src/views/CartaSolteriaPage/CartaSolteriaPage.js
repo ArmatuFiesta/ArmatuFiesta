@@ -15,10 +15,11 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import TextField from '@material-ui/core/TextField';
+import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import Axios from "axios";
+import { defaultBoxShadow } from 'assets/jss/material-kit-react';
 
 // Sections for this page
 
@@ -32,54 +33,63 @@ const datos ={
     
     },
   "data":{  
-    "name":"qweqwe",
-    "dia":"18",
-    "mes":"septiembre",
-    "año":"1800",
-    "papa":"qweqwe",
-    "mama":"dasdasdad"
+    "name":"",
+    "dia":"",
+    "mes":"",
+    "año":"",
+    "papa":"",
+    "mama":""
     }
 
 };
 
 
-function handleClick(){
-  
-  //llega la data bien pero al descargar queda en blanco :/
-
-  Axios.post("http://localhost:5488/api/report",
-  datos,
-  {
-      responseType: 'arraybuffer',
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/pdf'
-      }
-  })
-  .then((res) => {
-      const contentType = res.headers["content-type"];
-      const blob = new Blob([res.data], {contentType} ); 
-      const url = window.URL.createObjectURL(new Blob([blob]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'sample.pdf'); //or any other extension
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-  })
-  .catch((error) => console.log(error));
-
-
-};
-function handleChange(event) {
-  this.setState({value: event.target.value});
-  console.log(event.target.value)
-};
 
 export default function LandingPage(props) {
   const classes = useStyles();
+  const [nombre, setNombre] = React.useState('');
+  const [cedula, setCedula]= React.useState('');
+  const [dia, setDia] = React.useState('');
+  const [mes, setMes] = React.useState('');
+  const [anio, setAño] = React.useState('');
+  const [padre, setPadre] = React.useState('');
+  const [madre, setMadre] = React.useState('');
   
   const { ...rest } = props;
+  const handleClick = (nombre,dia,mes,anio,padre,madre) =>{
+    
+    Axios.post("http://localhost:5488/api/report",
+    {'template':{'name':'solteria'}  ,
+  'data':
+  {'name':nombre,
+    'cedula':cedula,
+    'dia':dia,
+    'mes':mes,
+    'año':anio,
+    'papa':padre,
+    'mama':madre
+    }},
+    {
+        responseType: 'arraybuffer',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/pdf'
+        }
+    })
+    .then((res) => {
+        const contentType = res.headers["content-type"];
+        const blob = new Blob([res.data], {contentType} ); 
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'sample.pdf'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+    })
+    .catch((error) => console.log(error));
+
+  }
   return (
     <div>
       <Header
@@ -109,18 +119,65 @@ export default function LandingPage(props) {
         <div className={classes.container}>
         <GridContainer></GridContainer>
         <GridContainer>
-        <form className={classes.root} noValidate autoComplete="off">
-          <TextField id="name" label="Nombre y apellido" variant="outlined"/>
-          <TextField id="dia" label="dia de nacimiento" variant="outlined" />
-          <TextField id="mes" label="mes de nacimiento" variant="outlined" />
-          <TextField id="año" label="año de nacimiento" variant="outlined" />
-          <TextField id="padre" label="nombre y apellido padre" variant="outlined" />
-          <TextField id="madre" label="Nombre y apellido madre" variant="outlined" props={onchange={name=this.target.value}}/>
-        </form>      
+          <GridItem>
+        <CustomInput
+                      labelText="Nombre y Apellido"
+                      id="nombre"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setNombre(e.target.value)
+                      }}
+                    /> 
+            <CustomInput
+                      labelText="Dia"
+                      id="dia"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setDia(e.target.value)
+                      }}
+                    />      
+           <CustomInput
+                      labelText="Mes"
+                      id="mes"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setMes(e.target.value)
+                      }}
+                    />  
+                    <CustomInput
+                      labelText="Año"
+                      id="anio"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setAño(e.target.value)
+                      }}
+                    /> </GridItem><GridItem>
+                    <CustomInput
+                      labelText="Nombre apellido Padre"
+                      id="padre"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setPadre(e.target.value)
+                      }}
+                    /> 
+                    <CustomInput
+                      labelText="Nombre apellido Madre"
+                      id="madre"
+                      
+                      inputProps={{
+                        
+                        onChange: e => setMadre(e.target.value)
+                      }}
+                    />          </GridItem>        
           </GridContainer>
           <GridContainer>
             <GridItem>
-              <Button onClick={handleClick} >Get</Button>
+              <Button onClick={(e) =>handleClick(nombre,dia,mes,anio,padre,madre)} >Get</Button>
             </GridItem>
           </GridContainer>
         </div>
