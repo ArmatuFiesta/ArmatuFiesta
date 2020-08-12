@@ -1,7 +1,6 @@
 
 
 import React from 'react';
-
 import axios from 'axios';
 
 export default class ServicePojo extends React.Component {
@@ -10,7 +9,7 @@ export default class ServicePojo extends React.Component {
       }
     
       componentDidMount() {
-        axios.get(`https://arma-tu-fiesta.herokuapp.com/api/notarias/`)
+        axios.get('http://localhost:8000/api/notarias/')
           .then(res => {
             const services = res.data;
             this.setState({ services });
