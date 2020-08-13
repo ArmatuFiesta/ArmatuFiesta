@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const httpClient = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://arma-tu-fiesta.herokuapp.com/api',
 });
 
 /** Interceptor para bearer token de JWT */

@@ -19,7 +19,7 @@ const useStyles = makeStyles(styles);
 
 
 export default function MainPage(props) {
-    const serviceCategories=["CATERING","NOTARIAS","DECORACION",
+    const serviceCategories=["CATERING","SALONES","DECORACION",
     "CORTE Y COSTURA"," OBSEQUIOS Y TARJETERIA","MATRIMONIOS"];
     const contratacionesCategories=["MUSICA", "SHOWS","SEGURIDAD",
 "PROTOCOLO","FOTOGRAFIA","BAILES"];

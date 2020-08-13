@@ -147,7 +147,7 @@ export default function LandingPage(props) {
         </Map>
         </div>
       </div>
-      <Footer />
+
     </div>
   );
 

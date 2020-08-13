@@ -20,7 +20,7 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-
+import Box from '@material-ui/core/Box';
 
 // Sections for this page
 
@@ -35,25 +35,31 @@ const Product = ({name, description}) => ({
   }
 });
 
+const serviceStyles = {
+  menuItemSelected:{
+    textColor: "blue",
+    backgroundColor: "grey",
+  }
+};
 
+const useServiceStyles = makeStyles(serviceStyles);
 
 export default function ServicePage(props) {
  
   const {menuCategories} = props;//categorias el menu
   const menuItems = [];//array del menu
   const classes = useStyles();//clases base
+  const serviceClasses = useServiceStyles();//proper classes
   const {...rest} = props;
   //for the menu behavior
 
   //State hooks
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [items, setItems] = React.useState([]);
+  
   const [mapPage, setMapPage] = React.useState(true);//si el contenido requiere mapa o no
   const [adminView, setAdminView] =React.useState(true);//estoy como admin o no
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
+  
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -64,7 +70,7 @@ export default function ServicePage(props) {
       setChecked((prev) => !prev);
     };
 
-  const componentDidMount= (data) => {
+  const fetchData= (data) => {
     //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
     axios.get('http://localhost:8000/api/'+{data}+'/')
       .then(res => {
@@ -99,16 +105,27 @@ export default function ServicePage(props) {
 
   
   for (let i = 0; i < 6; i++) {
-    menuItems.push(<MenuItem key={i} onClick={() => uploadProducts(i)}>{menuCategories[i]}</MenuItem>)
+    menuItems.push(<MenuItem key={i} onClick={() => handleClick(i)}>{menuCategories[i]}</MenuItem>);
+    console.log(""+menuCategories[i]);
   }
+
+  const handleClick = (event,i) => {
+    setAnchorEl(event.currentTarget);
+    console.log("Llamando a "+menuCategories[i]);
+    fetchData(menuCategories[i].toString())
+  };
 
 
   return (<>
-    {adminView && <Button ><Add/> Agregar Nuevo Item </Button>}
-   {mapPage && <FormControlLabel
+  
+
+   {adminView && <Box align="center"><Button size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+   {mapPage && <Box component="span" display="block" align="end"><FormControlLabel 
     control={<Switch checked={showMap} onChange={toggleChecked} />}
     label="Mapa"
-  />}
+  /></Box>}
+ 
+    
     <GridContainer spacing={2}>
       <GridItem xs={3}>
         <MenuList
