@@ -16,6 +16,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import ProductCard from 'components/Card/ProductCard.js'
 import MapPage from "views/MapPage/MapPage";
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Button } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 
 
 // Sections for this page
@@ -31,14 +35,21 @@ const Product = ({name, description}) => ({
   }
 });
 
-export default function ServicePage(props) {
 
-  const {menuCategories} = props;
-  const classes = useStyles();
+
+export default function ServicePage(props) {
+ 
+  const {menuCategories} = props;//categorias el menu
+  const menuItems = [];//array del menu
+  const classes = useStyles();//clases base
   const {...rest} = props;
   //for the menu behavior
+
+  //State hooks
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [items, setItems] = React.useState([]);
+  const [mapPage, setMapPage] = React.useState(true);//si el contenido requiere mapa o no
+  const [adminView, setAdminView] =React.useState(true);//estoy como admin o no
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -47,60 +58,57 @@ export default function ServicePage(props) {
     setAnchorEl(null);
   };
 
-  const selectedMenuItem = (category) => {
-    var productsList;
-    switch (category) {
-      case 0:
-        //Muestra comida y bebidas
-        break;
-      case 1:
-        //Muestra Salones
-        setItems(<GridItem xs={6}><MapPage></MapPage></GridItem>);
-        break;
-      case 5:
-        productsList = [
-          {
-            name: 'Cursos Matrimoniales',
-            description: 'cursitos matrimoniales para ti'
-          },
+    const [showMap, setChecked] = React.useState(false); // toggle: muestra o no el mapa
+  
+    const toggleChecked = () => {  //funcion para el toggle de mapa
+      setChecked((prev) => !prev);
+    };
 
-          {
-            name: 'Carta de Solteria',
-            email: 'Haz tu carta de solteria online!'
-          }
-        ]
-        uploadProducts(productsList);
-        //Declaraciones ejecutadas cuando el resultado de expresión coincide con valorN
-        break;
-      default:
-        //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
-        break;
-    }
-    
+  const componentDidMount= (data) => {
+    //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
+    axios.get('http://localhost:8000/api/'+{data}+'/')
+      .then(res => {
+        const items = res.data;
+        setItems({ items: items });
+        uploadProducts(data);
+      })
   };
 
-  const uploadProducts = (products) => {
+
+//final del menu behavior
+
+  const uploadProducts = (data) => {
+    if(data==="NOTARIAS" || data==="SALONES") {
+    setMapPage(true);
+    }
+  
+    
     setItems(
-      products.map(Product => <GridItem xs={3}>
-        <ProductCard productName={Product.name}
-                     productDescription={Product.description}
+     items.map(Product => <GridItem xs={3}>
+        <ProductCard productName={items.name}
+                     productDescription={items.categoria}
           /*href="/map"
             onClick={<Link to={"/com"} className={classes.Link}> </Link>
             Para cada producto se requiere de un link con parametro id que indique el producto al que se refiere */
         />
       </GridItem>)
-    );
 
+    );
+    
   };
 
-  const menuItems = [];
+  
   for (let i = 0; i < 6; i++) {
-    menuItems.push(<MenuItem key={i} onClick={() => selectedMenuItem(i)}>{menuCategories[i]}</MenuItem>)
+    menuItems.push(<MenuItem key={i} onClick={() => uploadProducts(i)}>{menuCategories[i]}</MenuItem>)
   }
 
-  //end of the menu behavior
-  return (<div>
 
+  return (<>
+    {adminView && <Button ><Add/> Agregar Nuevo Item </Button>}
+   {mapPage && <FormControlLabel
+    control={<Switch checked={showMap} onChange={toggleChecked} />}
+    label="Mapa"
+  />}
     <GridContainer spacing={2}>
       <GridItem xs={3}>
         <MenuList
@@ -114,10 +122,9 @@ export default function ServicePage(props) {
         </MenuList>
       </GridItem>
       {items}
+      <GridItem xs={6}><MapPage isHidden={showMap}></MapPage></GridItem>
     </GridContainer>
 
 
-  </div>);
+  </>);
 }
-
-

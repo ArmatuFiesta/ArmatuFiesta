@@ -26,7 +26,6 @@ import * as estados from "./estados.json";
 
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
-import { SmsOutlined } from "@material-ui/icons";
 
 
 
@@ -34,6 +33,7 @@ import { SmsOutlined } from "@material-ui/icons";
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
+  const {isHidden}=props;
 
   const [activePopup, setActivePopup] = React.useState(null);
   const mapref = React.useRef();
@@ -74,19 +74,11 @@ export default function LandingPage(props) {
   };
 
 
-  return (
+
+  const mapa = ()=> (
     <div>
-      <div>
-      <Header
-        absolute
-        color="white"
-        brand="Arma Tu Fiesta"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      />
-      </div>
+      
       <div className="sidebar" >
-      <h2>AA</h2>
         <div className="list"></div>
       </div>
       <div >
@@ -158,6 +150,9 @@ export default function LandingPage(props) {
       <Footer />
     </div>
   );
+
+  return(<div>
+    {isHidden && mapa()}
+  </div>);
  
 }
-
