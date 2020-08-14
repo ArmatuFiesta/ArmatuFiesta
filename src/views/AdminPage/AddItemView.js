@@ -73,14 +73,18 @@ export default function AddItemPage(props) {
   console.log('Categoria: '+ category);
 
    const handleSubmit = event => {
-     
+     console.log("Producto: "+product);
+
     //setProduct(nombre);
 
     httpClient.post(''+{category}+'/',{product})
     .then(res => {
       console.log(res);
+      console.log(res.data);
     }) 
   };
+
+
   return (
     <React.Fragment>
       <AppBar position="absolute" color="default" className={classes.appBar}>
@@ -137,7 +141,7 @@ export default function AddItemPage(props) {
               />
 
               <br/><br/>
-              <Button onClick= {handleSubmit()} color="primary" round className={classes.buttons}><Save/> Agregar Producto</Button>
+              <Button onClick= {handleSubmit()} color="primary" round className={classes.buttons} onClick={(e) => handleSubmit(e)}><Save/> Agregar Producto</Button>
             </GridItem>
           </GridContainer>
         </Paper>

@@ -20,6 +20,7 @@ import AddItemView from "views/AdminPage/AddItemView.js";
 import ServiceInfoPage from "views/ServicesPage/ServiceInfo/ServiceInfo.js";
 import CheckOut from "views/PaymentView/CheckOut";
 import Notaria from "./views/AdminPage/Notaria/Notaria";
+import BlogPage from "views/BlogPage/BlogPage";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -29,6 +30,7 @@ ReactDOM.render(
         <Route path="/solteria" component={Solteria}/>
        
         <Route path="/services" component={MainPage}/>
+        <Route path="/blog" component={BlogPage}/>
         <Route path="/item_example" component={ServiceInfoPage} />
         <Route path="/login-page" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
