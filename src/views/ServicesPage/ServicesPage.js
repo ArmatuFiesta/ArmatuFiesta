@@ -106,7 +106,8 @@ const handleClose = () => {
   return (<>
   
 
-   {adminView && <Box  align="center"><Button href="/adminView" size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+   {adminView && <Box  align="center"><Button href="/adminView" props={path} size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+   {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
    {mapPage && <Box component="span" display="block" align="end"><FormControlLabel 
     control={<Switch checked={showMap} onChange={toggleChecked} />}
     label="Mapa"

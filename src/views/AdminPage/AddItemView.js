@@ -70,6 +70,8 @@ export default function AddItemPage(props) {
   const category = props;
   const [product, setProduct]= React.useState(null); 
 
+  console.log('Categoria: '+ category);
+
    const handleSubmit = event => {
      
     //setProduct(nombre);
