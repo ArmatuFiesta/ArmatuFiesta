@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import GridItem from "components/Grid/GridItem";
 import GridContainer from "components/Grid/GridContainer";
+import httpClient from "core/http-client";
 
 const categoriasEx = [{title: "CATERING"}, {title: "NOTARIAS"}, {title: "DECORACION"}, {title: "CORTE Y COSTURA"}, {title: "OBSEQUIOS Y TARJETERIA"}, {title: "MATRIMONIOS"}];
 
@@ -62,8 +63,22 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
   }
 }));
-export default function AddServicePage(props) {
+
+
+export default function AddItemPage(props) {
   const classes = useStyles();
+  const category = props;
+  const [product, setProduct]= React.useState(null); 
+
+   const handleSubmit = event => {
+     
+    //setProduct(nombre);
+
+    httpClient.post(''+{category}+'/',{product})
+    .then(res => {
+      console.log(res);
+    }) 
+  };
   return (
     <React.Fragment>
       <AppBar position="absolute" color="default" className={classes.appBar}>
@@ -120,7 +135,7 @@ export default function AddServicePage(props) {
               />
 
               <br/><br/>
-              <Button color="primary" round className={classes.buttons}><Save/> Agregar Producto</Button>
+              <Button onClick= {handleSubmit()} color="primary" round className={classes.buttons}><Save/> Agregar Producto</Button>
             </GridItem>
           </GridContainer>
         </Paper>
