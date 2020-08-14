@@ -54,20 +54,36 @@ export default function LandingPage(props) {
   const [anio, setAño] = React.useState('');
   const [padre, setPadre] = React.useState('');
   const [madre, setMadre] = React.useState('');
+  const [testigo1, setTestigo1] = React.useState('');
+  const [testigo2, setTestigo2] = React.useState('');
+  const [ctestigo1, setCtestigo1] = React.useState('');
+  const [ctestigo2, setCtestigo2] = React.useState('');
   
   const { ...rest } = props;
-  const handleClick = (nombre,dia,mes,anio,padre,madre) =>{
+  const handleClick = (nombre,dia,mes,anio,padre,madre,cedula,testigo1,testigo2,ctes1,ctes2) =>{
     
     Axios.post("http://localhost:5488/api/report",
     {'template':{'name':'solteria'}  ,
   'data':
-  {'name':nombre,
-    'cedula':cedula,
-    'dia':dia,
-    'mes':mes,
-    'año':anio,
-    'papa':padre,
-    'mama':madre
+  {"nombre_solicitante": nombre,
+  "cedula_solicitante": cedula,
+  "dia_nacimiento": dia,
+  "mes_nacimiento": mes,
+  "año_nacimiento": anio,
+  "nombre_padre": padre,
+  "nombre_madre": madre,
+    'testigos':[{
+    "nombre_testigo": testigo1,
+    "cedula_testigo": ctes1
+
+
+    },{
+    "nombre_testigo": testigo2,
+    "cedula_testigo": ctes2  
+
+
+
+    }]
     }},
     {
         responseType: 'arraybuffer',
@@ -82,7 +98,7 @@ export default function LandingPage(props) {
         const url = window.URL.createObjectURL(new Blob([blob]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'sample.pdf'); //or any other extension
+        link.setAttribute('download', 'carta_solteria.pdf'); //or any other extension
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
@@ -155,7 +171,18 @@ export default function LandingPage(props) {
                         
                         onChange: e => setAño(e.target.value)
                       }}
-                    /> </GridItem><GridItem>
+                    /> 
+                  <CustomInput
+                      labelText="cedula"
+                      id="cedula"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setCedula(e.target.value)
+                      }}
+                    /> 
+
+                    </GridItem><GridItem>
                     <CustomInput
                       labelText="Nombre apellido Padre"
                       id="padre"
@@ -173,11 +200,49 @@ export default function LandingPage(props) {
                         
                         onChange: e => setMadre(e.target.value)
                       }}
-                    />          </GridItem>        
+                    />          </GridItem>     
+                    <GridItem>
+                    <CustomInput
+                      labelText="Nombre apellido testigo 1"
+                      id="testigo1"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setTestigo1(e.target.value)
+                      }}
+                    /> 
+                    <CustomInput
+                      labelText="cedula testigo 1"
+                      id="ctestigo1"
+                      
+                      inputProps={{
+                        
+                        onChange: e => setCtestigo1(e.target.value)
+                      }}
+                    />          </GridItem>    
+                    <GridItem>
+                    <CustomInput
+                      labelText="Nombre apellido testigo 2"
+                      id="testigo2"
+                     
+                      inputProps={{
+                        
+                        onChange: e => setTestigo2(e.target.value)
+                      }}
+                    /> 
+                    <CustomInput
+                      labelText="cedula testigo 2"
+                      id="ctestigo2"
+                      
+                      inputProps={{
+                        
+                        onChange: e => setCtestigo2(e.target.value)
+                      }}
+                    />          </GridItem>     
           </GridContainer>
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(nombre,dia,mes,anio,padre,madre)} >Get</Button>
+              <Button onClick={(e) =>handleClick(nombre,dia,mes,anio,padre,madre,cedula,testigo1,testigo2,ctestigo1,ctestigo2)} >Get</Button>
             </GridItem>
           </GridContainer>
         </div>
