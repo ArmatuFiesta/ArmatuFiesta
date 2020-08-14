@@ -3,7 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
-import axios from 'axios';
+import httpClient from 'core/http-client.js';
 
 // @material-ui/icons
 
@@ -72,12 +72,12 @@ export default function ServicePage(props) {
 
   const fetchData= (data) => {
     //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-    axios.get('http://localhost:8000/api/'+{data}+'/')
+    httpClient.get(''+{data}+'/')
       .then(res => {
-        const items = res.data;
-        setItems({ items: items });
+        console.log(res);
+        setItems({ items: res.data });
         uploadProducts(data);
-      })
+      });
   };
 
 
@@ -90,9 +90,9 @@ export default function ServicePage(props) {
   
     
     setItems(
-     items.map(Product => <GridItem xs={3}>
-        <ProductCard productName={items.name}
-                     productDescription={items.categoria}
+     items.map(item => <GridItem xs={3}>
+        <ProductCard productName={item.nombre}
+                     productDescription={item.categoria}
           /*href="/map"
             onClick={<Link to={"/com"} className={classes.Link}> </Link>
             Para cada producto se requiere de un link con parametro id que indique el producto al que se refiere */

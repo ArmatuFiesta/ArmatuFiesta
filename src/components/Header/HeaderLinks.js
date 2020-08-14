@@ -12,6 +12,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
+
 // @material-ui/icons
 import { Apps, CloudDownload,ChatBubble,PartyMode } from "@material-ui/icons";
 
@@ -21,7 +22,9 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 
+
 const useStyles = makeStyles(styles);
+
 
 export default function HeaderLinks(props) {
   const classes = useStyles();
@@ -55,7 +58,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-         <Link to={"adminView"} className={classes.Link}>Admin</Link>
+       <Link to={"adminView"} className={classes.Link}>Admin</Link>
 
         </Button>
         
