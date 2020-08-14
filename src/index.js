@@ -21,6 +21,7 @@ import ServiceInfoPage from "views/ServicesPage/ServiceInfo/ServiceInfo.js";
 import CheckOut from "views/PaymentView/CheckOut";
 import Notaria from "./views/AdminPage/Notaria/Notaria";
 import BlogPage from "views/BlogPage/BlogPage";
+import ReportPage from "views/ReportsPage/ReportsPage";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -28,7 +29,7 @@ ReactDOM.render(
     <Router history={hist}>
       <Switch>
         <Route path="/solteria" component={Solteria}/>
-       
+        <Route path="/reportes" component={ReportPage}/>
         <Route path="/services" component={MainPage}/>
         <Route path="/blog" component={BlogPage}/>
         <Route path="/item_example" component={ServiceInfoPage} />
