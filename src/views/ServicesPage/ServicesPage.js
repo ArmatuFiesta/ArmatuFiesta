@@ -105,14 +105,14 @@ export default function ServicePage(props) {
 
   
   for (let i = 0; i < 6; i++) {
-    menuItems.push(<MenuItem key={i} onClick={() => handleClick(i)}>{menuCategories[i]}</MenuItem>);
-    console.log(""+menuCategories[i]);
+    menuItems.push(<MenuItem key={i} onClick={(e) => handleClick(e,i)}>{menuCategories[i]}</MenuItem>);
+//si vas a usar el evento tienes que declararlo^ y pasarlo       ^
   }
 
   const handleClick = (event,i) => {
     setAnchorEl(event.currentTarget);
     console.log("Llamando a "+menuCategories[i]);
-    fetchData(menuCategories[i].toString())
+    fetchData(String(menuCategories[i]));
   };
 
 
