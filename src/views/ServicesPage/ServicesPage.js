@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState, useEffect } from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -26,14 +27,7 @@ import Box from '@material-ui/core/Box';
 
 
 const useStyles = makeStyles(styles);
-const Product = ({name, description}) => ({
-  //instancia de producto
-  type: 'item',
-  props: {
-    name: name,
-    description: description,
-  }
-});
+
 
 const serviceStyles = {
   menuItemSelected:{
@@ -55,65 +49,57 @@ export default function ServicePage(props) {
 
   //State hooks
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [items, setItems] = React.useState([]);
-  
+  const [items, setItems] = React.useState([]);//array para la data
   const [mapPage, setMapPage] = React.useState(true);//si el contenido requiere mapa o no
   const [adminView, setAdminView] =React.useState(true);//estoy como admin o no
-  
-  const handleClose = () => {
+  const [showMap, setChecked] = React.useState(false); // toggle: muestra o no el mapa
+  const [path, setPath] = React.useState(String(menuCategories[0]).toLowerCase()); // toggle: muestra o no el mapa
+  //Fin de state hooks
+
+    
+ 
+//MENU
+for (let i = 0; i < 6; i++) {
+  menuItems.push(<MenuItem key={i} onClick={(e) => handleClick(e,i)}>{menuCategories[i]}</MenuItem>);
+//si vas a usar el evento tienes que declararlo^ y pasarlo       ^
+}
+
+
+const handleClose = () => {
     setAnchorEl(null);
   };
 
-    const [showMap, setChecked] = React.useState(false); // toggle: muestra o no el mapa
+  const handleClick = (event,i) => {
+
+    if(String(menuCategories[i])==="NOTARIAS" || String(menuCategories[i])==="SALONES") {
+    setMapPage(true);
+    }
   
+  setAnchorEl(event.currentTarget);
+  console.log("Llamando a "+menuCategories[i].toLowerCase());
+  setPath(String(menuCategories[i]).toLowerCase());
+  fetchData();
+};
+  //FIN MANEJO DE MENU
+
     const toggleChecked = () => {  //funcion para el toggle de mapa
       setChecked((prev) => !prev);
     };
 
-  const fetchData= (data) => {
-    //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-    httpClient.get(''+{data}+'/')
-      .then(res => {
-        console.log(res);
-        setItems({ items: res.data });
-        uploadProducts(data);
-      });
-  };
+    const fetchData = async () => {
+      //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
+      const result = await httpClient.get(path+'/')
+          console.log(result);
+          setItems({ items: JSON.parse(JSON.stringify(result.data) )});
+        
+    };
 
 
-//final del menu behavior
+    useEffect(() => { fetchData();} , []); //retorname data o vacio 
 
-  const uploadProducts = (data) => {
-    if(data==="NOTARIAS" || data==="SALONES") {
-    setMapPage(true);
-    }
-  
-    
-    setItems(
-     items.map(item => <GridItem xs={3}>
-        <ProductCard productName={item.nombre}
-                     productDescription={item.categoria}
-          /*href="/map"
-            onClick={<Link to={"/com"} className={classes.Link}> </Link>
-            Para cada producto se requiere de un link con parametro id que indique el producto al que se refiere */
-        />
-      </GridItem>)
 
-    );
-    
-  };
 
-  
-  for (let i = 0; i < 6; i++) {
-    menuItems.push(<MenuItem key={i} onClick={(e) => handleClick(e,i)}>{menuCategories[i]}</MenuItem>);
-//si vas a usar el evento tienes que declararlo^ y pasarlo       ^
-  }
-
-  const handleClick = (event,i) => {
-    setAnchorEl(event.currentTarget);
-    console.log("Llamando a "+menuCategories[i]);
-    fetchData(String(menuCategories[i]));
-  };
+ 
 
 
   return (<>
@@ -138,7 +124,12 @@ export default function ServicePage(props) {
           {menuItems}
         </MenuList>
       </GridItem>
-      {items}
+      {items.map(item => <GridItem xs={3}>
+               <ProductCard key={item.id} 
+                             productName={item.nombre_notaria}
+                            productDescription={item.lugar}
+               />
+             </GridItem>)} 
       <GridItem xs={6}><MapPage isHidden={showMap}></MapPage></GridItem>
     </GridContainer>
 
