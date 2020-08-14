@@ -90,7 +90,7 @@ const handleClose = () => {
       //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
       const result = await httpClient.get(path+'/')
           console.log(result);
-          setItems({ items: JSON.parse(JSON.stringify(result.data) )});
+          setItems(result.data);
         
     };
 
