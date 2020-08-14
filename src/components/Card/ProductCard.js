@@ -5,7 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import Button from "components/CustomButtons/Button.js";
-
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
 
 import { cardTitle } from "assets/jss/material-kit-react.js";
@@ -19,7 +20,7 @@ const useStyles = makeStyles(styles);
 
 export default function ProductCard(props) {
   const classes = useStyles();
-  const { productName, productDescription, ...rest } = props;
+  const { productName, productDescription, path, ...rest } = props;
   return (
     <Card style={{width: "20rem"}}>
       <img
@@ -32,7 +33,11 @@ export default function ProductCard(props) {
         {/* aqui es donde va todo el body del card */}
         <h4 className={classes.cardTitle}>{productName}</h4>
         <p>{productDescription}</p>
-        {/*<Button color="primary">Añadir al carrito</Button>*/}
+        <GridContainer>
+          <GridItem sm={6}><Button href={'/'+path} color="primary">Detalle</Button> </GridItem>
+          <GridItem sm={6}><Button color="secondary">Añadir</Button> </GridItem>
+        </GridContainer>
+        
       </CardBody>
     </Card>
   );

@@ -43,8 +43,6 @@ export default function MainPage(props) {
                 tabContent:(<ServicesPage menuCategories={contratacionesCategories}/>)},
             {tabName:'Mi Cuenta',
                 tabContent:(<MiCuentaPage/>)},
-                {tabName:'EjemploProducto',
-                tabContent:(<ServiceInfo/>)},
             ] }
             {...rest}
         />

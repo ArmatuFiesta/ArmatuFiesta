@@ -50,7 +50,7 @@ export default function ServicePage(props) {
   //State hooks
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [items, setItems] = React.useState([]);//array para la data
-  const [mapPage, setMapPage] = React.useState(true);//si el contenido requiere mapa o no
+  const [mapPage, setMapPage] = React.useState(false);//si el contenido requiere mapa o no
   const [adminView, setAdminView] =React.useState(true);//estoy como admin o no
   const [showMap, setChecked] = React.useState(false); // toggle: muestra o no el mapa
   const [path, setPath] = React.useState(String(menuCategories[0]).toLowerCase()); // toggle: muestra o no el mapa
@@ -70,8 +70,9 @@ const handleClose = () => {
   };
 
   const handleClick = (event,i) => {
-
-    if(String(menuCategories[i])==="NOTARIAS" || String(menuCategories[i])==="SALONES") {
+    setItems([]);
+    setMapPage(false);
+    if(path==="notarias" || path==="salones") {
     setMapPage(true);
     }
   
@@ -105,7 +106,7 @@ const handleClose = () => {
   return (<>
   
 
-   {adminView && <Box align="center"><Button size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+   {adminView && <Box  align="center"><Button href="/adminView" size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
    {mapPage && <Box component="span" display="block" align="end"><FormControlLabel 
     control={<Switch checked={showMap} onChange={toggleChecked} />}
     label="Mapa"
@@ -126,6 +127,7 @@ const handleClose = () => {
       </GridItem>
       {items.map(item => <GridItem xs={3}>
                <ProductCard key={item.id} 
+                              path={"item_example"}
                              productName={item.nombre_notaria}
                             productDescription={item.lugar}
                />

@@ -13,11 +13,12 @@ import { cardTitle } from "assets/jss/material-kit-react.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import FormControl from '@material-ui/core/FormControl';
-import { InputLabel, Input, FormHelperText } from "@material-ui/core";
+import { InputLabel, Input, FormHelperText, Paper } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import { Message } from "@material-ui/icons";
 import Button from "components/CustomButtons/Button.js";
 import ComboBox from "components/ComboBox/ComboBox.js";
+import Header from "components/Header/Header";
 const styles = {
   ...imagesStyles,
   cardTitle,
@@ -26,20 +27,66 @@ const styles = {
   },
 };
 
+const myStyles = makeStyles((theme) => ({
+  appBar: {
+    position: 'relative',
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(10),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
+  stepper: {
+    padding: theme.spacing(3, 0, 5),
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
+}));
+
 const tiposEventos=[{title:"Matrimonio"},{title:"Boda"},{title:"Quinceanos"},{title:"Infantil"},{title:"Otros"}];
 
 const useStyles = makeStyles(styles);
 
 
-export default function ServicePage(props) {
+export default function ServiceInfoPage(props) {
 {/**Este componente debe ser generico y variaria segun su tipo de producto */}
+const { productName, productDescription, path, ...rest } = props;
     const classes = useStyles();
     const [value, setValue] = React.useState('Controlled');
     const handleChange = (event) => {
       setValue(event.target.value);
     };
     return(
-        <div>
+    
+    <>
+    <Header
+    brand="Arma Tu Fiesta"
+    fixed
+    {...rest}
+    className={myStyles}
+    />
+        <Paper className={myStyles}>
         <GridContainer alignContent='stretch'  spacing={2}>
             <GridItem xs={6}>
                 <Card>
@@ -83,7 +130,7 @@ Ambiente: Elegante</p>
         />
 
 <br/><br/>
-          <Button color="primary" round><Message/> Submit</Button>
+          <Button color="primary" round><Message/> Contratar</Button>
       </div>
             
             </div>
@@ -91,7 +138,7 @@ Ambiente: Elegante</p>
         </GridContainer>
         
 
-      </div>
-
+      </Paper>
+      </>
     );
 }
