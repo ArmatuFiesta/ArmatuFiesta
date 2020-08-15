@@ -18,9 +18,9 @@ import ServiceInfoPage from "./views/ServicesPage/ServiceInfo/ServiceInfo";
 import BlogPage from "./views/BlogPage/BlogPage";
 import history from "services/history";
 import Admin from "./views/AdminPage/Admin";
-import reportesPage from "views/ReportsPage/ReportsPage";
-import UsersCRUDPage from "views/AdminPage/usersCRUDPage";
-import NotificationsPage from "views/LoginPage/NotificationsPage";
+import reportesPage from "./views/ReportsPage/ReportsPage";
+import UsersCRUDPage from "./views/AdminPage/usersCRUDPage";
+import NotificationsPage from "./views/LoginPage/NotificationsPage";
 
 
 export default () => {
@@ -41,11 +41,12 @@ export default () => {
           <Route path="/payment" component={CheckOut}/>
           <Route path="/admin/notarias" component={Notaria}/>
           <Route path="/servicesEx" component={ServicePojo}/>
-          <Route path="/admin" component={Admin}/>
-          <Route path="/" component={LandingPage}/>
           <Route path="/reportes" component={reportesPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>
+          <Route path="/admin" component={Admin}/>
+          <Route path="/" component={LandingPage}/>
+          
         </Switch>
       </Router>
     </ThemeProvider>
