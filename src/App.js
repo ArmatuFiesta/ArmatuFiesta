@@ -8,7 +8,6 @@ import RegisterPage from "./views/RegisterPage/RegisterPage";
 import MapPage from "./views/MapPage/MapPage";
 import AddItemView from "./views/AdminPage/AddItemView";
 import CheckOut from "./views/PaymentView/CheckOut";
-import Notaria from "./views/AdminPage/Notaria/Notaria";
 import ServicePojo from "./views/ServicesPage/ServicePojo";
 import LandingPage from "./views/LandingPage/LandingPage";
 import {ThemeProvider} from "@material-ui/core/styles";
@@ -20,7 +19,7 @@ import history from "services/history";
 import Admin from "./views/AdminPage/Admin";
 import NotificationsPage from "./views/LoginPage/NotificationsPage";
 import UsersCRUDPage from "./views/AdminPage/usersCRUDPage";
-import ReportsPage from "./views/ReportsPage/ReportsPage"
+import reportesPage from "./views/ReportsPage/ReportsPage";
 import NewPost from "./views/BlogPage/NewPost";
 
 export default () => {
@@ -40,14 +39,13 @@ export default () => {
           <Route path="/map" component={MapPage}/>
           <Route path="/adminView" component={AddItemView}/>
           <Route path="/payment" component={CheckOut}/>
-          <Route path="/admin/notarias" component={Notaria}/>
+          <Route path="/servicesEx" component={ServicePojo}/>
           <Route path="/admin" component={Admin}/>
-          <Route path="/reportes" component={ReportsPage}/>
+          <Route path="/reportes" component={reportesPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>
-          <Route path="/admin" component={Admin}/>
           <Route path="/" component={LandingPage}/>
-          
+
         </Switch>
       </Router>
     </ThemeProvider>
