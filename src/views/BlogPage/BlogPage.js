@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function BlogPage() {
-  const menuCategories = ["TIPS", "NOTARIAS", "ACCESORIOS", "QUINCEAÑERAS"];//categorias el menu
+  const menuCategories = ["TODAS", "TIPS", "ACCESORIOS", "QUINCEAÑERAS"];//categorias el menu
   const menuItems = [];//array del menu
   const classes = useStyles();//clases base
   //const {...rest} = props;
@@ -118,17 +118,19 @@ export default function BlogPage() {
 
 
   const fetchData = async () => {
+    const url="publicaciones";
     //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-    const result = await httpClient.get(path)
+    if(path!="todas"){
+      url='publicaciones/cat='+path;
+    }
+    const result = await httpClient.get(url)
     console.log(result);
     setItems(result.data);
 
   };
 
 
-  useEffect(() => {
-    fetchData();
-  }, [path]); //retorname data o vacio
+  useEffect(() => { fetchData(); }, [path]); //retorname data o vacio
 
 
   return (
@@ -142,8 +144,13 @@ export default function BlogPage() {
           </Toolbar>
         </AppBar>
         {adminView &&
-        <Box align="center"><Button href="/new_post" props={path} size="medium"><Add/> Agregar Nuevo Item
-        </Button></Box>}
+        <Box align="center">
+          {/* href="/new_post"*/} 
+          <Button href="admin/productos/nuevo" props={path} size="medium">
+            <Add/> 
+            Agregar Nuevo Item
+        </Button>
+        </Box>}
         {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
         <Paper className={classes.paper}>
           <GridContainer spacing={2}>

@@ -58,7 +58,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-       <Link to={"set_roles"} className={classes.Link}>Admin Options</Link>
+       <Link to={"admin/productos/nuevo"} className={classes.Link}>Admin Options</Link>
 
         </Button>
         

@@ -14,6 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Button, Paper } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import NotificationItem  from "./NotificationItem"
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -59,27 +60,24 @@ const useStyles = makeStyles((theme) => ({
 export default function NotificationsPage(props){
   const username="admin";
 const classes = useStyles();//clases base
-const [notifications, setNotifications]=React.useState("Cargando...");
+const [notifications, setNotifications]=React.useState([]);
 
 useEffect(() => { fetchData();} , []); //retorname data o vacio 
 
 
 const fetchData = async () => {
   //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-  const result = await httpClient.get('contratos/?username='+{username})
+  //const result = await httpClient.get('contratos/?username='+{username})
+  const result = await httpClient.get('contratos');
       console.log(result);
       setNotifications(result.data);
 };
   
-      const notificationsList = () =>{
-      notifications.map(notification => 
-      <>
-      <Typography variant="h6" color="primary" noWrap>{"tiene un contrato pendiente por cancelar en "+notification.fecha_contrato}</Typography>
-      <Typography variant="subtitle1" color="grey" noWrap>{"por un monto de "+notification.monto}</Typography>
-      <br></br>
+    const notificationsList = () =>{
       
-      </>);
+      return(notifications.map(notification => <NotificationItem fecha_contrato={notification.fecha_contrato.getDate()} monto={notification.monto}/> ));
   };
+
 
     return(
 
@@ -114,3 +112,4 @@ const fetchData = async () => {
 
     );
 }
+
