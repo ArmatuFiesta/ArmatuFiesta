@@ -61,7 +61,7 @@ export default (props) => {
 
   const submit = () => {
     const {nombre, precio, costo, inventario, proveedor, categoria} = producto;
-    const data = {nombre, precio, costo, inventario, proveedor: proveedor.id, categoria_id: categoria.id};
+    const data = {nombre, precio, costo, inventario, proveedor_id: proveedor.id, categoria_id: categoria.id};
     httpClient.post('productos/', data)
       .then(({data: prod}) => {
         const formData = new FormData();
@@ -168,7 +168,7 @@ export default (props) => {
         </Grid>
       </Grid>
       <ImageUploader label={"Agregar foto"} onChange={fileSelectionHandler}/>
-      <Button variant="raised" onClick={() => submit()}>Enviar</Button>
+      <Button onClick={() => submit()}>Enviar</Button>
     </form>
   );
 
