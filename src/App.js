@@ -45,7 +45,9 @@ export default () => {
           <Route path="/reportes" component={ReportsPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>
+          <Route path="/admin" component={Admin}/>
           <Route path="/" component={LandingPage}/>
+          
         </Switch>
       </Router>
     </ThemeProvider>

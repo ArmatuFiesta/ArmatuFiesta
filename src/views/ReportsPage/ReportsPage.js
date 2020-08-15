@@ -167,7 +167,7 @@ export default function LandingPage(props) {
   const handleClick4 = (min,max) =>{
     
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':''}  ,
+    {'template':{'name':'ofertas'}  ,
   'data':{
         "min": min,
         "max": max,
