@@ -72,7 +72,7 @@ const handleClose = () => {
   const handleClick = (event,i) => {
     setItems([]);
     setMapPage(false);
-    if(path==="notarias" || path==="salones") {
+    if(path==="notarias" || path==="salones"|| path==="establecimientos"||path==="matrimonios") {
     setMapPage(true);
     }
   
@@ -106,7 +106,7 @@ const handleClose = () => {
   return (<>
   
 
-   {adminView && <Box  align="center"><Button href="/adminView" props={path} size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+   {adminView && <Box  align="center"><Button href="/admin/productos/nuevo" props={path} size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
    {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
    {mapPage && <Box component="span" display="block" align="end"><FormControlLabel 
     control={<Switch checked={showMap} onChange={toggleChecked} />}
@@ -129,8 +129,8 @@ const handleClose = () => {
       {items.map(item => <GridItem xs={3}>
                <ProductCard key={item.id} 
                               path={"item_example"}
-                             productName={item.nombre_notaria}
-                            productDescription={item.lugar}
+                             productName={item.nombre}
+                            productDescription={item.categoria}
                />
              </GridItem>)} 
       <GridItem xs={6}><MapPage isHidden={showMap}></MapPage></GridItem>

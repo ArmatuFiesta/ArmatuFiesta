@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const categorias = [{title:'tips'}, {title:'accesorios'},{title:'quinceañeras'}];
+  const categorias=[{title: "Tips"},{title: "Masculino"}];
 
 
 export default function ModifyPost() {

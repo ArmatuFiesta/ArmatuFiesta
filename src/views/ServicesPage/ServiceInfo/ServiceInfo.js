@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import imagesStyles from "assets/jss/material-kit-react/imagesStyles.js";
-import InfoArea from "components/InfoArea/InfoArea.js";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { cardTitle } from "assets/jss/material-kit-react.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -18,7 +18,9 @@ import TextField from '@material-ui/core/TextField';
 import { Message } from "@material-ui/icons";
 import Button from "components/CustomButtons/Button.js";
 import ComboBox from "components/ComboBox/ComboBox.js";
-import Header from "components/Header/Header";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 const styles = {
   ...imagesStyles,
   cardTitle,
@@ -66,7 +68,7 @@ const myStyles = makeStyles((theme) => ({
 
 const tiposEventos=[{title:"Matrimonio"},{title:"Boda"},{title:"Quinceanos"},{title:"Infantil"},{title:"Otros"}];
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(myStyles);
 
 
 export default function ServiceInfoPage(props) {
@@ -78,67 +80,76 @@ const { productName, productDescription, path, ...rest } = props;
       setValue(event.target.value);
     };
     return(
-    
-    <>
-    <Header
-    brand="Arma Tu Fiesta"
-    fixed
-    {...rest}
-    className={myStyles}
-    />
-        <Paper className={myStyles}>
-        <GridContainer alignContent='stretch'  spacing={2}>
-            <GridItem xs={6}>
-                <Card>
-            <img className={classes.imgCardTop} src="..." alt="Card-img-cap" />
-            <CardBody>
-                <h4 className={classes.cardTitle}>Servicio Ejemplo</h4> {/** {service.name} */}
-                <p>Tipo: Comedor
+
+
+<React.Fragment>
+      <CssBaseline />
+      <AppBar position="absolute" color="default" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap>
+            Arma Tu Fiesta
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <main className={classes.layout}>
+        <Paper className={classes.paper}>
+          <Typography component="h1" variant="h4" align="center">
+            Informacion del producto
+          </Typography>
+         
+          <GridContainer alignContent='stretch'  spacing={2}>
+          <GridItem xs={6}>
+              <Card>
+          <img className={classes.imgCardTop} src="..." alt="Card-img-cap" />
+          <CardBody>
+              <h4 className={classes.cardTitle}>Servicio Ejemplo</h4> {/** {service.name} */}
+              <p>Tipo: Comedor
 Direccion: Quinta numero xx, Palos Grandes, Carcas {/** {service.description} */}
 Contacto: 0414-xxxx-xxx
 Ambiente: Elegante</p>   
-                <p><small className={classes.textMuted}>Last updated 3 mins ago</small></p>  {/** {service.habilitado} */}
-            </CardBody>
-            </Card>
-            </GridItem>
-            <GridItem xs={4} justify='flex-end'>
-            <div>
-                <h6>Solicitar Presupuesto</h6>
-            <FormControl>
+              <p><small className={classes.textMuted}>Last updated 3 mins ago</small></p>  {/** {service.habilitado} */}
+          </CardBody>
+          </Card>
+          </GridItem>
+          <GridItem xs={4} justify='flex-end'>
+          <div>
+              <h6>Solicitar Presupuesto</h6>
+          <FormControl>
 
-                <InputLabel htmlFor="my-input">Nombre Completo</InputLabel> 
-                <Input id="my-input" aria-describedby="my-helper-text" />
+              <InputLabel htmlFor="my-input">Nombre Completo</InputLabel> 
+              <Input id="my-input" aria-describedby="my-helper-text" />
+              {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
+          </FormControl>
+          <br/><br/>
+          <FormControl>
+              <InputLabel htmlFor="my-input">Correo Electronico</InputLabel>
+              <Input id="my-input" aria-describedby="my-helper-text" />
                 {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
-            </FormControl>
-            <br/><br/>
-            <FormControl>
-                <InputLabel htmlFor="my-input">Correo Electronico</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text" />
-                  {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
-            </FormControl>
-            <br/><br/>
-            <p>Selecciona el tipo de evento: </p>
-            <ComboBox itemList={tiposEventos} label="Eventos"/>
-            <div>
-            <br/><br/>
-        <TextField
-          id="outlined-textarea"
-          label="Detalles del Evento"
-          placeholder="Escribenos aca cualquier otro detalle!"
-          multiline
-          variant="outlined"
-        />
+          </FormControl>
+          <br/><br/>
+          <p>Selecciona el tipo de evento: </p>
+          <ComboBox itemList={tiposEventos} label="Eventos"/>
+          <div>
+          <br/><br/>
+      <TextField
+        id="outlined-textarea"
+        label="Detalles del Evento"
+        placeholder="Escribenos aca cualquier otro detalle!"
+        multiline
+        variant="outlined"
+      />
 
 <br/><br/>
-          <Button color="primary" round><Message/> Contratar</Button>
-      </div>
-            
-            </div>
-            </GridItem>
-        </GridContainer>
-        
+        <Button color="primary" round><Message/> Contratar</Button>
+    </div>
+          
+          </div>
+          </GridItem>
+      </GridContainer>
+      
+        </Paper>
+      </main>
+    </React.Fragment>
 
-      </Paper>
-      </>
     );
 }

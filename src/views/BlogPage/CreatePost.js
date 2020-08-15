@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     def __str__(self): */
 
     
-const categorias = [{title:'tips'}, {title:'accesorios'},{title:'quinceañeras'}];
+const categorias = ['Tips', 'Accesorios','Quinceañeras'];
 
 export default function CreatePost() {
     const classes = useStyles();//clases base
@@ -131,9 +131,10 @@ export default function CreatePost() {
                                     />
                                     </Grid>
 
-                                    <Grid item xs={3} justify="space-around">
+                                    <Grid item xs={6} >
                                     <ComboBox id="categoria" itemList={categorias} label="categoria"/>
                                     </Grid>
+                                    
                             </GridContainer>
                                 <Box  align="center">
                                     <Button size="large"

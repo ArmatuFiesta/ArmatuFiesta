@@ -57,8 +57,29 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function NotificationsPage(props){
+  const username="admin";
 const classes = useStyles();//clases base
-const [notifications, setNotifications]=React.useState("No tiene pagos pendientes");
+const [notifications, setNotifications]=React.useState("Cargando...");
+
+useEffect(() => { fetchData();} , []); //retorname data o vacio 
+
+
+const fetchData = async () => {
+  //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
+  const result = await httpClient.get('contratos/?username='+{username})
+      console.log(result);
+      setNotifications(result.data);
+};
+  
+      const notificationsList = () =>{
+      notifications.map(notification => 
+      <>
+      <Typography variant="h6" color="primary" noWrap>{"tiene un contrato pendiente por cancelar en "+notification.fecha_contrato}</Typography>
+      <Typography variant="subtitle1" color="grey" noWrap>{"por un monto de "+notification.monto}</Typography>
+      <br></br>
+      
+      </>);
+  };
 
     return(
 
@@ -74,7 +95,7 @@ const [notifications, setNotifications]=React.useState("No tiene pagos pendiente
        <Paper className={classes.paper}>
        <React.Fragment>
        <Typography variant="h6" color="grey" noWrap>
-                     {notifications}
+                     {notifications.length!=0 ? notificationsList(): "No tiene pagos pendientes"}
            </Typography>
           </React.Fragment>
           <Box  align="center">

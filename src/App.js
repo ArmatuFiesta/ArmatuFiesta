@@ -41,7 +41,6 @@ export default () => {
           <Route path="/adminView" component={AddItemView}/>
           <Route path="/payment" component={CheckOut}/>
           <Route path="/admin/notarias" component={Notaria}/>
-          <Route path="/servicesEx" component={ServicePojo}/>
           <Route path="/admin" component={Admin}/>
           <Route path="/reportes" component={ReportsPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
