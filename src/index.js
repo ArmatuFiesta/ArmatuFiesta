@@ -22,7 +22,7 @@ import Notaria from "./views/AdminPage/Notaria/Notaria";
 import BlogPage from "views/BlogPage/BlogPage";
 import { Provider } from 'react-redux'
 import store from 'redux/store.js'
-
+import reportesPage from 'views/ReportsPage/ReportsPage'
 import UsersCRUDPage from "views/AdminPage/usersCRUDPage";
 import NotificationsPage from "views/LoginPage/NotificationsPage";
 var hist = createBrowserHistory();
@@ -32,6 +32,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
     <Router history={hist}>
       <Switch>
+        <Route path="/reportes" component={reportesPage}/>
         <Route path="/solteria" component={Solteria}/>
         <Route path="/notifications" component={NotificationsPage}/>
         <Route path="/set_roles" component={UsersCRUDPage}/>
