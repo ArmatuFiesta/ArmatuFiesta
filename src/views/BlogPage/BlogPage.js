@@ -121,7 +121,7 @@ export default function BlogPage() {
     const url="publicaciones";
     //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
     if(path!="todas"){
-      url='publicaciones/cat='+path;
+      url='publicaciones/?cat='+{params: {cat: path}};
     }
     const result = await httpClient.get(url)
     console.log(result);

@@ -20,7 +20,7 @@ const useStyles = makeStyles(styles);
 
 export default function ProductCard(props) {
   const classes = useStyles();
-  const { productName, productDescription, path, ...rest } = props;
+  const { productName, productDescription, path, onAdd, ...rest } = props;
   return (
     <Card style={{width: "20rem"}}>
       <img
@@ -35,7 +35,7 @@ export default function ProductCard(props) {
         <p>{productDescription}</p>
         <GridContainer>
           <GridItem sm={6}><Button href={'/'+path} color="primary">Detalle</Button> </GridItem>
-          <GridItem sm={6}><Button color="secondary">Añadir</Button> </GridItem>
+          <GridItem sm={6}><Button onClick={onAdd} color="secondary">Añadir</Button> </GridItem>
         </GridContainer>
         
       </CardBody>

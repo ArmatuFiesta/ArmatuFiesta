@@ -22,6 +22,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 
 // Sections for this page
 
@@ -44,7 +45,7 @@ export default function ServicePage(props) {
   const menuItems = [];//array del menu
   const classes = useStyles();//clases base
   const serviceClasses = useServiceStyles();//proper classes
-  const {...rest} = props;
+  const {listaCompra, update,...rest} = props;
   //for the menu behavior
 
   //State hooks
@@ -54,6 +55,7 @@ export default function ServicePage(props) {
   const [adminView, setAdminView] =React.useState(true);//estoy como admin o no
   const [showMap, setChecked] = React.useState(false); // toggle: muestra o no el mapa
   const [path, setPath] = React.useState(String(menuCategories[0]).toLowerCase()); // toggle: muestra o no el mapa
+  const [presupuesto, addItem] =React.useState([]); //LISTA DE PRODUCTOS: PRESUPUESTO
   //Fin de state hooks
 
     
@@ -89,7 +91,7 @@ const handleClose = () => {
 
     const fetchData = async () => {
       //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-      const result = await httpClient.get(path+'/')
+      const result = await httpClient.get("/productos/?cat="+{params: {cat: path}}) 
           console.log(result);
           setItems(result.data);
         
@@ -100,11 +102,23 @@ const handleClose = () => {
 
 
 
+    const handleAdd = (event,idProducto) => {
+      addItem(presupuesto.push(idProducto));
+      console.log(presupuesto);
+      httpClient.post('presupuesto/' + {idProducto} + '/add_producto')
+        .then(res => {
+          console.log(res);
+          console.log(res.data);
+        })
+    };
+  
+    
+  
  
 
 
   return (<>
-  
+  <Typography variant="subtitle1">{presupuesto}</Typography>
 
    {adminView && <Box  align="center"><Button href="/admin/productos/nuevo" props={path} size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
    {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
@@ -131,6 +145,7 @@ const handleClose = () => {
                               path={"item_example"}
                              productName={item.nombre}
                             productDescription={item.categoria}
+                            onAdd={(e) => handleAdd(e,item.id)}
                />
              </GridItem>)} 
       <GridItem xs={6}><MapPage isHidden={showMap}></MapPage></GridItem>

@@ -25,6 +25,12 @@ export default function MainPage(props) {
 "PROTOCOLO","FOTOGRAFIA","BAILES"];
     const classes = useStyles();
     const { ...rest } = props;
+
+
+    const [presupuesto, updatePresupuesto] =React.useState();
+
+
+    
     return(
         <CustomTabs headerColor="primary" 
             title="ArmaTuFiesta"
@@ -37,12 +43,17 @@ export default function MainPage(props) {
                   ),
                 },*/
             {  tabName:"Servicios",
-                tabContent: (<ServicesPage menuCategories={serviceCategories}/>),
+                tabContent: (<ServicesPage
+                   
+                    menuCategories={serviceCategories}/>),
             },
             {tabName:'Contrataciones',
-                tabContent:(<ServicesPage menuCategories={contratacionesCategories}/>)},
+                tabContent:(<ServicesPage 
+                   
+                    menuCategories={contratacionesCategories}/>)},
             {tabName:'Mi Cuenta',
-                tabContent:(<MiCuentaPage/>)},
+                tabContent:(<MiCuentaPage
+                    presupuesto={presupuesto}/>)},
             ] }
             {...rest}
         />
