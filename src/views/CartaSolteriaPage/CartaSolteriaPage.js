@@ -134,8 +134,8 @@ export default function LandingPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
         <GridContainer></GridContainer>
-        <GridContainer>
-          <GridItem>
+        <GridContainer spacing={2}>
+          <GridItem xs={12}>
         <CustomInput
                       labelText="Nombre y Apellido"
                       id="nombre"

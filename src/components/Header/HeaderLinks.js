@@ -53,17 +53,17 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem>
 
-    {/*  <ListItem className={classes.listItem}>
+      <ListItem className={classes.listItem}>
             <Button
           color="transparent"
           className={classes.navLink}
         >
-       <Link to={"adminView"} className={classes.Link}>Admin</Link>
+       <Link to={"set_roles"} className={classes.Link}>Admin Options</Link>
 
         </Button>
         
 
-  </ListItem>*/}
+  </ListItem>
       {/*<ListItem className={classes.listItem}>
         <Tooltip title="Delete">
           <IconButton aria-label="Delete">

@@ -165,6 +165,7 @@ export default function LoginPage(props) {
                     <Button
                       variant="contained"
                       color="primary"
+                      href = "notifications"
                       //justify="center"
                       //size="lg"
                       onClick={(e) => handleLogin(username, password)}
