@@ -18,10 +18,10 @@ import ServiceInfoPage from "./views/ServicesPage/ServiceInfo/ServiceInfo";
 import BlogPage from "./views/BlogPage/BlogPage";
 import history from "services/history";
 import Admin from "./views/AdminPage/Admin";
-import reportesPage from "./views/ReportsPage/ReportsPage";
-import UsersCRUDPage from "./views/AdminPage/usersCRUDPage";
 import NotificationsPage from "./views/LoginPage/NotificationsPage";
-
+import UsersCRUDPage from "./views/AdminPage/usersCRUDPage";
+import ReportsPage from "./views/ReportsPage/ReportsPage"
+import NewPost from "./views/BlogPage/NewPost";
 
 export default () => {
   return (
@@ -29,6 +29,7 @@ export default () => {
       <Router history={history}>
         <Switch>
           <Route path="/solteria" component={Solteria}/>
+          <Route path="/new_post" component={NewPost}/>
           <Route path="/services" component={MainPage}/>
           <Route path="/login-page">
             <LoginPage/>
@@ -41,7 +42,7 @@ export default () => {
           <Route path="/payment" component={CheckOut}/>
           <Route path="/admin/notarias" component={Notaria}/>
           <Route path="/servicesEx" component={ServicePojo}/>
-          <Route path="/reportes" component={reportesPage}/>
+          <Route path="/reportes" component={ReportsPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>
           <Route path="/admin" component={Admin}/>
