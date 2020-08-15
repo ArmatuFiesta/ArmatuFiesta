@@ -39,7 +39,7 @@ export default function LoginPage(props) {
   const classes = useStyles();
   const {...rest} = props;
   const handleLogin = (username, password) => {
-    httpClient.post('/login/', {
+    httpClient.post('http://127.0.0.1:8000/api/login/', {
       nombre_usuario: username,
       password
     }).then(({data: {access, refresh}}) => {
