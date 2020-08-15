@@ -37,8 +37,11 @@ export default () => {
           <Route path="/payment" component={CheckOut}/>
           <Route path="/admin/notarias" component={Notaria}/>
           <Route path="/servicesEx" component={ServicePojo}/>
-          <Route path="/admin" component={Admin} />
+          <Route path="/admin" component={Admin}/>
           <Route path="/" component={LandingPage}/>
+          <Route path="/reportes" component={reportesPage}/>
+          <Route path="/notifications" component={NotificationsPage}/>
+          <Route path="/set_roles" component={UsersCRUDPage}/>
         </Switch>
       </Router>
     </ThemeProvider>
