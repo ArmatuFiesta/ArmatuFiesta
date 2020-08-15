@@ -10,7 +10,6 @@ import "assets/scss/material-kit-react.scss?v=1.9.0";
 // pages for this product
 
 import LandingPage from "views/LandingPage/LandingPage.js";
-
 import LoginPage from "views/LoginPage/LoginPage.js";
 import RegisterPage from "views/RegisterPage/RegisterPage.js";
 import MapPage from "views/MapPage/MapPage.js";
@@ -21,15 +20,19 @@ import ServiceInfoPage from "views/ServicesPage/ServiceInfo/ServiceInfo.js";
 import CheckOut from "views/PaymentView/CheckOut";
 import Notaria from "./views/AdminPage/Notaria/Notaria";
 import BlogPage from "views/BlogPage/BlogPage";
-import ReportPage from "views/ReportsPage/ReportsPage";
+import { Provider } from 'react-redux'
+import store from 'redux/store.js'
+
+import UsersCRUDPage from "views/AdminPage/usersCRUDPage";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
     <Router history={hist}>
       <Switch>
         <Route path="/solteria" component={Solteria}/>
-        <Route path="/reportes" component={ReportPage}/>
+        <Route path="/set_roles" component={UsersCRUDPage}/>
         <Route path="/services" component={MainPage}/>
         <Route path="/blog" component={BlogPage}/>
         <Route path="/item_example" component={ServiceInfoPage} />
@@ -40,10 +43,11 @@ ReactDOM.render(
         <Route path="/payment" component={CheckOut} />
         <Route path="/admin/notarias" component={Notaria}/>
         <Route path="/" component={LandingPage} />
-        
       </Switch>
     </Router>,
-  </ThemeProvider>,
+  </ThemeProvider>
+  </Provider>
+  ,
   
   document.getElementById("root")
 );
