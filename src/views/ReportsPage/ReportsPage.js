@@ -36,7 +36,7 @@ const useStyles = makeStyles(styles);
 
 
 
-export default function LandingPage(props) {
+export default function ReportsPage(props) {
   const classes = useStyles();
   const [min1, setMin1] = React.useState(new Date('2014-08-18T21:11:54'));
   const [max1, setmax1]= React.useState(new Date('2014-08-18T21:11:54'));
