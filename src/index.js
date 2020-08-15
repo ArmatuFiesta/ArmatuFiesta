@@ -24,6 +24,7 @@ import { Provider } from 'react-redux'
 import store from 'redux/store.js'
 
 import UsersCRUDPage from "views/AdminPage/usersCRUDPage";
+import NotificationsPage from "views/LoginPage/NotificationsPage";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -32,6 +33,7 @@ ReactDOM.render(
     <Router history={hist}>
       <Switch>
         <Route path="/solteria" component={Solteria}/>
+        <Route path="/notifications" component={NotificationsPage}/>
         <Route path="/set_roles" component={UsersCRUDPage}/>
         <Route path="/services" component={MainPage}/>
         <Route path="/blog" component={BlogPage}/>
