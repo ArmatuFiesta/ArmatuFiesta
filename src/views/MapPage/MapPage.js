@@ -42,7 +42,7 @@ export default function LandingPage(props) {
   
   const fetchNotarias = async page => {
     const response = await axios.get(
-      `http://localhost:8000/api/notarias/`,
+      'http://127.0.0.1:8000/api/notarias/',
     );
     setData(response.data);
     console.log(response.data);
@@ -118,6 +118,7 @@ export default function LandingPage(props) {
            ]}
            onClick={() => {
             setActivePopup(notaria);
+            console.log(notaria);
 
 
            }}
@@ -135,8 +136,8 @@ export default function LandingPage(props) {
           }}
         >
           <div>
-            <h2>{activePopup.nombre_notaria}</h2>
-            
+            <h2>{activePopup.nombre}</h2>
+        <b1>{activePopup.lugar}</b1>
           </div>
         </Popup>
       )}  
