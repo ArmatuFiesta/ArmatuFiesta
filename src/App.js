@@ -18,6 +18,10 @@ import ServiceInfoPage from "./views/ServicesPage/ServiceInfo/ServiceInfo";
 import BlogPage from "./views/BlogPage/BlogPage";
 import history from "services/history";
 import Admin from "./views/AdminPage/Admin";
+import reportesPage from "views/ReportsPage/ReportsPage";
+import UsersCRUDPage from "views/AdminPage/usersCRUDPage";
+import NotificationsPage from "views/LoginPage/NotificationsPage";
+
 
 export default () => {
   return (
