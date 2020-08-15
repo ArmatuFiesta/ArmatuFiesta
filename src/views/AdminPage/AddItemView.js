@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -18,7 +18,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import GridItem from "components/Grid/GridItem";
 import GridContainer from "components/Grid/GridContainer";
+import Context from "../../Context";
 import httpClient from "core/http-client";
+import AdminNavbar from "../../components/AdminNavbar";
+import AdminSideBar from "../../components/AdminSideBar";
+import AdminLayout from "../../layout/AdminLayout";
 
 const categoriasEx = [{title: "CATERING"}, {title: "NOTARIAS"}, {title: "DECORACION"}, {title: "CORTE Y COSTURA"}, {title: "OBSEQUIOS Y TARJETERIA"}, {title: "MATRIMONIOS"}];
 
@@ -31,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 700,
+      width: 1000,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -65,89 +69,105 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function AddItemPage(props) {
+const DEFAULT_IMG_MESSAGE = "Agregar foto";
+
+export default function AddProductPage(props) {
   const classes = useStyles();
   const category = props;
-  const [product, setProduct]= React.useState(null); 
+  const [product, setProduct] = React.useState(null);
+  const fileUploader = React.useRef(null);
+  const [currentFileName, setCurrentFileName] = React.useState(DEFAULT_IMG_MESSAGE);
+  const [categoriesOptions, setCategoriesOptions] = React.useState([]);
+  const [subCategoriesOptions, setSubCategoriesOptions] = React.useState([]);
 
-  console.log('Categoria: '+ category);
+  // Carga inicial de las categorias principales
+  useEffect(() => {
+    httpClient.get('categorias')
+      .then(({data}) => {
+        const mainCategories = data.filter(c => c.categoria_padre === null);
+        setCategoriesOptions(mainCategories);
+      });
+  }, []);
 
-   const handleSubmit = event => {
-     console.log("Producto: "+product);
 
-    //setProduct(nombre);
+  const handleSubmit = event => {
 
-    httpClient.post(''+{category}+'/',{product})
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    }) 
+    httpClient.post('' + {category} + '/', {product})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
   };
 
+  const selectCategory = ({subcategorias}) => {
+    console.log(subcategorias);
+    setSubCategoriesOptions(subcategorias);
+  }
+
+  const fileHandler = ({target: {files}}) => {
+    const file = files[0];
+    console.log(file);
+    setCurrentFileName(file ? file.name : DEFAULT_IMG_MESSAGE);
+  };
 
   return (
-    <React.Fragment>
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Vista Administrador
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <main className={classes.layout}>
+      <Paper className={classes.paper}>
+        <Typography variant="h5" align="center">Agregar Item</Typography>
+        <GridContainer spacing={3}>
+          <GridItem sm={6}>
+            <p>Selecciona la categoria del Item</p>
+            <ComboBox labelKey="nombre" onChange={(ev, value) => selectCategory(value)} itemList={categoriesOptions}
+                      label="Categoria"/>
+            <ComboBox labelKey="nombre" itemList={subCategoriesOptions} label="Subcategoria"/>
+            <br/>
+            <p>Coloca el nombre con el que se identifica el item</p>
+            <FormControl>
+              <InputLabel htmlFor="my-input">Nombre Item</InputLabel>
+              <Input id="my-input" aria-describedby="my-helper-text"/>
+              {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
+            </FormControl>
+            <br/>
+            <p>Indica el precio asociado</p>
+            <FormControl>
+              <InputLabel htmlFor="my-input">Precio Item</InputLabel>
+              <Input id="my-input" aria-describedby="my-helper-text"/>
+              {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
+            </FormControl>
+          </GridItem>
+          <GridItem sm={6}>
+            <Button
+              variant="contained"
+              align="center"
+              color="default"
+              className={classes.button}
+              startIcon={<CloudUpload/>}
+              onClick={() => {
+                console.log("Aquii");
+                return fileUploader.current.click();
+              }}
+            >
+              {currentFileName}
+            </Button>
+            <Input type="file" style={{display: "none"}} inputRef={fileUploader}
+                   onChange={(ev) => fileHandler(ev)} className={classes.margins}/>
+            <TextField
+              id="outlined-textarea"
+              label="Descripción Item"
+              width="full"
+              placeholder="Describe aqui tu producto"
+              multiline
+              variant="outlined"
+              className={classes.margins}
+            />
 
-
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography variant="h5" align="center">Agregar Item</Typography>
-          <GridContainer spacing={3}>
-            <GridItem sm={6}>
-              <p>Selecciona la categoria del Item</p>
-              <ComboBox itemList={categoriasEx} label="Categoria"/>
-              <ComboBox itemList={categoriasEx} label="Subcategoria"/>
-              <br/>
-              <p>Coloca el nombre con el que se identifica el item</p>
-              <FormControl>
-                <InputLabel htmlFor="my-input">Nombre Item</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text"/>
-                {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
-              </FormControl>
-              <br/>
-              <p>Indica el precio asociado</p>
-              <FormControl>
-                <InputLabel htmlFor="my-input">Precio Item</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text"/>
-                {/*<FormHelperText id="my-helper-text">Nombres y Apellidos</FormHelperText>*/}
-              </FormControl>
-            </GridItem>
-            <GridItem sm={6}>
-              <Button
-                variant="contained"
-                align="center"
-                color="default"
-                className={classes.button}
-                startIcon={<CloudUpload/>}
-              >
-                Agregar Foto
-              </Button>
-              <Input type="image" className={classes.margins}></Input>
-              <TextField
-                id="outlined-textarea"
-                label="Descripción Item"
-                width="full"
-                placeholder="Describe aqui tu producto/servicio!"
-                multiline
-                variant="outlined"
-                className={classes.margins}
-              />
-
-              <br/><br/>
-              <Button onClick= {handleSubmit()} color="primary" round className={classes.buttons} onClick={(e) => handleSubmit(e)}><Save/> Agregar Producto</Button>
-            </GridItem>
-          </GridContainer>
-        </Paper>
-      </main>
-
-
-    </React.Fragment>
+            <br/><br/>
+            <Button onClick={() => handleSubmit()} color="primary" round className={classes.buttons}
+                    onClick={(e) => handleSubmit(e)}><Save/> Agregar
+              Producto</Button>
+          </GridItem>
+        </GridContainer>
+      </Paper>
+    </main>
   );
 }

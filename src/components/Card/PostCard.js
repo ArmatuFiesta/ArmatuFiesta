@@ -20,14 +20,14 @@ const useStyles = makeStyles(styles);
 
 export default function PostCard(props) {
   const classes = useStyles();
-  const { postTitle, postContent, path, ...rest } = props;
+  const { postTitle, postContent, path, imageSrc, ...rest } = props;
   return (
     <Card style={{width: "200"}}>
       <img
         style={{height: "180px", width: "100%", display: "block"}}
         className={classes.imgCardTop}
-        src="..."
-        alt="Card-img-cap"
+        src={imageSrc}
+        alt={postTitle}
       />
       <CardBody>
         {/* aqui es donde va todo el body del card */}

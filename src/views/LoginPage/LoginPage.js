@@ -3,7 +3,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 //import People from "@material-ui/icons/People";
@@ -19,33 +19,50 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import jwt_decode from "jwt-decode";
+import {useHistory} from "react-router-dom";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import {httpClient} from "../../core/http-client";
 
 import image from "assets/img/log.jpg";
+import Context from "../../Context";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  const [redirect, setRedirect] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
-  setTimeout(function () {
-    setCardAnimation("");
-  }, 700);
+  const {updateUser} = React.useContext(Context);
+  const history = useHistory();
+  React.useContext(Context);
+  React.useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      setTimeout(function () {
+        setCardAnimation("");
+      }, 700);
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   const classes = useStyles();
   const {...rest} = props;
   const handleLogin = (username, password) => {
-    httpClient.post('/login/', {
+    httpClient.post('/token/', {
       nombre_usuario: username,
       password
     }).then(({data: {access, refresh}}) => {
+      const user = jwt_decode(access).user;
+      console.log(access);
       localStorage.setItem('token', access);
       localStorage.setItem('refresh', refresh);
-      setRedirect(true)
+      updateUser(user);
+      history.push('/adminView');
     })
       .catch(reason => console.log(reason));
   }
@@ -60,7 +77,7 @@ export default function LoginPage(props) {
   />;
 
 
-  return redirect ? <Redirect to="/adminView/"/> : (
+  return (
     <div>
       {header}
       <div

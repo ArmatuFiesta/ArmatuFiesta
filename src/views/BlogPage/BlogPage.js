@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -19,56 +19,54 @@ import MenuList from '@material-ui/core/MenuList';
 import PostCard from 'components/Card/PostCard.js'
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Button, Paper } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
+import {Button, Paper} from "@material-ui/core";
+import {Add} from "@material-ui/icons";
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 // Sections for this page
 
 
-
-
 const useStyles = makeStyles((theme) => ({
-    appBar: {
-      position: 'relative',
+  appBar: {
+    position: 'relative',
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 600,
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
-    layout: {
-      width: 'auto',
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-        width: 600,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
+  },
+  paper: {
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
     },
-    paper: {
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(3),
-      padding: theme.spacing(2),
-      [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-        marginTop: theme.spacing(6),
-        marginBottom: theme.spacing(6),
-        padding: theme.spacing(3),
-      },
-    },
-    stepper: {
-      padding: theme.spacing(3, 0, 5),
-    },
-    buttons: {
-      display: 'flex',
-      justifyContent: 'flex-end',
-    },
-    button: {
-      marginTop: theme.spacing(3),
-      marginLeft: theme.spacing(1),
-    },
-  }));
-  
+  },
+  stepper: {
+    padding: theme.spacing(3, 0, 5),
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  },
+}));
 
-export default function BlogPage(){
-  const menuCategories=["TIPS", "NOTARIAS","ACCESORIOS","QUINCEAÑERAS"];//categorias el menu
+
+export default function BlogPage() {
+  const menuCategories = ["TIPS", "NOTARIAS", "ACCESORIOS", "QUINCEAÑERAS"];//categorias el menu
   const menuItems = [];//array del menu
   const classes = useStyles();//clases base
   //const {...rest} = props;
@@ -77,83 +75,90 @@ export default function BlogPage(){
   //State hooks
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [items, setItems] = React.useState([]);//array para la data
-  const [adminView, setAdminView] =React.useState(true);//estoy como admin o no
+  const [adminView, setAdminView] = React.useState(true);//estoy como admin o no
   const [path, setPath] = React.useState(String(menuCategories[0]).toLowerCase()); // toggle: muestra o no el mapa
   //Fin de state hooks
 
-    
- 
-//MENU
-for (let i = 0; i < menuCategories.length; i++) {
-  menuItems.push(<MenuItem key={i} onClick={(e) => handleClick(e,i)}>{menuCategories[i]}</MenuItem>);
-//si vas a usar el evento tienes que declararlo^ y pasarlo       ^
-}
 
-const handleClose = () => {
+//MENU
+  for (let i = 0; i < menuCategories.length; i++) {
+    menuItems.push(<MenuItem key={i} onClick={(e) => handleClick(e, i)}>{menuCategories[i]}</MenuItem>);
+//si vas a usar el evento tienes que declararlo^ y pasarlo       ^
+  }
+
+  const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleClick = (event,i) => {
+  const handleClick = (event, i) => {
     setItems([]);
-  setAnchorEl(event.currentTarget);
-  console.log("Llamando a "+menuCategories[i].toLowerCase());
-  setPath(String(menuCategories[i]).toLowerCase());
-  fetchData();
-};
+    setAnchorEl(event.currentTarget);
+    console.log("Llamando a " + menuCategories[i].toLowerCase());
+    setPath(String(menuCategories[i]).toLowerCase());
+    fetchData();
+  };
   //FIN MANEJO DE MENU
 
 
-    const fetchData = async () => {
-      //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-      const result = await httpClient.get(path+'/')
-          console.log(result);
-          setItems(result.data);
-        
-    };
+  const fetchData = async () => {
+    //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
+    const result = await httpClient.get(path)
+    console.log(result);
+    setItems(result.data);
+
+  };
 
 
-    useEffect(() => { fetchData();} , []); //retorname data o vacio 
+  useEffect(() => {
+    fetchData();
+  }, [path]); //retorname data o vacio
 
 
-
-return (
-     <React.Fragment className={classes}>
-         <CssBaseline>
-         <AppBar position="absolute" color="default" className={classes.appBar}>
-            <Toolbar>
+  return (
+    <React.Fragment className={classes}>
+      <CssBaseline>
+        <AppBar position="absolute" color="default" className={classes.appBar}>
+          <Toolbar>
             <Typography variant="h6" color="inherit" noWrap>
-                Arma Tu Fiesta BLOG
+              Arma Tu Fiesta BLOG
             </Typography>
-            </Toolbar>
-         </AppBar>
-        {adminView && <Box  align="center"><Button href="/adminView" props={path} size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+          </Toolbar>
+        </AppBar>
+        {adminView &&
+        <Box align="center"><Button href="/adminView" props={path} size="medium"><Add/> Agregar Nuevo Item
+        </Button></Box>}
         {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
         <Paper className={classes.paper}>
-            <GridContainer spacing={2}>
-                <GridItem xs={3} height="100%" >
-                    <MenuList
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                    >
-                    {menuItems}
-                    </MenuList>
-                        </GridItem>
-                            {items.map(item => <GridItem xs={9}>
-                                <PostCard key={item.id} 
-                                        path={"item_example"}
-                                        postTitle={item.nombre_notaria}
-                                        postContent={item.lugar}
-                            />
-                </GridItem>)} 
+          <GridContainer spacing={2}>
+            <GridItem xs={3} height="100%">
+              <MenuList
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                {menuItems}
+              </MenuList>
+            </GridItem>
+            {items.map(item => {
+              const imgSrc = item.fotos.length === 0 ?
+                "" : item.fotos[0].ruta;
+              return (<GridItem xs={4}>
+                <PostCard key={item.id}
+                          path={"item_example"}
+                          postTitle={item.nombre}
+                          postContent={item.direccion}
+                          imgSrc={imgSrc}
+                />
+              </GridItem>);
+            })}
 
-            </GridContainer>
+          </GridContainer>
         </Paper>
-         </CssBaseline>
-  </React.Fragment>
-    )
+      </CssBaseline>
+    </React.Fragment>
+  )
 
 
 }
