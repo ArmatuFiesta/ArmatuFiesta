@@ -65,6 +65,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+ /** Estructura de una Publicacion
+   * 
+   * id = models.AutoField(db_column='id_publicacion',
+                          primary_key=True)
+    fecha_publicacion = models.DateTimeField(db_column='fecha_publicacion', auto_now=True)
+    contenido = models.TextField(db_column='contenido_publicacion')
+    usuario = models.ForeignKey(to='Usuario',
+                                db_column='usuario_id_usuario',
+                                on_delete=models.CASCADE)
+    categorias = models.ManyToManyField(to='Categoria',
+                                        through='CategoriaPublicacion',
+                                        related_name='publicaciones')
+
+    def __str__(self): */
+
+
+
 export default function BlogPage() {
   const menuCategories = ["TIPS", "NOTARIAS", "ACCESORIOS", "QUINCEAÑERAS"];//categorias el menu
   const menuItems = [];//array del menu
@@ -125,7 +142,7 @@ export default function BlogPage() {
           </Toolbar>
         </AppBar>
         {adminView &&
-        <Box align="center"><Button href="/adminView" props={path} size="medium"><Add/> Agregar Nuevo Item
+        <Box align="center"><Button href="/new_post" props={path} size="medium"><Add/> Agregar Nuevo Item
         </Button></Box>}
         {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
         <Paper className={classes.paper}>
@@ -146,7 +163,6 @@ export default function BlogPage() {
                 "" : item.fotos[0].ruta;
               return (<GridItem xs={4}>
                 <PostCard key={item.id}
-                          path={"item_example"}
                           postTitle={item.nombre}
                           postContent={item.direccion}
                           imgSrc={imgSrc}
