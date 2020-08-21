@@ -97,7 +97,7 @@ const handleDateChange = (date) => {
       
                         <GridItem xs={9} align="center">
                             <GridContainer spacing={3} justify="space-around">
-                            <Box align="center">
+                            <Box justify="space-around" align="center">
                                 <Typography variant="h6" gutterBottom>
                                  Agrega los datos de usuario
                                   </Typography>
@@ -137,6 +137,15 @@ const handleDateChange = (date) => {
                                         id="segundo_apellido"
                                         name="apellido"
                                         label="Segundo Apellido"
+                                        fullWidth
+                                        autoComplete="Segundo Apellido"
+                                    />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                    <TextField
+                                        id="username"
+                                        name="username"
+                                        label="Username"
                                         fullWidth
                                         autoComplete="Segundo Apellido"
                                     />

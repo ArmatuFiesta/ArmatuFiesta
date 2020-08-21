@@ -118,10 +118,10 @@ export default function BlogPage() {
 
 
   const fetchData = async () => {
-    const url="publicaciones";
+     var url="publicaciones/";
     //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
     if(path!="todas"){
-      url='publicaciones/?cat='+{params: {cat: path}};
+      url='publicaciones/?cat='+path;
     }
     const result = await httpClient.get(url)
     console.log(result);
@@ -165,17 +165,14 @@ export default function BlogPage() {
                 {menuItems}
               </MenuList>
             </GridItem>
-            {items.map(item => {
-              const imgSrc = item.fotos.length === 0 ?
-                "" : item.fotos[0].ruta;
-              return (<GridItem xs={4}>
+            {items.map(item => <GridItem xs={4}>
                 <PostCard key={item.id}
-                          postTitle={item.nombre}
-                          postContent={item.direccion}
-                          imgSrc={imgSrc}
+                          postTitle={item.usuario}
+                          postContent={item.contenido}
+                         
                 />
-              </GridItem>);
-            })}
+              </GridItem>
+            )}
 
           </GridContainer>
         </Paper>

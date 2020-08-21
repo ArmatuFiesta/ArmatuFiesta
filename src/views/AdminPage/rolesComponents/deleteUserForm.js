@@ -92,43 +92,14 @@ export default function DeleteUserForm() {
                                     </Typography>
                                 </Box>
                                 <br></br>
-                                        <Grid item xs={9}>
-                                        <TextField
-                                            required
-                                            id="primer_nombre"
-                                            name="nombre"
-                                            label="Primer Nombre"
-                                            fullWidth
-                                            autoComplete="Primer Nombre"
-                                        />
-                                        <Grid item xs={9}>
+                                <Grid item xs={6}>
                                     <TextField
-                                        id="segundo_nombre"
-                                        name="nombre"
-                                        label="Segundo Nombre"
-                                        fullWidth
-                                        autoComplete="Segundo Nombre"
-                                    />
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                    <TextField
-                                        required
-                                        id="primer_apellido"
-                                        name="apellido"
-                                        label="Primer Apellido"
-                                        fullWidth
-                                        autoComplete="Primer Apellido"
-                                    />
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                    <TextField
-                                        id="segundo_apellido"
-                                        name="apellido"
-                                        label="Segundo Apellido"
+                                        id="username"
+                                        name="username"
+                                        label="Username"
                                         fullWidth
                                         autoComplete="Segundo Apellido"
                                     />
-                                    </Grid>
                                         </Grid>
                              </GridContainer>
                                 

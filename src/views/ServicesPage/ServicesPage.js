@@ -90,8 +90,12 @@ const handleClose = () => {
     };
 
     const fetchData = async () => {
+      const url="productos/"
       //le pasas la data que quieras cargar dependiendo de la categoria escogida y listo bello
-      const result = await httpClient.get("/productos/?cat="+{params: {cat: path}}) 
+     // const result = await httpClient.get(url) 
+    //  const result = await httpClient.get("/productos/",{params: {cat: path}}) 
+      const result = await httpClient.get("/notarias/") 
+      
           console.log(result);
           setItems(result.data);
         
@@ -120,9 +124,13 @@ const handleClose = () => {
   return (<>
   <Typography variant="subtitle1">{presupuesto}</Typography>
 
-   {adminView && <Box  align="center"><Button href="/admin/productos/nuevo" props={path} size="medium"><Add/> Agregar Nuevo Item </Button></Box> }
+   {adminView && <Box  align="center">
+     <Button href="/admin/productos/nuevo" props={path} size="medium">
+       <Add/> Agregar Nuevo Item </Button>
+       </Box> }
    {/* en href de este boton debemos pasarle la categoria exacta en la que estamos: menuCategories[i] y que te precargue la info */}
-   {mapPage && <Box component="span" display="block" align="end"><FormControlLabel 
+   {mapPage && <Box component="span" display="block" align="end">
+     <FormControlLabel 
     control={<Switch checked={showMap} onChange={toggleChecked} />}
     label="Mapa"
   /></Box>}

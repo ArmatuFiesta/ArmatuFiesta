@@ -75,7 +75,7 @@ const fetchData = async () => {
   
     const notificationsList = () =>{
       
-      return(notifications.map(notification => <NotificationItem fecha_contrato={notification.fecha_contrato.getDate()} monto={notification.monto}/> ));
+      return(notifications.map(notification => <NotificationItem fecha_contrato={notification.fecha_contrato} monto={notification.monto}/> ));
   };
 
 
