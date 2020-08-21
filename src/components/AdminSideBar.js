@@ -19,29 +19,34 @@ export default (props) => {
       anchor="left">
       <Toolbar/>
       <List>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/admin/notarias')}>
           <ListItemText primary="Notarias"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/admin/jefaturas')}>
           <ListItemText primary="Jefaturas"/>
         </ListItem>
-        <ListItem button>
-          <ListItemText primary="Locales"/>
+        <ListItem button onClick={() => history.push('/admin/establecimientos')}>
+          <ListItemText primary="Establecimientos"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/admin/festejos')}>
           <ListItemText primary="Festejos"/>
         </ListItem>
         <ListItem button onClick={() => history.push('/admin/productos')}>
           <ListItemText primary="Productos" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/admin/servicios')}>
           <ListItemText primary="Servicios"/>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => history.push('/admin/proveedores')}>
           <ListItemText primary="Proveedores"/>
         </ListItem>
       </List>
       <Divider/>
+      <List>
+        <ListItem button onClick={() => history.push('/admin/publicaciones')}>
+          <ListItemText primary="Publicaciones" />
+        </ListItem>
+      </List>
     </Drawer>
   );
 }

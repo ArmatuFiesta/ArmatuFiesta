@@ -3,12 +3,17 @@ import DataTable from "react-data-table-component";
 import {Button, Icon} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Dialog from "@material-ui/core/Dialog";
+import {Link, useRouteMatch} from "react-router-dom";
+import httpClient from "../../../core/http-client";
 
 
 export default (props) => {
-  const {notarias, lugares} = props;
-  const [open, setOpen] = useState(false);
-  console.log(notarias);
+  const [notarias, setNotarias] = React.useState([]);
+  React.useEffect(() => {
+    httpClient.get('/notarias/')
+      .then(({data}) => setNotarias(data));
+  }, []);
+  const {path, url} = useRouteMatch();
   const columns = [
     {
       name: 'ID',
@@ -43,13 +48,12 @@ export default (props) => {
     }
   ];
 
-  const addNotaria = () => {
-    setOpen(true);
-  };
-
   const title = (
-    <h2>Listado de notarías <Button startIcon={<AddIcon/>} variant="contained" color="primary"
-                                    onClick={() => addNotaria()}>Nuevo</Button></h2>
+    <h2>Listado de notarías
+      <Button startIcon={<AddIcon/>} variant="contained" color="primary">
+        <Link to={`${path}/nuevo`}>Nuevo</Link>
+      </Button>
+    </h2>
   );
 
   return (
@@ -59,10 +63,6 @@ export default (props) => {
                  title={title}
                  pagination={true}
       />
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <p>test</p>
-        <Button onClick={() => setOpen(false)}>Cerrar</Button>
-      </Dialog>
     </React.Fragment>
   );
 
