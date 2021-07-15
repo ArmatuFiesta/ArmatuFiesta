@@ -88,7 +88,7 @@ export default function LandingPage(props) {
     if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
     
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'fichaa','recipe':'chrome-pdf'}  ,
+    {'template':{'name':'ficharally','recipe':'chrome-pdf'}  ,
   'data':
   {"continente": agencia,
   "costomin": costomin,
@@ -112,7 +112,7 @@ export default function LandingPage(props) {
         const url = window.URL.createObjectURL(new Blob([blob]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'fichas.pdf'); //or any other extension
+        link.setAttribute('download', 'rallys.pdf'); //or any other extension
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
@@ -129,7 +129,7 @@ export default function LandingPage(props) {
     if(duracion=='') {duracion=0; console.log(duracion)};
     if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'fichaa'}  ,
+    {'template':{'name':'ficharally'}  ,
   'data':
   {"continente": agencia,
   "costomin": costomin,
@@ -159,28 +159,39 @@ export default function LandingPage(props) {
 
   return (
     <div>
-      
+      <Header
+        color="transparent"
+        routes={dashboardRoutes}
+        brand="TRAVGO"
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        {...rest}
+      />
      
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
         <GridContainer>
             <GridItem> </GridItem>
         </GridContainer><GridContainer>
-            <GridItem>&nbsp; </GridItem>
+            <GridItem>espacio </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> &nbsp; </GridItem>
+            <GridItem> espacio </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> &nbsp;</GridItem>
+            <GridItem> espacio</GridItem>
         </GridContainer><GridContainer>
-            <GridItem> </GridItem>
+            <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> </GridItem>
+            <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Ficha paquete</h1> </label></GridItem>
+            <GridItem> <label><h1>Ficha Rally</h1> </label></GridItem>
         </GridContainer>
 
         <GridContainer>
@@ -249,43 +260,7 @@ export default function LandingPage(props) {
 
         </ListItem>
         </MuiPickersUtilsProvider>
-        <ListItem>
-            <CustomInput
-                      labelText="precio minimo"
-                      id="costomin"
-                      
-                      inputProps={{onChange: e => setcostomin(e.target.value)
-                      }
-                    }
-                    /> 
-                    
-            <CustomInput
-                      labelText="precio maximo"
-                      id="costomax"
-                      
-                      inputProps={{
-                        
-                        onChange: e => setcostomax(e.target.value)
-                      }}
-                    />    
-           <CustomInput
-                      labelText="numero de personas"
-                      id="personas"
-                     
-                      inputProps={{
-                        
-                        onChange: e => setpersonas(e.target.value)
-                      }}
-                    />  
-                    <CustomInput
-                      labelText="duracion"
-                      id="duracion"
-                     
-                      inputProps={{
-                        
-                        onChange: e => setduracion(e.target.value)
-                      }}
-                    /> </ListItem>
+        
                     </List>
                     
                    
@@ -303,13 +278,10 @@ export default function LandingPage(props) {
             </GridItem>
           </GridContainer>
           <div>
-              <GridContainer>      
-                
+           
               <div dangerouslySetInnerHTML={{__html:html}}></div>
-              
-              </GridContainer>  
+         
           </div>
-          <div>&nbsp;</div>
           <div>
           <Dialog
         open={open}

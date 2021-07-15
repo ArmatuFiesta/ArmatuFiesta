@@ -37,7 +37,7 @@ export default function Footer(props) {
                 className={classes.block}
                 target="_blank"
               >
-                Arma Tu Fiesta
+                TRAVGO
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>

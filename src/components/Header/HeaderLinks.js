@@ -36,34 +36,73 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-         <Link to={"services"} className={classes.Link}>Acceder</Link>
+         <Link to={"catalogo"} className={classes.Link}>Catalogo Paquetes</Link>
 
         </Button>
         
 
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="blog"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
-         { /*<PartyMode className={classes.icons} /> */} Blog
-        </Button>
-      </ListItem>
-
       <ListItem className={classes.listItem}>
             <Button
           color="transparent"
           className={classes.navLink}
         >
-       <Link to={"admin/productos/nuevo"} className={classes.Link}>Admin Options</Link>
+         <Link to={"reportes"} className={classes.Link}>Ficha paquete</Link>
 
         </Button>
         
 
-  </ListItem>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+            <Button
+          color="transparent"
+          className={classes.navLink}
+        >
+         <Link to={"factura"} className={classes.Link}>Factura</Link>
+
+        </Button>
+        
+
+      </ListItem>
+      <ListItem className={classes.listItem}>
+            <Button
+          color="transparent"
+          className={classes.navLink}
+        >
+         <Link to={"reportes"} className={classes.Link}>Ficha pais</Link>
+
+        </Button>
+        
+
+      </ListItem>
+      <ListItem className={classes.listItem}>
+            <Button
+          color="transparent"
+          className={classes.navLink}
+        >
+         <Link to={"rallys"} className={classes.Link}>Ficha rally</Link>
+
+        </Button>
+        
+
+      </ListItem>
+      <ListItem className={classes.listItem}>
+            <Button
+          color="transparent"
+          className={classes.navLink}
+        >
+         <Link to={"mapa"} className={classes.Link}>mapa</Link>
+
+        </Button>
+        
+
+      </ListItem>
+
+
+
+        
+
+
       {/*<ListItem className={classes.listItem}>
         <Tooltip title="Delete">
           <IconButton aria-label="Delete">
@@ -121,17 +160,7 @@ export default function HeaderLinks(props) {
         </Tooltip>
       </ListItem>
         */}
-      <ListItem className={classes.listItem}>
-      <Link to={"/login-page"} className={classes.link}>
-                  <Button
-                    className={classes.registerNavLink}
-                    color="primary"
-                    round
-                  >
-                    Iniciar Sesión
-                  </Button>
-              </Link>
-      </ListItem>
+      
     </List>
   );
 }

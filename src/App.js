@@ -1,10 +1,11 @@
 import theme from "./theme";
 import {Route, Router, Switch} from "react-router-dom";
-import Solteria from "./views/CartaSolteriaPage/CartaSolteriaPage";
+import catalogo from "./views/catalogo/catalogo";
 import MainPage from "./views/MainPage/MainPage";
 import {ContextProvider} from "./Context";
 import LoginPage from "./views/LoginPage/LoginPage";
-import RegisterPage from "./views/RegisterPage/RegisterPage";
+import factura from "./views/factura/factura";
+import mapa from "./views/mapaPage/mapa";
 import MapPage from "./views/MapPage/MapPage";
 import AddItemView from "./views/AdminPage/AddItemView";
 import CheckOut from "./views/PaymentView/CheckOut";
@@ -14,7 +15,7 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import React from "react";
 import {createBrowserHistory} from "history";
 import ServiceInfoPage from "./views/ServicesPage/ServiceInfo/ServiceInfo";
-import BlogPage from "./views/BlogPage/BlogPage";
+import rally from "./views/BlogPage/rally";
 import history from "services/history";
 import Admin from "./views/AdminPage/Admin";
 import NotificationsPage from "./views/LoginPage/NotificationsPage";
@@ -27,24 +28,21 @@ export default () => {
     <ThemeProvider theme={theme}>
       <Router history={history}>
         <Switch>
-          <Route path="/solteria" component={Solteria}/>
+          <Route path="/catalogo" component={catalogo}/>
           <Route path="/new_post" component={NewPost}/>
           <Route path="/services" component={MainPage}/>
-          <Route path="/login-page">
-            <LoginPage/>
-          </Route>
-          <Route path="/register" component={RegisterPage}/>
-          <Route path="/blog" component={BlogPage}/>
+          
+          <Route path="/mapa" component={mapa}/>
+          <Route path="/factura" component={factura}/>
           <Route path="/item_example" component={ServiceInfoPage}/>
-          <Route path="/map" component={MapPage}/>
           <Route path="/adminView" component={AddItemView}/>
           <Route path="/payment" component={CheckOut}/>
           <Route path="/servicesEx" component={ServicePojo}/>
-          <Route path="/admin" component={Admin}/>
+          <Route path="/rallys" component={rally}/>
           <Route path="/reportes" component={reportesPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>
-          <Route path="/" component={LandingPage}/>
+          <Route path="/" component={catalogo}/>
 
         </Switch>
       </Router>

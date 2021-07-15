@@ -125,7 +125,7 @@ return (
   <AppBar position="absolute" color="default" className={classes.appBar}>
      <Toolbar>
      <Typography variant="h6" color="inherit" noWrap>
-         Arma Tu Fiesta Administrador
+         TRAVGO Administrador
      </Typography>
      </Toolbar>
   </AppBar>

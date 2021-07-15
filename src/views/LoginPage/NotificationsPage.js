@@ -86,7 +86,7 @@ const fetchData = async () => {
         <AppBar position="absolute" color="default" className={classes.appBar}>
            <Toolbar>
            <Typography variant="h6" color="inherit" noWrap>
-               Arma Tu Fiesta Notificaciones
+               TRAVGO Notificaciones
            </Typography>
            </Toolbar>
         </AppBar>

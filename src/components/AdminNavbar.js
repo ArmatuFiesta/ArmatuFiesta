@@ -59,7 +59,7 @@ export default (props) => {
       <AppBar position="fixed" className={classes.navbar}>
         <Toolbar>
           <Typography noWrap className={classes.title}>
-            Administración de Arma Tu Fiesta
+            Administración de TRAVGO
           </Typography>
           <Tooltip title="Cuenta">
             <IconButton className={classes.menuButton} edge="end" aria-label="account of current user" aria-haspopup="true" onClick={profileClick}

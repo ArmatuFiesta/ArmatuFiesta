@@ -33,7 +33,7 @@ export default function LandingPage(props) {
     <div>
       <Header
         routes={dashboardRoutes}
-        brand="Arma Tu Fiesta"
+        brand="TRAVGO"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -46,7 +46,7 @@ export default function LandingPage(props) {
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Arma tu fiesta!</h1>
+              <h1 className={classes.title}>TRAVGO!</h1>
               <h4>La celebración de tus sueños a un solo click!</h4>
               <br />
               <Button

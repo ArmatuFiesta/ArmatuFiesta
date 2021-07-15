@@ -19,7 +19,7 @@ import theme from "theme.js";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles =>({
-  title:"Arma Tu Fiesta",
+  title:"TRAVGO",
   color:styles.color,//used in servicesPage
 }));
 
@@ -152,7 +152,7 @@ Header.propTypes = {
       "danger",
       "transparent",
       "white",
-      "rose",
+      
       "dark"
     ]).isRequired
   })

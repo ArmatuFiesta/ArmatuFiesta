@@ -14,7 +14,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-
 import Header from "components/Header/Header.js";
 import MenuItem from '@material-ui/core/MenuItem';
 import Footer from "components/Footer/Footer.js";
@@ -22,7 +21,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-
+import Parallax from "components/Parallax/Parallax.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -37,7 +36,6 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { number } from 'prop-types';
 
 
 // Sections for this page
@@ -59,7 +57,7 @@ export default function LandingPage(props) {
   const [salidamax, setsalidamax] = React.useState(new Date("2020-12-20"));
   const [duracion, setduracion] = React.useState('0');
   const [html, setHTML]= React.useState('');
-
+  const [Loading, setLoading]= React.useState(true);
 
   const handlenombre = (event) => {
     setAgencia(event.target.value);
@@ -79,6 +77,7 @@ export default function LandingPage(props) {
     setOpen(false);
   };
 
+
   const { ...rest } = props;
   const handleClick = (agencia,costomin,costomax,personas,salidamin,salidamax,duracion) =>{
     if(costomin=='') {costomin=0; console.log(costomin)};
@@ -86,11 +85,10 @@ export default function LandingPage(props) {
     if(personas=='') {personas=0; console.log(personas)};
     if(duracion=='') {duracion=0; console.log(duracion)};
     if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
-    
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'fichaa','recipe':'chrome-pdf'}  ,
+    {'template':{'name':'catalogos','recipe':'chrome-pdf'}  ,
   'data':
-  {"continente": agencia,
+  {"idagencia": agencia,
   "costomin": costomin,
   "costomax": costomax,
   "personas": personas,
@@ -112,26 +110,24 @@ export default function LandingPage(props) {
         const url = window.URL.createObjectURL(new Blob([blob]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'fichas.pdf'); //or any other extension
+        link.setAttribute('download', 'catalogo.pdf'); //or any other extension
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
     })
     .catch((error) => console.log(error));
-
   }else handleClickOpen()
-}
+  }
   const handleClick1 = (agencia,costomin,costomax,personas,salidamin,salidamax,duracion) =>{
-
     if(costomin=='') {costomin=0; console.log(costomin)};
     if(costomax=='') {costomax=0; console.log(costomax)};
     if(personas=='') {personas=0; console.log(personas)};
     if(duracion=='') {duracion=0; console.log(duracion)};
     if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'fichaa'}  ,
+    {'template':{'name':'catalogos'}  ,
   'data':
-  {"continente": agencia,
+  {"idagencia": agencia,
   "costomin": costomin,
   "costomax": costomax,
   "personas": personas,
@@ -154,45 +150,44 @@ export default function LandingPage(props) {
       htmlnuevo(res); 
     })
     .catch((error) => console.log(error));
-  }else handleClickOpen()
+  } else handleClickOpen()
   }
 
   return (
     <div>
-      
+      <Header
+        color="transparent"
+        routes={dashboardRoutes}
+        brand="TRAVGO"
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        {...rest}
+      />
      
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
         <GridContainer>
             <GridItem> </GridItem>
         </GridContainer><GridContainer>
-            <GridItem>&nbsp; </GridItem>
+            <GridItem>espacio </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> &nbsp; </GridItem>
+            <GridItem> espacio </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> &nbsp;</GridItem>
+            <GridItem> espacio</GridItem>
         </GridContainer><GridContainer>
-            <GridItem> </GridItem>
+            <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> </GridItem>
+            <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Ficha paquete</h1> </label></GridItem>
-        </GridContainer>
-
-        <GridContainer>
-            <GridItem> <h1></h1> </GridItem>
-        </GridContainer><GridContainer>
-            <GridItem> 
-              <h1></h1>
-
-            </GridItem>
-        </GridContainer>
-        <GridContainer>
-            <GridItem>  <h1></h1><h1></h1> </GridItem>
+            <GridItem> <label><h1>Catalogo</h1> </label></GridItem>
         </GridContainer>
 
 
@@ -208,44 +203,24 @@ export default function LandingPage(props) {
           
         >
           
-          <MenuItem value={0}>Todos</MenuItem>
-          <MenuItem value={'asia'}>asia</MenuItem>
-          <MenuItem value={'africa'}>africa</MenuItem>
-          <MenuItem value={'america'}>america</MenuItem>
-          <MenuItem value={'europa'}>europa</MenuItem>
-          <MenuItem value={'oceania'}>oceania</MenuItem>
-
+          <MenuItem value={0}>Todas</MenuItem>
+          <MenuItem value={1}>booking</MenuItem>
+          <MenuItem value={2}>kiwi</MenuItem>
+          <MenuItem value={3}>skyscanner</MenuItem>
+          <MenuItem value={4}>trivago</MenuItem>
+          <MenuItem value={5}>kayak</MenuItem>
+          <MenuItem value={6}>atom</MenuItem>
+          <MenuItem value={7}>destinia</MenuItem>
+          <MenuItem value={8}>hotelbeds</MenuItem>
+          <MenuItem value={9}>agoda</MenuItem>
+          
         </Select>
-        <FormHelperText>Filtrar por continente</FormHelperText>
+        <FormHelperText>Filtrar por agencia</FormHelperText>
             </FormControl>
         </ListItem>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ListItem>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="dd/MM/yyyy"
-          margin="normal"
-          id="min1"
-          label="Desde (minimo)"
-          value={salidamin}
-          onChange={e => setsalidamin(e)}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        /><KeyboardDatePicker
-        disableToolbar
-        variant="inline"
-        format="dd/MM/yyyy"
-        margin="normal"
-        id="max1"
-        label="hasta (maximo)"
-        value={salidamax}
-        onChange={e => setsalidamax(e)}
-        KeyboardButtonProps={{
-          'aria-label': 'change date',
-        }}
-      />
+       
 
         </ListItem>
         </MuiPickersUtilsProvider>
@@ -303,14 +278,10 @@ export default function LandingPage(props) {
             </GridItem>
           </GridContainer>
           <div>
-              <GridContainer>      
-                
+           
               <div dangerouslySetInnerHTML={{__html:html}}></div>
-              
-              </GridContainer>  
+         
           </div>
-          <div>&nbsp;</div>
-          <div>
           <Dialog
         open={open}
         onClose={handleClose}
@@ -329,8 +300,6 @@ export default function LandingPage(props) {
           </Button>
         </DialogActions>
       </Dialog>
-
-          </div>
         </div>
       </div>
       <Footer />
