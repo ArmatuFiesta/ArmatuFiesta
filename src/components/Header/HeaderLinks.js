@@ -36,7 +36,20 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-         <Link to={"catalogo"} className={classes.Link}>Catalogo Paquetes</Link>
+         <Link to={"catalogo"} className={classes.Link}>Ver Eventos</Link>
+
+        </Button>
+        
+
+      </ListItem>
+      
+  
+      <ListItem className={classes.listItem}>
+            <Button
+          color="transparent"
+          className={classes.navLink}
+        >
+         <Link to={"newEvent"} className={classes.Link}>Crea Evento</Link>
 
         </Button>
         
@@ -47,51 +60,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-         <Link to={"reportes"} className={classes.Link}>Ficha paquete</Link>
-
-        </Button>
-        
-
-      </ListItem>
-      <ListItem className={classes.listItem}>
-            <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-         <Link to={"factura"} className={classes.Link}>Factura</Link>
-
-        </Button>
-        
-
-      </ListItem>
-      <ListItem className={classes.listItem}>
-            <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-         <Link to={"reportes"} className={classes.Link}>Ficha pais</Link>
-
-        </Button>
-        
-
-      </ListItem>
-      <ListItem className={classes.listItem}>
-            <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-         <Link to={"newEvent/id:1"} className={classes.Link}>Crea Evento</Link>
-
-        </Button>
-        
-
-      </ListItem>
-      <ListItem className={classes.listItem}>
-            <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-         <Link to={"mapa"} className={classes.Link}>mapa</Link>
+         <Link to={"ejecutar"} className={classes.Link}>Ejecutar Evento</Link>
 
         </Button>
         

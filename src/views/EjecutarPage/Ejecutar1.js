@@ -14,6 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from "react-router-dom";
+
 import Header from "components/Header/Header.js";
 import MenuItem from '@material-ui/core/MenuItem';
 import Footer from "components/Footer/Footer.js";
@@ -50,32 +51,25 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-  const [idOrganizador, setid] = React.useState('0');
-  const [costomin, setcostomin]= React.useState('0');
+  const [agencia, setAgencia] = React.useState('0');
+  const [NUR, setNur]= React.useState('0');
   const [costomax, setcostomax] = React.useState('0');
   const [tipo, setTipo] = React.useState('0');
-  const [local, setLocal] = React.useState('0');
-  const [pujas, setpujas] = React.useState('0');
+  const [personas, setpersonas] = React.useState('0');
+  const [salidamin, setsalidamin] = React.useState(new Date("2020-12-20"));
+  const [salidamax, setsalidamax] = React.useState(new Date("2020-12-20"));
   const [duracion, setduracion] = React.useState('0');
-  const [FI, setFecha_Inicio] = React.useState(new Date("2020-12-20"));
-
   const [html, setHTML]= React.useState('');
   
   const handleTipo = (event)=>{
     setTipo(event.target.value);
   };
-  const handleLocal = (event)=>{
-    setLocal(event.target.value);
-  };
-  const handlePujas = (event)=>{
-    setpujas(event.target.value);
-  };
 
-  const handleCostoCliente = (event)=>{
-    setcostomin(event.target.value);
+  const handleNur = (event)=>{
+    setNur(event.target.value);
   };
-  const handleId = (event) => {
-    setid(event.target.value);
+  const handlenombre = (event) => {
+    setAgencia(event.target.value);
     
   };
 
@@ -93,36 +87,53 @@ export default function LandingPage(props) {
   };
 
   const { ...rest } = props;
-  const handleClick = ( FI, Costo_inscripcion_Clientes, Costo_Inscripcion,Tipo, LocalSubasta, TipoPujas, DuracionHoras) =>{
-    console.log(FI);
-    const ff = FI.toLocaleString();
-    console.log(ff);
-    const params = new URLSearchParams()
-    params.append('Fecha_Inicio',ff)
-    params.append('Estatus','P')
-    params.append('Costo_inscripcion_Clientes',Costo_inscripcion_Clientes)
-    params.append('Costo_Inscripcion',Costo_Inscripcion)
-    params.append('Tipo',Tipo)
-    params.append('LocalSubasta',LocalSubasta)
-    params.append('TipoPujas',TipoPujas)
-    params.append('DuracionHoras',DuracionHoras)
 
-    Axios.post("http://localhost:3000/newEventos",params,
+  const handleClick1 = (agencia) =>{
+    Axios.post("http://localhost:5488/api/report",
+    {'template':{'name':'EventosObras'}  ,
+  'data':
+  {"id": agencia,
+    }},
     {
+        responseType: 'text',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            'Accept':'HTML'
             
             
         }
     })
     .then((res) => {
-        
+      const contentType = res.headers["content-type"];
+      console.log(res.status);
+      htmlnuevo(res); 
     })
     .catch((error) => console.log(error));
 
- 
-}
-  
+  }
+  const handleClick = (NUR) =>{
+    Axios.post("http://localhost:5488/api/report",
+    {'template':{'name':'EventosObras'}  ,
+  'data':
+  {"id": agencia,
+    }},
+    {
+        responseType: 'text',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept':'HTML'
+            
+            
+        }
+    })
+    .then((res) => {
+      const contentType = res.headers["content-type"];
+      console.log(res.status);
+      htmlnuevo(res); 
+    })
+    .catch((error) => console.log(error));
+
+  }
 
   return (
     <div>
@@ -158,7 +169,7 @@ export default function LandingPage(props) {
             <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Nuevo Evento</h1> </label></GridItem>
+            <GridItem> <label><h1>Agrega Obras</h1> </label></GridItem>
         </GridContainer>
 
         <GridContainer>
@@ -176,12 +187,10 @@ export default function LandingPage(props) {
 
         <List className={classes.list}>
         <ListItem className={classes.listItem}>
-         
           <FormControl className={classes.formControl}>
-            
           <Select
-          value={tipo}
-          onChange={handleTipo}
+          value={agencia}
+          onChange={handlenombre}
           displayEmpty
           className={classes.selectEmpty}
           inputProps={{ 'aria-label': 'Without label' }}
@@ -196,90 +205,27 @@ export default function LandingPage(props) {
           <MenuItem value={6}>6</MenuItem>
 
         </Select>
-        <FormHelperText>Tipo</FormHelperText>
+        <FormHelperText>ID Organizador  </FormHelperText>
             </FormControl>
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-          <FormControl className={classes.formControl}>
-            
-          <Select
-          value={local}
-          onChange={handleLocal}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
+           <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
           
-        >
-          
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-
-        </Select>
-        <FormHelperText>Local</FormHelperText>
-            </FormControl>
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-          <FormControl className={classes.formControl}>
-            
-          <Select
-          value={pujas}
-          onChange={handlePujas}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
-          
-        >
-          
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-
-        </Select>
-        <FormHelperText>Tipo Pujas</FormHelperText>
-            </FormControl>
+           
+           
+    
         </ListItem>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ListItem>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="dd/MM/yyyy"
-          margin="normal"
-          id="min1"
-          label="Fecha"
-          value={FI}
-          onChange={e => setFecha_Inicio(e)}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
+        
         </ListItem><ListItem>
         <CustomInput
-          labelText="Duracion Hrs"
-          id="duracion"
-          inputProps={{onChange: e => setduracion(e.target.value)
+          labelText="NUR OBRA"
+          id="NUR"
+          inputProps={{onChange: e => handleNur(e.target.value)
           }
         }
         /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-        <CustomInput
-          labelText="Precio Clientes"
-          id="costomin"
-          inputProps={{onChange: e => setcostomin(e.target.value)
-          }
-        }
-        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-        <CustomInput
-          labelText="Precio General"
-          id="costomax"
-          inputProps={{onChange: e => setcostomax(e.target.value)
-          }
-        }
-        />         
+       
+                 
         </ListItem>
         </MuiPickersUtilsProvider>
         
@@ -293,8 +239,10 @@ export default function LandingPage(props) {
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(FI,costomin,costomax,tipo,local,pujas,duracion)}>
-              <Link to={"newEvent2"} className={classes.Link}>SIGUIENTE</Link>
+              <Button onClick={(e) =>handleClick(agencia)} >Agregar</Button>
+              <Button onClick={(e) =>handleClick1(agencia)} >Ver lista</Button>
+              <Button>
+              <Link to={"newEvent3"} className={classes.Link}>SIGUIENTE</Link>
               </Button>
             </GridItem>
           </GridContainer>

@@ -180,7 +180,7 @@ export default function LandingPage(props) {
             <GridItem> </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Ficha paquete</h1> </label></GridItem>
+            <GridItem> <label><h1>Productos</h1> </label></GridItem>
         </GridContainer>
 
         <GridContainer>
@@ -292,22 +292,20 @@ export default function LandingPage(props) {
                      
 
  
-                       
+                    <GridContainer>      
+                
+                <div dangerouslySetInnerHTML={{__html:html}}></div>
+                
+                </GridContainer>   
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Descargar</Button>
+              <Button onClick={(e) =>handleClick(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Ofertar </Button>
             </GridItem>
-            <GridItem>
-              <Button onClick={(e) =>handleClick1(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Ver</Button>
-            </GridItem>
+         
           </GridContainer>
           <div>
-              <GridContainer>      
-                
-              <div dangerouslySetInnerHTML={{__html:html}}></div>
-              
-              </GridContainer>  
+             
           </div>
           <div>&nbsp;</div>
           <div>
