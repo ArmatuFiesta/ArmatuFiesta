@@ -87,7 +87,7 @@ const { productName, productDescription, path, ...rest } = props;
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            TRAVGO
+            star subastas
           </Typography>
         </Toolbar>
       </AppBar>

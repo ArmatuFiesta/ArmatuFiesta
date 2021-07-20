@@ -14,13 +14,13 @@ import Drawer from "@material-ui/core/Drawer";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
-import styles from "assets/jss/material-kit-react/components/headerStyle.js";
-import theme from "theme.js";
+//import styles from "assets/jss/material-kit-react/components/headerStyle.js";
+//import theme from "theme.js";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(styles =>({
-  title:"TRAVGO",
-  color:styles.color,//used in servicesPage
+  title:"star subastas",
+  color: styles.color,//used in servicesPage
 }));
 
 export default function Header(props) {
@@ -61,7 +61,7 @@ export default function Header(props) {
   const { color, rightLinks, leftLinks, brand, homeUrl, fixed, absolute } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
-    [classes[color]]: color,
+    [classes[color]]: '#7affa9',
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });

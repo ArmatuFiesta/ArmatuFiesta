@@ -19,7 +19,7 @@ const headerStyle = {
     borderRadius: "3px",
     padding: "0.625rem 0",
     marginBottom: "20px",
-    color: "#555",
+    color: "#7ef542",
     width: "100%",
     backgroundColor: "#fff",
     boxShadow:
@@ -69,7 +69,7 @@ const headerStyle = {
     margin: "20px 10px"
   },
   primary: {
-    backgroundColor: primaryColor,
+    backgroundColor: '#7affa9',
     color: "#FFFFFF",
     boxShadow:
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(156, 39, 176, 0.46)"
@@ -99,7 +99,7 @@ const headerStyle = {
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(244, 67, 54, 0.46)"
   },
   rose: {
-    backgroundColor: roseColor,
+    backgroundColor: '#7affa9',
     color: "#FFFFFF",
     boxShadow:
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(233, 30, 99, 0.46)"

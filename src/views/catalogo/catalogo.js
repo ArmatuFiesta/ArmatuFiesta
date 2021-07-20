@@ -8,22 +8,16 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Link } from "react-router-dom";
 
 import Header from "components/Header/Header.js";
 import MenuItem from '@material-ui/core/MenuItem';
-import Footer from "components/Footer/Footer.js";
+
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import InputLabel from '@material-ui/core/InputLabel';
+
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -31,11 +25,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import Axios from "axios";
-import { defaultBoxShadow } from 'assets/jss/material-kit-react';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+
 
 
 // Sections for this page
@@ -79,61 +69,13 @@ export default function LandingPage(props) {
 
 
   const { ...rest } = props;
-  const handleClick = (agencia,costomin,costomax,personas,salidamin,salidamax,duracion) =>{
-    if(costomin=='') {costomin=0; console.log(costomin)};
-    if(costomax=='') {costomax=0; console.log(costomax)};
-    if(personas=='') {personas=0; console.log(personas)};
-    if(duracion=='') {duracion=0; console.log(duracion)};
-    if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
+
+  const handleClick1 = (agencia) =>{
+ 
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'catalogos','recipe':'chrome-pdf'}  ,
+    {'template':{'name':'Eventos'}  ,
   'data':
-  {"idagencia": agencia,
-  "costomin": costomin,
-  "costomax": costomax,
-  "personas": personas,
-  "salidamin": salidamin,
-  "salidamax": salidamax,
-  "duracion": duracion
-    }},
-    {
-        responseType: 'arraybuffer',
-        headers: {
-            'Content-Type': 'application/json',
-            
-            'Accept': 'application/pdf'
-        }
-    })
-    .then((res) => {
-        const contentType = res.headers["content-type"];
-        const blob = new Blob([res.data], {contentType} ); 
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'catalogo.pdf'); //or any other extension
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-    })
-    .catch((error) => console.log(error));
-  }else handleClickOpen()
-  }
-  const handleClick1 = (agencia,costomin,costomax,personas,salidamin,salidamax,duracion) =>{
-    if(costomin=='') {costomin=0; console.log(costomin)};
-    if(costomax=='') {costomax=0; console.log(costomax)};
-    if(personas=='') {personas=0; console.log(personas)};
-    if(duracion=='') {duracion=0; console.log(duracion)};
-    if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
-    Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'catalogos'}  ,
-  'data':
-  {"idagencia": agencia,
-  "costomin": costomin,
-  "costomax": costomax,
-  "personas": personas,
-  "salidamin": salidamin,
-  "salidamax": salidamax,
-  "duracion": duracion
+  {"idAgencia": agencia,
     }},
     {
         responseType: 'text',
@@ -150,7 +92,7 @@ export default function LandingPage(props) {
       htmlnuevo(res); 
     })
     .catch((error) => console.log(error));
-  } else handleClickOpen()
+
   }
 
   return (
@@ -158,7 +100,7 @@ export default function LandingPage(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="TRAVGO"
+        brand="star subastas"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -167,30 +109,38 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-     
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-        <GridContainer>
+      <GridContainer>
             <GridItem> </GridItem>
         </GridContainer><GridContainer>
             <GridItem>espacio </GridItem>
-        </GridContainer>
-        <GridContainer>
-            <GridItem> espacio </GridItem>
-        </GridContainer>
-        <GridContainer>
-            <GridItem> espacio</GridItem>
+            <GridContainer>
+            <GridItem>espacio </GridItem>
         </GridContainer><GridContainer>
-            <GridItem> espacio</GridItem>
+            <GridItem>espacio </GridItem>
+        </GridContainer><GridContainer>
+            <GridItem>espacio </GridItem>
+        </GridContainer><GridContainer>
+            <GridItem>espacio </GridItem>
+        </GridContainer><GridContainer>
+            <GridItem>espacio </GridItem>
+        </GridContainer><GridContainer>
+            <GridItem>espacio </GridItem>
+        </GridContainer><GridContainer>
+            <GridItem>espacio </GridItem>
+        </GridContainer><GridContainer>
+            <GridItem>espacio </GridItem>
+        </GridContainer>
+            <GridItem> espacio </GridItem>
+            <GridItem> espacio </GridItem><GridItem> espacio </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> espacio</GridItem>
+            <GridItem> {'  '}</GridItem>
+            <GridItem> {'  '}</GridItem>
+            <GridItem> {'  '}</GridItem>
+            <GridItem> {'  '}</GridItem>
         </GridContainer>
-        <GridContainer>
-            <GridItem> <label><h1>Catalogo</h1> </label></GridItem>
-        </GridContainer>
-
-
         <List className={classes.list}>
         <ListItem className={classes.listItem}>
           <FormControl className={classes.formControl}>
@@ -203,106 +153,45 @@ export default function LandingPage(props) {
           
         >
           
-          <MenuItem value={0}>Todas</MenuItem>
-          <MenuItem value={1}>booking</MenuItem>
-          <MenuItem value={2}>kiwi</MenuItem>
-          <MenuItem value={3}>skyscanner</MenuItem>
-          <MenuItem value={4}>trivago</MenuItem>
-          <MenuItem value={5}>kayak</MenuItem>
-          <MenuItem value={6}>atom</MenuItem>
-          <MenuItem value={7}>destinia</MenuItem>
-          <MenuItem value={8}>hotelbeds</MenuItem>
-          <MenuItem value={9}>agoda</MenuItem>
-          
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+
         </Select>
-        <FormHelperText>Filtrar por agencia</FormHelperText>
+        <FormHelperText>ID Organizador  </FormHelperText>
             </FormControl>
-        </ListItem>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <ListItem>
-       
-
-        </ListItem>
-        </MuiPickersUtilsProvider>
-        <ListItem>
-            <CustomInput
-                      labelText="precio minimo"
-                      id="costomin"
-                      
-                      inputProps={{onChange: e => setcostomin(e.target.value)
-                      }
-                    }
-                    /> 
-                    
-            <CustomInput
-                      labelText="precio maximo"
-                      id="costomax"
-                      
-                      inputProps={{
-                        
-                        onChange: e => setcostomax(e.target.value)
-                      }}
-                    />    
-           <CustomInput
-                      labelText="numero de personas"
-                      id="personas"
-                     
-                      inputProps={{
-                        
-                        onChange: e => setpersonas(e.target.value)
-                      }}
-                    />  
-                    <CustomInput
-                      labelText="duracion"
-                      id="duracion"
-                     
-                      inputProps={{
-                        
-                        onChange: e => setduracion(e.target.value)
-                      }}
-                    /> </ListItem>
-                    </List>
-                    
-                   
-                     
-
- 
-                       
-         
-          <GridContainer>
+            </ListItem>
+            </List>
+            <GridContainer>      
+                
+                <div dangerouslySetInnerHTML={{__html:html}}></div>
+                
+                </GridContainer>  
+            <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Descargar</Button>
+              <Button ><Link to={"newEvent"} className={classes.Link}>Crear Nuevo</Link></Button>
             </GridItem>
             <GridItem>
               <Button onClick={(e) =>handleClick1(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Ver</Button>
             </GridItem>
           </GridContainer>
           <div>
-           
-              <div dangerouslySetInnerHTML={{__html:html}}></div>
-         
+            
           </div>
-          <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Todos los datos deben ser numeros o vacios, por favor verifica
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-        </div>
-      </div>
-      <Footer />
+
+
+            </div>
+
     </div>
+    
+
+</div>
+
+
+
+
   );
 }

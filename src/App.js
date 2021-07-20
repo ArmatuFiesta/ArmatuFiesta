@@ -15,7 +15,7 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import React from "react";
 import {createBrowserHistory} from "history";
 import ServiceInfoPage from "./views/ServicesPage/ServiceInfo/ServiceInfo";
-import rally from "./views/BlogPage/rally";
+import CreaEvento from "./views/BlogPage/CreaEvento";
 import history from "services/history";
 import Admin from "./views/AdminPage/Admin";
 import NotificationsPage from "./views/LoginPage/NotificationsPage";
@@ -38,7 +38,7 @@ export default () => {
           <Route path="/adminView" component={AddItemView}/>
           <Route path="/payment" component={CheckOut}/>
           <Route path="/servicesEx" component={ServicePojo}/>
-          <Route path="/rallys" component={rally}/>
+          <Route path="/newEvent" component={CreaEvento}/>
           <Route path="/reportes" component={reportesPage}/>
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>

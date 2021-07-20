@@ -71,7 +71,7 @@ export default function LoginPage(props) {
     homeUrl="/" //TODO: A  veriguar como redirigir a home
     absolute
     color="transparent"
-    brand="TRAVGO"
+    brand="star subastas"
     rightLinks={<HeaderLinks/>}
     {...rest}
   />;

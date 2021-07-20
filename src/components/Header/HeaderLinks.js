@@ -80,7 +80,7 @@ export default function HeaderLinks(props) {
           color="transparent"
           className={classes.navLink}
         >
-         <Link to={"rallys"} className={classes.Link}>Ficha rally</Link>
+         <Link to={"newEvent/id:1"} className={classes.Link}>Crea Evento</Link>
 
         </Button>
         

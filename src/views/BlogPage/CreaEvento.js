@@ -54,13 +54,20 @@ export default function LandingPage(props) {
   const [agencia, setAgencia] = React.useState('0');
   const [costomin, setcostomin]= React.useState('0');
   const [costomax, setcostomax] = React.useState('0');
+  const [tipo, setTipo] = React.useState('0');
   const [personas, setpersonas] = React.useState('0');
   const [salidamin, setsalidamin] = React.useState(new Date("2020-12-20"));
   const [salidamax, setsalidamax] = React.useState(new Date("2020-12-20"));
   const [duracion, setduracion] = React.useState('0');
   const [html, setHTML]= React.useState('');
+  
+  const handleTipo = (event)=>{
+    setTipo(event.target.value);
+  };
 
-
+  const handleCostoCliente = (event)=>{
+    setcostomin(event.target.value);
+  };
   const handlenombre = (event) => {
     setAgencia(event.target.value);
     
@@ -162,7 +169,7 @@ export default function LandingPage(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="TRAVGO"
+        brand="star subastas"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -191,7 +198,7 @@ export default function LandingPage(props) {
             <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Ficha Rally</h1> </label></GridItem>
+            <GridItem> <label><h1>Nuevo Evento</h1> </label></GridItem>
         </GridContainer>
 
         <GridContainer>
@@ -219,15 +226,81 @@ export default function LandingPage(props) {
           
         >
           
-          <MenuItem value={0}>Todos</MenuItem>
-          <MenuItem value={'asia'}>asia</MenuItem>
-          <MenuItem value={'africa'}>africa</MenuItem>
-          <MenuItem value={'america'}>america</MenuItem>
-          <MenuItem value={'europa'}>europa</MenuItem>
-          <MenuItem value={'oceania'}>oceania</MenuItem>
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
 
         </Select>
-        <FormHelperText>Filtrar por continente</FormHelperText>
+        <FormHelperText>ID Organizador  </FormHelperText>
+            </FormControl>
+           <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+          <FormControl className={classes.formControl}>
+            
+          <Select
+          value={tipo}
+          onChange={handleTipo}
+          displayEmpty
+          className={classes.selectEmpty}
+          inputProps={{ 'aria-label': 'Without label' }}
+          
+        >
+          
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+
+        </Select>
+        <FormHelperText>Tipo</FormHelperText>
+            </FormControl>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+          <FormControl className={classes.formControl}>
+            
+          <Select
+          value={tipo}
+          onChange={handleTipo}
+          displayEmpty
+          className={classes.selectEmpty}
+          inputProps={{ 'aria-label': 'Without label' }}
+          
+        >
+          
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+
+        </Select>
+        <FormHelperText>Local</FormHelperText>
+            </FormControl>
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+          <FormControl className={classes.formControl}>
+            
+          <Select
+          value={tipo}
+          onChange={handleTipo}
+          displayEmpty
+          className={classes.selectEmpty}
+          inputProps={{ 'aria-label': 'Without label' }}
+          
+        >
+          
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+
+        </Select>
+        <FormHelperText>Tipo Pujas</FormHelperText>
             </FormControl>
         </ListItem>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -235,29 +308,38 @@ export default function LandingPage(props) {
         <KeyboardDatePicker
           disableToolbar
           variant="inline"
-          format="dd/MM/yyyy"
+          format="dd/MM/yyyy/HH/mm"
           margin="normal"
           id="min1"
-          label="Desde (minimo)"
+          label="Fecha"
           value={salidamin}
           onChange={e => setsalidamin(e)}
           KeyboardButtonProps={{
             'aria-label': 'change date',
           }}
-        /><KeyboardDatePicker
-        disableToolbar
-        variant="inline"
-        format="dd/MM/yyyy"
-        margin="normal"
-        id="max1"
-        label="hasta (maximo)"
-        value={salidamax}
-        onChange={e => setsalidamax(e)}
-        KeyboardButtonProps={{
-          'aria-label': 'change date',
-        }}
-      />
-
+        />
+        </ListItem><ListItem>
+        <CustomInput
+          labelText="Duracion Hrs"
+          id="idcontrato"
+          inputProps={{//onChange: e => setcontrato(e.target.value)
+          }
+        }
+        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+        <CustomInput
+          labelText="Precio Clientes"
+          id="idcontrato"
+          inputProps={{//onChange: e => setcontrato(e.target.value)
+          }
+        }
+        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+        <CustomInput
+          labelText="Precio General"
+          id="idcontrato"
+          inputProps={{//onChange: e => setcontrato(e.target.value)
+          }
+        }
+        />         
         </ListItem>
         </MuiPickersUtilsProvider>
         
@@ -271,10 +353,7 @@ export default function LandingPage(props) {
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Descargar</Button>
-            </GridItem>
-            <GridItem>
-              <Button onClick={(e) =>handleClick1(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Ver</Button>
+              <Button onClick={(e) =>handleClick(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Siguiente</Button>
             </GridItem>
           </GridContainer>
           <div>
