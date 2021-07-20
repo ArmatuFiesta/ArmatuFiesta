@@ -188,12 +188,10 @@ export default function LandingPage(props) {
           
         >
           
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={'P'}>Presencial</MenuItem>
+          <MenuItem value={'O'}>Online</MenuItem>
+
+
 
         </Select>
         <FormHelperText>Tipo</FormHelperText>
@@ -210,12 +208,8 @@ export default function LandingPage(props) {
           
         >
           
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={1}>Si</MenuItem>
+          <MenuItem value={0}>no</MenuItem>
 
         </Select>
         <FormHelperText>Local</FormHelperText>
@@ -232,12 +226,11 @@ export default function LandingPage(props) {
           
         >
           
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
+          <MenuItem value={'D'}>Dinamica</MenuItem>
+          <MenuItem value={'C'}>Sobre Cerrado</MenuItem>
+          <MenuItem value={'R'}>Round Robin</MenuItem>
+          <MenuItem value={'B'}>A la baja</MenuItem>
+          <MenuItem value={'S'}>Silenciosa</MenuItem>
 
         </Select>
         <FormHelperText>Tipo Pujas</FormHelperText>

@@ -53,6 +53,7 @@ export default function LandingPage(props) {
   const classes = useStyles();
   const [agencia, setAgencia] = React.useState('0');
   const [NUR, setNur]= React.useState('0');
+  const [ASK, setAsk]= React.useState('0');
   const [costomax, setcostomax] = React.useState('0');
   const [tipo, setTipo] = React.useState('0');
   const [personas, setpersonas] = React.useState('0');
@@ -68,6 +69,13 @@ export default function LandingPage(props) {
   const handleNur = (event)=>{
     setNur(event.target.value);
   };
+  const handleAsk = (event)=>{
+    setAsk(event.target.value);
+  };
+  const handleDur = (event)=>{
+    setduracion(event.target.value);
+  };
+
   const handlenombre = (event) => {
     setAgencia(event.target.value);
     
@@ -88,12 +96,10 @@ export default function LandingPage(props) {
 
   const { ...rest } = props;
 
-  const handleClick1 = (agencia) =>{
+  const handleClick1 = () =>{
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'EventosMonedas'}  ,
-  'data':
-  {"id": agencia,
-    }},
+    {'template':{'name':'EventosObras'}  
+  },
     {
         responseType: 'text',
         headers: {
@@ -111,12 +117,13 @@ export default function LandingPage(props) {
     .catch((error) => console.log(error));
 
   }
-  const handleClick = (NUR) =>{
-    Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'EventosMonedas'}  ,
-  'data':
-  {"id": agencia,
-    }},
+  const handleClick = (NUR,ASK,duracion) =>{
+    const params = new URLSearchParams()
+    params.append('nur',NUR)
+    params.append('ask',ASK)
+    params.append('duracion',duracion)
+    Axios.post("http://localhost:3000/",params,
+    
     {
         responseType: 'text',
         headers: {
@@ -187,26 +194,7 @@ export default function LandingPage(props) {
 
         <List className={classes.list}>
         <ListItem className={classes.listItem}>
-          <FormControl className={classes.formControl}>
-          <Select
-          value={agencia}
-          onChange={handlenombre}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
           
-        >
-          
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-
-        </Select>
-        <FormHelperText>ID Organizador  </FormHelperText>
-            </FormControl>
            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
           
            
@@ -218,14 +206,26 @@ export default function LandingPage(props) {
         
         </ListItem><ListItem>
         <CustomInput
-          labelText="NUR OBRA"
+          labelText="NUR"
           id="NUR"
           inputProps={{onChange: e => handleNur(e.target.value)
           }
         }
         /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-       
-                 
+       <CustomInput
+          labelText="ASK"
+          id="ASK"
+          inputProps={{onChange: e => handleAsk(e.target.value)
+          }
+        }
+        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
+        <CustomInput
+          labelText="Duracion"
+          id="duracion"
+          inputProps={{onChange: e => setduracion(e.target.value)
+          }
+        }
+        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>    
         </ListItem>
         </MuiPickersUtilsProvider>
         
@@ -239,10 +239,10 @@ export default function LandingPage(props) {
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(agencia)} >Agregar</Button>
-              <Button onClick={(e) =>handleClick1(agencia)} >Ver lista</Button>
+              <Button onClick={(e) =>handleClick(NUR,ASK,duracion)} >Agregar</Button>
+              <Button onClick={(e) =>handleClick1()} >Ver lista</Button>
               <Button>
-              <Link to={"newEvent3"} className={classes.Link}>SIGUIENTE</Link>
+              <Link to={"events"} className={classes.Link}>Finalizar</Link>
               </Button>
             </GridItem>
           </GridContainer>
