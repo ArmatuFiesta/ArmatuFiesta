@@ -213,8 +213,7 @@ export default function LandingPage(props) {
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(agencia)} >Agregar</Button>
-              <Button onClick={(e) =>handleClick1(agencia)} >Ver lista</Button>
+ 
               <Button>
               <Link to={"Ejecutar2"} className={classes.Link}>SIGUIENTE</Link>
               </Button>

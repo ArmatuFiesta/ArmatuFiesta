@@ -55,6 +55,7 @@ export default function LandingPage(props) {
   const [costomin, setcostomin]= React.useState('0');
   const [costomax, setcostomax] = React.useState('0');
   const [personas, setpersonas] = React.useState('0');
+  const [pujas,setpujas] = React.useState('0')
   const [salidamin, setsalidamin] = React.useState(new Date("2020-12-20"));
   const [salidamax, setsalidamax] = React.useState(new Date("2020-12-20"));
   const [duracion, setduracion] = React.useState('0');
@@ -65,6 +66,9 @@ export default function LandingPage(props) {
     setAgencia(event.target.value);
     
   };
+  const handlePuja =(event)=>{
+      setpujas(event.target.value);
+  }
 
   const htmlnuevo = (htmll)=>{
     setHTML(htmll.data);
@@ -159,7 +163,18 @@ export default function LandingPage(props) {
 
   return (
     <div>
-      
+      <Header
+        color="transparent"
+        routes={dashboardRoutes}
+        brand="star subastas"
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        {...rest}
+      />
      
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
@@ -169,7 +184,7 @@ export default function LandingPage(props) {
             <GridItem>&nbsp; </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> &nbsp; </GridItem>
+            <GridItem> &nbsp; </GridItem><GridItem> &nbsp; </GridItem><GridItem> &nbsp; </GridItem><GridItem> &nbsp; </GridItem>
         </GridContainer>
         <GridContainer>
             <GridItem> &nbsp;</GridItem>
@@ -213,7 +228,13 @@ export default function LandingPage(props) {
             </ListItem>
                     </List>
                     
-                   
+                    <CustomInput
+          labelText="Puja"
+          id="Puja"
+          inputProps={{onChange: e => handlePuja(e.target.value)
+          }
+        }
+        /> 
                      
 
  
