@@ -57,7 +57,7 @@ export default function LandingPage(props) {
   const [local, setLocal] = React.useState('0');
   const [pujas, setpujas] = React.useState('0');
   const [duracion, setduracion] = React.useState('0');
-  const [FI, setFecha_Inicio] = React.useState(new Date("2020-12-20"));
+  
 
   const [html, setHTML]= React.useState('');
   
@@ -93,21 +93,12 @@ export default function LandingPage(props) {
   };
 
   const { ...rest } = props;
-  const handleClick = ( FI, Costo_inscripcion_Clientes, Costo_Inscripcion,Tipo, LocalSubasta, TipoPujas, DuracionHoras) =>{
-    console.log(FI);
-    const ff = FI.toLocaleString();
-    console.log(ff);
-    const params = new URLSearchParams()
-    params.append('Fecha_Inicio',ff)
-    params.append('Estatus','P')
-    params.append('Costo_inscripcion_Clientes',Costo_inscripcion_Clientes)
-    params.append('Costo_Inscripcion',Costo_Inscripcion)
-    params.append('Tipo',Tipo)
-    params.append('LocalSubasta',LocalSubasta)
-    params.append('TipoPujas',TipoPujas)
-    params.append('DuracionHoras',DuracionHoras)
 
-    Axios.post("http://localhost:3000/newEventos",params,
+  const handleClick = (idOrganizador) =>{
+    const params = new URLSearchParams()
+    params.append('id',idOrganizador)
+
+    Axios.post("http://localhost:3000/insOrg",params,
     {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -158,7 +149,7 @@ export default function LandingPage(props) {
             <GridItem> espacio</GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Nuevo Evento</h1> </label></GridItem>
+            <GridItem> <label><h1>Agregar Organizadores y Lugar</h1> </label></GridItem>
         </GridContainer>
 
         <GridContainer>
@@ -175,106 +166,19 @@ export default function LandingPage(props) {
 
 
         <List className={classes.list}>
-        <ListItem className={classes.listItem}>
-         
-          <FormControl className={classes.formControl}>
-            
-          <Select
-          value={tipo}
-          onChange={handleTipo}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
-          
-        >
-          
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-
-        </Select>
-        <FormHelperText>Tipo</FormHelperText>
-            </FormControl>
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-          <FormControl className={classes.formControl}>
-            
-          <Select
-          value={local}
-          onChange={handleLocal}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
-          
-        >
-          
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-
-        </Select>
-        <FormHelperText>Local</FormHelperText>
-            </FormControl>
-            <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-          <FormControl className={classes.formControl}>
-            
-          <Select
-          value={pujas}
-          onChange={handlePujas}
-          displayEmpty
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'Without label' }}
-          
-        >
-          
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={6}>6</MenuItem>
-
-        </Select>
-        <FormHelperText>Tipo Pujas</FormHelperText>
-            </FormControl>
-        </ListItem>
+        
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ListItem>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="dd/MM/yyyy"
-          margin="normal"
-          id="min1"
-          label="Fecha"
-          value={FI}
-          onChange={e => setFecha_Inicio(e)}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        </ListItem><ListItem>
+        <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
         <CustomInput
-          labelText="Duracion Hrs"
-          id="duracion"
-          inputProps={{onChange: e => setduracion(e.target.value)
+          labelText="id Organizador"
+          id="idOrganizador"
+          inputProps={{onChange: e => setid(e.target.value)
           }
         }
         /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
         <CustomInput
-          labelText="Precio Clientes"
-          id="costomin"
-          inputProps={{onChange: e => setcostomin(e.target.value)
-          }
-        }
-        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-        <CustomInput
-          labelText="Precio General"
+          labelText="Nombre Lugar"
           id="costomax"
           inputProps={{onChange: e => setcostomax(e.target.value)
           }
@@ -293,7 +197,7 @@ export default function LandingPage(props) {
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(FI,costomin,costomax,tipo,local,pujas,duracion)}>
+              <Button onClick={(e) =>handleClick(idOrganizador)}>
               <Link to={"newEvent2"} className={classes.Link}>SIGUIENTE</Link>
               </Button>
             </GridItem>

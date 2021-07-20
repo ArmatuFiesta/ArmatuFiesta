@@ -13,7 +13,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Link } from "react-router-dom";
+
 
 import Header from "components/Header/Header.js";
 import MenuItem from '@material-ui/core/MenuItem';
@@ -52,22 +52,15 @@ export default function LandingPage(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
   const [agencia, setAgencia] = React.useState('0');
-  const [NUR, setNur]= React.useState('0');
+  const [costomin, setcostomin]= React.useState('0');
   const [costomax, setcostomax] = React.useState('0');
-  const [tipo, setTipo] = React.useState('0');
   const [personas, setpersonas] = React.useState('0');
   const [salidamin, setsalidamin] = React.useState(new Date("2020-12-20"));
   const [salidamax, setsalidamax] = React.useState(new Date("2020-12-20"));
   const [duracion, setduracion] = React.useState('0');
   const [html, setHTML]= React.useState('');
-  
-  const handleTipo = (event)=>{
-    setTipo(event.target.value);
-  };
 
-  const handleNur = (event)=>{
-    setNur(event.target.value);
-  };
+
   const handlenombre = (event) => {
     setAgencia(event.target.value);
     
@@ -87,12 +80,64 @@ export default function LandingPage(props) {
   };
 
   const { ...rest } = props;
-
-  const handleClick1 = (agencia) =>{
+  const handleClick = (agencia,costomin,costomax,personas,salidamin,salidamax,duracion) =>{
+    if(costomin=='') {costomin=0; console.log(costomin)};
+    if(costomax=='') {costomax=0; console.log(costomax)};
+    if(personas=='') {personas=0; console.log(personas)};
+    if(duracion=='') {duracion=0; console.log(duracion)};
+    if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
+    
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'EventosObras'}  ,
+    {'template':{'name':'fichaa','recipe':'chrome-pdf'}  ,
   'data':
-  {"id": agencia,
+  {"continente": agencia,
+  "costomin": costomin,
+  "costomax": costomax,
+  "personas": personas,
+  "salidamin": salidamin,
+  "salidamax": salidamax,
+  "duracion": duracion
+    }},
+    {
+        responseType: 'arraybuffer',
+        headers: {
+            'Content-Type': 'application/json',
+            
+            'Accept': 'application/pdf'
+        }
+    })
+    .then((res) => {
+        const contentType = res.headers["content-type"];
+        const blob = new Blob([res.data], {contentType} ); 
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'fichas.pdf'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+    })
+    .catch((error) => console.log(error));
+
+  }else handleClickOpen()
+}
+  const handleClick1 = (agencia,costomin,costomax,personas,salidamin,salidamax,duracion) =>{
+
+    if(costomin=='') {costomin=0; console.log(costomin)};
+    if(costomax=='') {costomax=0; console.log(costomax)};
+    if(personas=='') {personas=0; console.log(personas)};
+    if(duracion=='') {duracion=0; console.log(duracion)};
+    if(!isNaN(costomin)&&!isNaN(costomax)&&!isNaN(personas)&&!isNaN(duracion)){
+    Axios.post("http://localhost:5488/api/report",
+    {'template':{'name':'fichaa'}  ,
+  'data':
+  {"continente": agencia,
+  "costomin": costomin,
+  "costomax": costomax,
+  "personas": personas,
+  "salidamin": salidamin,
+  "salidamax": salidamax,
+  "duracion": duracion
     }},
     {
         responseType: 'text',
@@ -109,67 +154,33 @@ export default function LandingPage(props) {
       htmlnuevo(res); 
     })
     .catch((error) => console.log(error));
-
-  }
-  const handleClick = (NUR) =>{
-    Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'EventosObras'}  ,
-  'data':
-  {"id": agencia,
-    }},
-    {
-        responseType: 'text',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept':'HTML'
-            
-            
-        }
-    })
-    .then((res) => {
-      const contentType = res.headers["content-type"];
-      console.log(res.status);
-      htmlnuevo(res); 
-    })
-    .catch((error) => console.log(error));
-
+  }else handleClickOpen()
   }
 
   return (
     <div>
-      <Header
-        color="transparent"
-        routes={dashboardRoutes}
-        brand="star subastas"
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "white"
-        }}
-        {...rest}
-      />
+      
      
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
         <GridContainer>
             <GridItem> </GridItem>
         </GridContainer><GridContainer>
-            <GridItem>espacio </GridItem>
+            <GridItem>&nbsp; </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> espacio </GridItem>
+            <GridItem> &nbsp; </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> espacio</GridItem>
+            <GridItem> &nbsp;</GridItem>
         </GridContainer><GridContainer>
-            <GridItem> espacio</GridItem>
+            <GridItem> </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> espacio</GridItem>
+            <GridItem> </GridItem>
         </GridContainer>
         <GridContainer>
-            <GridItem> <label><h1>Ejecutar</h1> </label></GridItem>
+            <GridItem> <label><h1>Productos</h1> </label></GridItem>
         </GridContainer>
 
         <GridContainer>
@@ -186,45 +197,43 @@ export default function LandingPage(props) {
 
 
         <List className={classes.list}>
+        <ListItem className={classes.listItem}>
 
+        </ListItem>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ListItem>
         
-        </ListItem><ListItem>
-        <CustomInput
-          labelText="ID Evento a ejecutar"
-          id="ID"
-          inputProps={{onChange: e => handleNur(e.target.value)
-          }
-        }
-        /> <b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-       
-                 
+
         </ListItem>
         </MuiPickersUtilsProvider>
-        
+        <ListItem>
+
+                    
+   
+            </ListItem>
                     </List>
                     
                    
                      
 
  
-                       
+                    <GridContainer>      
+                
+                <div dangerouslySetInnerHTML={{__html:html}}></div>
+                
+                </GridContainer>   
          
           <GridContainer>
             <GridItem>
-              <Button onClick={(e) =>handleClick(agencia)} >Agregar</Button>
-              <Button onClick={(e) =>handleClick1(agencia)} >Ver lista</Button>
-              <Button>
-              <Link to={"Ejecutar2"} className={classes.Link}>SIGUIENTE</Link>
-              </Button>
+              <Button onClick={(e) =>handleClick()} >Ofertar </Button>
+              <Button onClick={(e) =>handleClick()} >Ver Item(Recargar) </Button>
             </GridItem>
+         
           </GridContainer>
           <div>
-           
-              <div dangerouslySetInnerHTML={{__html:html}}></div>
-         
+             
           </div>
+          <div>&nbsp;</div>
           <div>
           <Dialog
         open={open}

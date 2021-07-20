@@ -20,10 +20,11 @@ import ServiceInfoPage from "./views/ServicesPage/ServiceInfo/ServiceInfo";
 import CreaEvento from "./views/BlogPage/CreaEvento";
 import history from "services/history";
 import Ejecutar1 from "./views/EjecutarPage/Ejecutar1";
+import Ejecutar2 from "./views/EjecutarPage/Ejecutar2";
 import NotificationsPage from "./views/LoginPage/NotificationsPage";
 import UsersCRUDPage from "./views/AdminPage/usersCRUDPage";
 import reportesPage from "./views/ReportsPage/ReportsPage";
-
+import agregarTienda from "./views/BlogPage/agregaTienda"
 
 export default () => {
   return (
@@ -35,6 +36,7 @@ export default () => {
           <Route path="/services" component={MainPage}/>
           <Route path="/newEvent2" component={AgregarObras}/>
           <Route path="/newEvent3" component={AgregarMonedas}/>
+          <Route path="/newEvent1" component={agregarTienda}/>
           <Route path="/mapa" component={mapa}/>
           <Route path="/factura" component={factura}/>
           <Route path="/item_example" component={ServiceInfoPage}/>
@@ -46,6 +48,7 @@ export default () => {
           <Route path="/notifications" component={NotificationsPage}/>
           <Route path="/set_roles" component={UsersCRUDPage}/>
           <Route path="/ejecutar" component={Ejecutar1}/>
+          <Route path="/ejecutar2" component={Ejecutar2}/>
           <Route path="/" component={catalogo}/>
 
         </Switch>

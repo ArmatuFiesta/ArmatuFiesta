@@ -294,7 +294,7 @@ export default function LandingPage(props) {
           <GridContainer>
             <GridItem>
               <Button onClick={(e) =>handleClick(FI,costomin,costomax,tipo,local,pujas,duracion)}>
-              <Link to={"newEvent2"} className={classes.Link}>SIGUIENTE</Link>
+              <Link to={"newEvent1"} className={classes.Link}>SIGUIENTE</Link>
               </Button>
             </GridItem>
           </GridContainer>

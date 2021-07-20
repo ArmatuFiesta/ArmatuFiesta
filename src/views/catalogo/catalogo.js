@@ -70,12 +70,12 @@ export default function LandingPage(props) {
 
   const { ...rest } = props;
 
-  const handleClick1 = (agencia) =>{
+  const handleClick1 = (id) =>{
  
     Axios.post("http://localhost:5488/api/report",
-    {'template':{'name':'Eventos'}  ,
+    {'template':{'name':'EventosT'}  ,
   'data':
-  {"idAgencia": agencia,
+  {"id": id,
     }},
     {
         responseType: 'text',
@@ -175,7 +175,7 @@ export default function LandingPage(props) {
               <Button ><Link to={"newEvent"} className={classes.Link}>Crear Nuevo</Link></Button>
             </GridItem>
             <GridItem>
-              <Button onClick={(e) =>handleClick1(agencia,costomin,costomax,personas,salidamin,salidamax,duracion)} >Ver</Button>
+              <Button onClick={(e) =>handleClick1(agencia)} >Ver</Button>
             </GridItem>
           </GridContainer>
           <div>
