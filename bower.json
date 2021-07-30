@@ -1,0 +1,25 @@
+{
+  "name": "star subastas",
+  "homepage": " http://google.com",
+  "authors": [
+    " "
+  ],
+  "description": "",
+  "main": "dist/index.js",
+  "keywords": [
+    "material",
+    "design",
+    "material-ui",
+    "google",
+    "twitter"
+  ],
+  "license": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true
+}
